@@ -15,7 +15,7 @@ fi
 
 
 #main class
-APP_MAINCLASS=com.alibaba.cardscanner.Application
+APP_MAINCLASS=Application
 
 #classpath
 CLASSPATH=$APP_HOME/classes
