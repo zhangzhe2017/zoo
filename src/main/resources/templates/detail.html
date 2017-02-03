@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>名片详情</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" type="text/css" href="http://114.55.143.176/css/detail.css"/>
+</head>
+
+<body>
+<div class="preview-image"></div>
+<div class="detail-wrap">
+    <section class="base-info"></section>
+</div>
+
+<div class="btn-wrap">
+    <a>添加其他项</a>
+</div>
+
+<div class="btn-wrap">
+    <a>删除</a>
+</div>
+
+<!--<div class="btn-wrap">-->
+    <!--<a class="btn-delete">取消</a>-->
+<!--</div>-->
+
+<div class="mask">
+    <div class="add-dialog">
+        <div class="detail-item">
+            <div class="select-category">
+                <select>
+                    <optgroup label="选择类别">
+                        <option value="names">姓名</option>
+                        <option value="titles">职位</option>
+                        <option value="companys">公司</option>
+                        <option value="websites">网址</option>
+                        <option value="emails">邮件</option>
+                        <option value="addresses">联系地址</option>
+                        <option value="workTels">电话</option>
+                        <option value="faxes">传真</option>
+                        <option value="zip">邮编</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="underline-wrap">
+                <input type="text" name="names" maxlength="128" required="required"/>
+                <span class="delete-row"></span>
+                <label class="underline"><i>姓名</i></label>
+            </div>
+        </div>
+        <div class="action-bar">
+            <span class="btn-cancel-item">取消</span>
+            <span class="btn-add-item">添加</span>
+        </div>
+    </div>
+</div>
+<script type="text/html"  id="template-info-item">
+    <div class="info-item">
+        <!--<input type="hidden" name="new" value="false" />-->
+        <div class="info-category" data-key="{categoryKey}">{categoryName} <span class="iconfont">&#xe600;</span></div>
+        <div class="info-input">
+            <input type="text" name="names" value="{categoryValue}" maxlength="128" required="required"/>
+        </div>
+        <div class="btn-delete"><span class="iconfont">&#xe601;</span></div>
+    </div>
+</script>
+<script type="text/javascript" src="http://114.55.143.176/js/zepto.min.js"></script>
+<script type="text/javascript" src="http://114.55.143.176/js/ddtalk.js"></script>
+<script type="text/javascript" src="http://114.55.143.176/js/detail.js"></script>
+</body>
+</html>

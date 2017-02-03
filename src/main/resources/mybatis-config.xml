@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <package name="com.alibaba.cardscanner.infrastructure.model"/>
+    </typeAliases>
+    <!--<environments default="development">-->
+        <!--<environment id="development">-->
+            <!--<transactionManager type="JDBC" />-->
+            <!--<dataSource type="POOLED">-->
+                <!--<property name="driver" value="com.mysql.jdbc.Driver" />-->
+                <!--<property name="url" value="jdbc:mysql://localhost:3306/alibaba" />-->
+                <!--<property name="username" value="rmy" />-->
+                <!--<property name="password" value="rmy" />-->
+            <!--</dataSource>-->
+        <!--</environment>-->
+    <!--</environments>-->
+    <mappers>
+        <mapper resource="mybatis/mapper/user_card_mapper.xml"/>
+    </mappers>
+</configuration>

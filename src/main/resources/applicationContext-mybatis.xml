@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+    <context:property-placeholder ignore-unresolvable="true" />
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName">
+            <value>com.mysql.jdbc.Driver</value>
+        </property>
+        <!--<property name="url" value="jdbc:mysql://localhost:3306/alibaba?characterEncoding=utf8"/>-->
+        <property name="url" value="${database.url}"/>
+        <property name="username">
+            <value>${database.username}</value>
+        </property>
+        <property name="password">
+            <value>${database.password}</value>
+        </property>
+        <!-- 以下为可选参数 -->
+        <property name="initialSize">
+            <value>10</value>
+        </property>
+        <property name="minIdle">
+            <value>10</value>
+        </property>
+        <property name="maxActive">
+            <value>100</value>
+        </property>
+        <property name="maxIdle">
+            <value>100</value>
+        </property>
+        <property name="testOnBorrow">
+            <value>true</value>
+        </property>
+        <property name="testOnReturn">
+            <value>true</value>
+        </property>
+        <property name="testWhileIdle">
+            <value>true</value>
+        </property>
+        <!--大于0 ，进行连接空闲时间判断，或为0，对空闲的连接不进行验证 -->
+        <property name="minEvictableIdleTimeMillis">
+            <value>60000</value>
+        </property>
+        <!--失效检查线程运行时间间隔，如果小于等于0，不会启动检查线程 -->
+        <property name="timeBetweenEvictionRunsMillis">
+            <value>300000</value>
+        </property>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 配置mybatis配置文件的位置 -->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!--<property name="typeAliasesPackage" value="com.alibaba.cardscanner.infrastructure.model"/>-->
+        <!-- 配置扫描Mapper XML的位置 -->
+        <!--<property name="mapperLocations" value="classpath:mybatis/mapper/*mapper.xml"/>-->
+    </bean>
+
+    <!-- 配置扫描Mapper接口的包路径 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="basePackage" value="com.alibaba.cardscanner.infrastructure.mapper"/>
+    </bean>
+
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg ref="sqlSessionFactory"/>
+    </bean>
+
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+          p:dataSource-ref="dataSource"/>
+    <!--<aop:aspectj-autoproxy expose-proxy="true" proxy-target-class="true" />-->
+
+    <!--<tx:advice id="txAdvice" transaction-manager="transactionManager" >-->
+        <!--<tx:attributes>-->
+            <!--<tx:method name="start*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="submit*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="clear*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="create*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="activate*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="save*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="insert*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="add*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="update*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="delete*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="remove*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="execute*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="del*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="*" read-only="true"/>-->
+        <!--</tx:attributes>-->
+    <!--</tx:advice>-->
+    <!--<aop:config proxy-target-class="true" expose-proxy="true">-->
+        <!--<aop:pointcut id="pt" expression="execution(public * com.xixicat.service.*.*(..))" />-->
+        <!--<aop:advisor order="200" pointcut-ref="pt" advice-ref="txAdvice"/>-->
+    <!--</aop:config>-->
+
+    <tx:annotation-driven transaction-manager="transactionManager"
+                          proxy-target-class="true" />
+
+    <!-- 启用注解 -->
+    <context:annotation-config/>
+</beans>
