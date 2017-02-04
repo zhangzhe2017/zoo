@@ -29,7 +29,7 @@ public class Validator {
         String timestamp = request.getParameter("timestamp");
         String nonce = request.getParameter("nonce");
         String echostr = request.getParameter("echostr");
-        String token = "";
+        String token = "connection";
         String appSecret = "43d5bd2dcfee1c967e9562252b0ea7f3";
 
         String validateSha1 = getValidateSHA1(nonce,timestamp,token);
