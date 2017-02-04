@@ -7,7 +7,7 @@ JAVA_HOME=$JAVA_HOME
 RUNNING_USER=root
 
 #APP home
-APP_HOME=$(pwd)
+APP_HOME=$(cd ..;pwd)
 if [ ${APP_HOME:(-4)} == "/bin" ]; then
     APP_HOME=$(cd ..;pwd)
     echo $APP_HOME
@@ -15,7 +15,7 @@ fi
 
 
 #main class
-APP_MAINCLASS=Application
+APP_MAINCLASS=weixin.connection.Application
 
 #classpath
 CLASSPATH=$APP_HOME/classes
