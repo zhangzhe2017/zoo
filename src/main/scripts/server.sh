@@ -8,7 +8,7 @@ RUNNING_USER=root
 
 #APP home
 APP_HOME=$(cd ..;pwd)
-if [ ${APP_HOME:(-4)} == "/bin" ]; then
+if [ ${APP_HOME:-4} == "/bin" ]; then
     APP_HOME=$(cd ..;pwd)
     echo $APP_HOME
 fi
@@ -26,7 +26,7 @@ done
 CLASSPATH="$CLASSPATH":"$APP_HOME"/conf
 
 #jvm options
-JAVA_OPTS="-Xms1024m -Xmx1024m -Xmn512M -XX:ParallelGCThreads=20 -Djava.awt.headless=true -XX:MaxPermSize=128m -server -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=85 -XX:+DisableExplicitGC -Xnoclassgc -Xverify:none"
+JAVA_OPTS="-Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=5005,suspend=n -Xms1024m -Xmx1024m -Xmn512M -XX:ParallelGCThreads=20 -Djava.awt.headless=true -XX:MaxPermSize=128m -server -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=85 -XX:+DisableExplicitGC -Xnoclassgc -Xverify:none"
 
 #psid
 psid=0
