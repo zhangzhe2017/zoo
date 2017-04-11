@@ -52,9 +52,9 @@ var srcPath = getPath('src');
 module.exports = {
     entry: entry,
     output: {
-        path: getPath('dist'),
+        path: getPath('../src/main/resources/static'),
         filename: 'js/[name].js',
-        publicPath: isDev ? '/' : '/dist/'
+        publicPath: '/'
     },
     devtool: isDev ? 'source-map' : false,
     resolve: {
