@@ -1,5 +1,5 @@
 {
-  "name": "mobile",
+  "name": "zoo",
   "author": "wenhan.wwh",
   "scripts": {
     "build": "set NODE_ENV=production&webpack -p --progress --colors",
