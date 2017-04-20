@@ -15,7 +15,7 @@ export default {
         this.renderLog();
         const {location} = this.props;
         if (location) {
-            document.body.style.overflow = 'auto';
+            //document.body.style.overflow = 'auto';
             this.doInit();
         } else {
             this.init && this.init();

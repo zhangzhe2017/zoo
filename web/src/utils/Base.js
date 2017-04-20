@@ -1,8 +1,11 @@
 'use strict';
 
-const {_} = window._external;
+const {_, Toast} = window._external;
 
 export default {
+
+    appId: 'wx88ba27baed50d054',
+    loadingCount: 0,
 
     blankImageData: 'data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==',
     loadingImageData: 'data:image/gif;base64,R0lGODlhEAAQAKIAAP///9bW1szMzL29vXt7e3Nzc2ZmZv4BAiH/C05FVFNDQVBFMi4wAwEAAAAh+QQFBwAHACwAAAAAEAAQAAADPAi6QRQrymJMkcwFatuLXOFt1bWEYBmNq6awGDCicUhjIYzBwTBAmc9CQBSkLJGiYKZi+EgdV60ZCwIjCQAh+QQFBwAHACwAAAYABgAIAAADE3gz1/LCwaYYbYTQYkxpnEdlRwIAIfkEBQcABwAsAAACAAYACAAAAxN4OqMnUKgoVzuEuGJMUZznZE4CACH5BAUHAAcALAIAAAAIAAYAAAMUeKozqyKKQ8iRohhTTjsa91DWkwAAIfkEBQcABwAsBgAAAAgABgAAAxR4RNddxhR3oDxjtHWEF9QHUtmRAAAh+QQFBwAHACwKAAIABgAIAAADFHhE12WmOCjbaviMgYUXzQc225EAACH5BAUHAAcALAoABgAGAAgAAAMTeEqkV8YUBaVjagwnulDel21KAgAh+QQFBwAHACwGAAoACAAGAAADFHiqRKvFmHLGOHGKLU47XPdYz5EAADs=',
@@ -147,6 +150,18 @@ export default {
             return '';
         }
         return value + '';
+    },
+
+    showLoading() {
+        this.loadingCount++;
+        Toast.loading(this.Const.loadingMessage, 0);
+    },
+
+    hideLoading() {
+        this.loadingCount--;
+        if (this.loadingCount <= 0) {
+            Toast.hide();
+        }
     }
 
 };

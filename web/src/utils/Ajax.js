@@ -1,5 +1,7 @@
 'use strict';
 
+import Util from '../utils/Util';
+
 const {$, React, Toast} = window._external;
 
 export default {
@@ -10,7 +12,6 @@ export default {
             error,
             complete,
             showLoading = true,
-            loadingMessage = '正在请求数据...',
             showSuccessMessage = false,
             showErrorMessage = true,
             successMessage = '请求成功',
@@ -43,14 +44,14 @@ export default {
             },
             complete(jqXHR, textStatus) {
                 if (showLoading) {
-                    Toast.hide();
+                    Util.hideLoading();
                 }
                 complete && complete.apply(this, arguments);
             },
             ...(this.isProxy() ? {type: 'get'} : {})
         };
         if (showLoading) {
-            Toast.loading(loadingMessage, 0);
+            Util.showLoading();
         }
         return $.ajax(config);
     }

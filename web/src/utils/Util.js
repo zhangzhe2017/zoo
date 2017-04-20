@@ -13,10 +13,7 @@ export default {
 
     pageParams: Base.unparam(location.search),
     isDebug() {
-        /*const {pageParams} = this;
-        const {debug} = pageParams;
-        return debug === 'true';*/
-        return location.pathname === '/index-debug.html';
+        return this.isProxy() || location.pathname === '/index-debug.html';
     },
     isProxy() {
         return location.port === config.devServerPort;

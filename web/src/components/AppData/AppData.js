@@ -10,7 +10,10 @@ const {React, Component, connect, reactMixin} = window._external;
 class AppData extends Component {
 
     static defaultState = {
-        loading: false
+        loading: false,
+        timestamp: 0,
+        nonceStr: '',
+        signature: ''
     };
 
     init() {

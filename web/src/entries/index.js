@@ -1,9 +1,9 @@
 'use strict';
 
+import FastClick from 'fastclick';
 import '../common/common.scss';
 import Reducers from '../redux/reducers/Reducers';
 import Routes from '../components/Routes/Routes';
-import FastClick from 'fastclick';
 
 const {
     React, render, hashHistory, createStore, combineReducers, applyMiddleware, thunk, Provider, syncHistoryWithStore,

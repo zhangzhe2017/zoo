@@ -2,6 +2,7 @@
 
 import App from '../../layouts/App';
 import CommonMixin from '../../mixins/CommonMixin';
+import Loading from '../../pages/Loading/Loading';
 import NotFound from '../../pages/NotFound/NotFound';
 
 const {React, Component, PropTypes, Router, Route, IndexRedirect, connect, reactMixin} = window._external;
@@ -40,7 +41,8 @@ class Routes extends Component {
         return (
             <Router history={history}>
                 <Route path="/" component={App}>
-                    <IndexRedirect to="NotFound"/>
+                    <IndexRedirect to="loading"/>
+                    <Route path="loading" component={Loading}/>
                     <Route path="*" component={NotFound}/>
                 </Route>
             </Router>

@@ -3,6 +3,7 @@
 export default {
 
     Const: {
+        loadingMessage: '正在请求数据...',
         loadingText: '正在加载...',
         notFoundText: '无数据',
         plsInput: '请输入...',
