@@ -2,8 +2,8 @@
 
 import App from '../../layouts/App';
 import CommonMixin from '../../mixins/CommonMixin';
-import Loading from '../../pages/Loading/Loading';
 import NotFound from '../../pages/NotFound/NotFound';
+import Blank from '../../pages/Blank/Blank';
 
 const {React, Component, PropTypes, Router, Route, IndexRedirect, connect, reactMixin} = window._external;
 
@@ -41,8 +41,8 @@ class Routes extends Component {
         return (
             <Router history={history}>
                 <Route path="/" component={App}>
-                    <IndexRedirect to="loading"/>
-                    <Route path="loading" component={Loading}/>
+                    <IndexRedirect to="blank"/>
+                    <Route path="blank" component={Blank}/>
                     <Route path="*" component={NotFound}/>
                 </Route>
             </Router>

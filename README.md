@@ -14,5 +14,5 @@
     - 执行`dev.sh`
     - 基于mock数据开发，访问路径：`http://localhost:8081/index-debug.html`
     - 基于后端数据开发，访问路径：`http://localhost:8080/index-debug.html`
-- 发布前构建(只需在发布前构建一次)
+- 提交代码前构建
     - 执行`build.sh`，构建生成的前端代码路径：`/src/main/resources/static`

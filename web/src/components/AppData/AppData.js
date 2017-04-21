@@ -13,7 +13,8 @@ class AppData extends Component {
         loading: false,
         timestamp: 0,
         nonceStr: '',
-        signature: ''
+        signature: '',
+        attention: false
     };
 
     init() {

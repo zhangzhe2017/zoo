@@ -5,7 +5,7 @@ import CommonMixin from '../../mixins/CommonMixin';
 const {React, Component, PropTypes, connect, reactMixin} = window._external;
 
 @reactMixin.decorate(CommonMixin)
-class Loading extends Component {
+class Blank extends Component {
 
     render() {
         return (
@@ -15,10 +15,10 @@ class Loading extends Component {
 
 }
 
-Loading.propTypes = {
+Blank.propTypes = {
     location: PropTypes.object.isRequired
 };
 
-export {Loading};
+export {Blank};
 
-export default connect(state => ({}))(Loading);
+export default connect(state => ({}))(Blank);
