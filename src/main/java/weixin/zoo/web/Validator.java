@@ -1,16 +1,13 @@
-package weixin.connection.web;
+package weixin.zoo.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import weixin.connection.service.common.aes.AesException;
-import weixin.connection.service.common.aes.WXBizMsgCrypt;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.security.MessageDigest;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
 /**
  * Created by viczhang.zhangz on 2016/6/29.
@@ -30,7 +27,7 @@ public class Validator {
         String nonce = request.getParameter("nonce");
         String echostr = request.getParameter("echostr");
         String token = "connection";
-        String appSecret = "43d5bd2dcfee1c967e9562252b0ea7f3";
+        String appSecret = "cc4c82cea557df5b1893aa8711e3ea48";
 
         String validateSha1 = getValidateSHA1(nonce,timestamp,token);
         if(validateSha1.equals(signature)){
