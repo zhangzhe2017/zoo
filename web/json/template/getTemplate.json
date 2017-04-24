@@ -1,0 +1,29 @@
+{
+    "success": true,
+    "data": {
+        "type": "activity",
+        "title": "发起活动",
+        "fields": [
+            {
+                "label": "时间",
+                "name": "time",
+                "type": "input"
+            },
+            {
+                "label": "地点",
+                "name": "address",
+                "type": "input"
+            },
+            {
+                "label": "图片",
+                "name": "image",
+                "type": "image"
+            },
+            {
+                "label": "详情",
+                "name": "detail",
+                "type": "textarea"
+            }
+        ]
+    }
+}

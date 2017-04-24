@@ -7,7 +7,7 @@ const ActionTypes = {
 
     formEdit: {
 
-        load(dispatch) {
+        getTemplate(dispatch) {
             const {id} = this || {};
             doAction(dispatch, ActionTypes.formEdit.changeState, {loading: true});
             TemplateService.getTemplate({
