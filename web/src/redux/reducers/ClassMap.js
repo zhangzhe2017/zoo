@@ -1,11 +1,11 @@
 'use strict';
 
 import {AppData} from '../../components/AppData/AppData';
-import {CustomForm} from '../../pages/CustomForm/CustomForm';
+import {FormEdit} from '../../pages/form/FormEdit/FormEdit';
 
 export default {
 
     appData: AppData,
-    customForm: CustomForm
+    formEdit: FormEdit
 
 };

@@ -4,7 +4,7 @@ import App from '../../layouts/App';
 import CommonMixin from '../../mixins/CommonMixin';
 import NotFound from '../../pages/NotFound/NotFound';
 import Blank from '../../pages/Blank/Blank';
-import CustomForm from '../../pages/CustomForm/CustomForm';
+import FormEdit from '../../pages/form/FormEdit/FormEdit';
 
 const {React, Component, PropTypes, Router, Route, IndexRedirect, connect, reactMixin} = window._external;
 
@@ -44,7 +44,7 @@ class Routes extends Component {
                 <Route path="/" component={App}>
                     <IndexRedirect to="blank"/>
                     <Route path="blank" component={Blank}/>
-                    <Route path="customForm" component={CustomForm}/>
+                    <Route path="formEdit" component={FormEdit}/>
                     <Route path="*" component={NotFound}/>
                 </Route>
             </Router>

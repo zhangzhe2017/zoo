@@ -1,11 +1,11 @@
 'use strict';
 
-import CommonMixin from '../../mixins/CommonMixin';
+import CommonMixin from '../../../mixins/CommonMixin';
 
 const {React, Component, PropTypes, connect, reactMixin} = window._external;
 
 @reactMixin.decorate(CommonMixin)
-class CustomForm extends Component {
+class FormEdit extends Component {
 
     static defaultState = {
         loading: false,
@@ -18,17 +18,17 @@ class CustomForm extends Component {
         const {title} = this.props;
         return (
             <div className="x-page">
-                CustomForm
+                FormEdit
             </div>
         );
     }
 
 }
 
-CustomForm.propTypes = {
+FormEdit.propTypes = {
     location: PropTypes.object.isRequired
 };
 
-export {CustomForm};
+export {FormEdit};
 
-export default connect(state => ({}))(CustomForm);
+export default connect(state => ({}))(FormEdit);

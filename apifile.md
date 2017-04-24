@@ -13,8 +13,8 @@
                 "timestamp": 0,//jssdk签名时间戳
                 "nonceStr": "",//jssdk签名随机字符串
                 "signature": "",//jssdk签名
-                "attention": false//是否已关注
-				"wxid": 当前用户id
+                "attention": false,//是否已关注
+                "wxid": 当前用户id
             }
         }
      </pre>
@@ -37,7 +37,7 @@
      </pre>
 3. 保存自定义表单的接口
     * 接口功能描述: 把用户填写的字段值都保存起来
-    * 接口地址: `/customForm/saveCustomForm.json`
+    * 接口地址: `/form/saveForm.json`
     * 参数
         * templateId: 模板id
         * title: 表单标题
@@ -54,7 +54,7 @@
      </pre>
 4. 获取自定义表单的接口
     * 接口功能描述: 获取表单数据, 渲染查看详情的页面
-    * 接口地址: `/customForm/getCustomForm.json`
+    * 接口地址: `/form/getForm.json`
     * 参数
         * id: 表单id
     * 返回的json格式
@@ -68,15 +68,15 @@
                 "fields": [],//字段信息, 每个字段包含字段标签, 字段名, 字段类型(input/textarea/select/image)等信息
                 "fieldValues": "{field1: value1, field2: value2, ...}",//字段值
                 "registered": false,//如果type为activity, 则需要这个标识告诉我当前用户是否已报名
-                "creatorNickName": 活动发起者昵称
-				"creatorWxid": 活动发起者wxid
+                "creatorNickName": 活动发起者昵称,
+                "creatorWxid": 活动发起者wxid,
                 "attenderList": 参加者昵称名单
             }
         }
      </pre>
 5. 报名/取消报名的接口
     * 接口功能描述: 查看详情的页面, 点击报名按钮进行报名
-    * 接口地址: `/customForm/register.json`
+    * 接口地址: `/form/register.json`
     * 参数
         * id: 表单id
         * register: true为报名, false为取消报名
@@ -89,7 +89,7 @@
      </pre>
 6. 我发起的活动列表
     * 接口功能描述: 获取我发起的活动列表
-    * 接口地址: `/customForm/getMyFormList.json`
+    * 接口地址: `/form/getMyFormList.json`
     * 参数
         * type: "activity"//表单类型
     * 返回的json格式
@@ -110,7 +110,7 @@
      </pre>
 7. 我参加的活动列表
     * 接口功能描述: 获取我参加的活动列表
-    * 接口地址: `/customForm/getAttendedActivityList.json`
+    * 接口地址: `/form/getAttendedActivityList.json`
     * 参数
         * 无
     * 返回的json格式

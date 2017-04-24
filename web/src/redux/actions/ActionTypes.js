@@ -1,14 +1,14 @@
 'use strict';
 
 import AppDataActionTypes from '../../components/AppData/AppDataActionTypes';
-import CustomFormActionTypes from '../../pages/CustomForm/CustomFormActionTypes';
+import FormEditActionTypes from '../../pages/form/FormEdit/FormEditActionTypes';
 
 const {_} = window._external;
 
 const ActionTypes = {
 
     ...AppDataActionTypes,
-    ...CustomFormActionTypes
+    ...FormEditActionTypes
 
 };
 

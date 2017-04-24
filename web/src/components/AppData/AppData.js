@@ -14,7 +14,8 @@ class AppData extends Component {
         timestamp: 0,
         nonceStr: '',
         signature: '',
-        attention: false
+        attention: false,
+        wxid: ''
     };
 
     init() {

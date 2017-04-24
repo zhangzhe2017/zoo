@@ -18,8 +18,10 @@ const ActionTypes = {
                 data: {code},
                 success: (result = {}) => {
                     const {data = {}} = result;
-                    const {timestamp = 0, nonceStr = '', signature = '', attention = false} = data;
-                    doAction(dispatch, ActionTypes.appData.changeState, {timestamp, nonceStr, signature, attention});
+                    const {timestamp = 0, nonceStr = '', signature = '', attention = false, wxid = ''} = data;
+                    doAction(dispatch, ActionTypes.appData.changeState, {
+                        timestamp, nonceStr, signature, attention, wxid
+                    });
                     if (timestamp && nonceStr && signature) {
                         wx.config({
                             debug: false,

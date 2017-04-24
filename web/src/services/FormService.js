@@ -4,9 +4,9 @@ import Util from '../utils/Util';
 
 export default {
 
-    getCustomForm(config) {
+    getForm(config) {
         return Util.ajax({
-            url: '/customForm/getCustomForm.json',
+            url: '/form/getForm.json',
             ...config
         });
     }
