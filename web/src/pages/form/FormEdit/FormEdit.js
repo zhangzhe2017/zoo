@@ -3,6 +3,7 @@
 import {doAction} from '../../../redux/actions/Action';
 import ActionTypes from '../../../redux/actions/ActionTypes';
 import CommonMixin from '../../../mixins/CommonMixin';
+import EditForm, {EditForm as OriginEditForm} from './EditForm/EditForm';
 
 const {React, Component, PropTypes, connect, reactMixin} = window._external;
 
@@ -24,10 +25,17 @@ class FormEdit extends Component {
         });
     }
 
+    reset() {
+        const {dispatch} = this.props;
+        doAction(dispatch, ActionTypes.formEdit.replaceState, FormEdit.defaultState);
+        const editForm = OriginEditForm.instance;
+        editForm.reset();
+    }
+
     render() {
-        const {type, title, fields} = this.props;
         return (
             <div className="x-page">
+                <EditForm/>
             </div>
         );
     }

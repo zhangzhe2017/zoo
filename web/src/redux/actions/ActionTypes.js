@@ -2,13 +2,15 @@
 
 import AppDataActionTypes from '../../components/AppData/AppDataActionTypes';
 import FormEditActionTypes from '../../pages/form/FormEdit/FormEditActionTypes';
+import FEEditFormActionTypes from '../../pages/form/FormEdit/EditForm/EditFormActionTypes';
 
 const {_} = window._external;
 
 const ActionTypes = {
 
     ...AppDataActionTypes,
-    ...FormEditActionTypes
+    ...FormEditActionTypes,
+    ...FEEditFormActionTypes
 
 };
 

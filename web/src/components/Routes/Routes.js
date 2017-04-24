@@ -44,7 +44,7 @@ class Routes extends Component {
                 <Route path="/" component={App}>
                     <IndexRedirect to="blank"/>
                     <Route path="blank" component={Blank}/>
-                    <Route path="formEdit" component={FormEdit}/>
+                    <Route path="form/formEdit" component={FormEdit}/>
                     <Route path="*" component={NotFound}/>
                 </Route>
             </Router>
