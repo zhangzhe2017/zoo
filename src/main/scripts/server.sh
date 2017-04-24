@@ -15,7 +15,7 @@ fi
 
 
 #main class
-APP_MAINCLASS=weixin.connection.Application
+APP_MAINCLASS=weixin.zoo.Application
 
 #classpath
 CLASSPATH=$APP_HOME/classes

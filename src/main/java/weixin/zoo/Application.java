@@ -1,4 +1,4 @@
-package weixin.connection;
+package weixin.zoo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -15,7 +15,7 @@ import org.springframework.context.annotation.ImportResource;
  */
 @Configuration
 @SpringBootApplication
-@ComponentScan(basePackages = {"weixin.connection"})
+@ComponentScan(basePackages = {"weixin.zoo"})
 @ImportResource("classpath:applicationContext-mybatis.xml")
 @EnableAutoConfiguration
 public class Application {

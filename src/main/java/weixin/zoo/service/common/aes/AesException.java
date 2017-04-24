@@ -1,4 +1,4 @@
-package weixin.connection.service.common.aes;
+package weixin.zoo.service.common.aes;
 
 @SuppressWarnings("serial")
 public class AesException extends Exception {

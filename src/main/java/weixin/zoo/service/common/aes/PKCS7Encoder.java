@@ -6,7 +6,7 @@
 
 // ------------------------------------------------------------------------
 
-package weixin.connection.service.common.aes;
+package weixin.zoo.service.common.aes;
 
 import java.nio.charset.Charset;
 import java.util.Arrays;
