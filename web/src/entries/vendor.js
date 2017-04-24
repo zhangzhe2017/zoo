@@ -11,16 +11,16 @@ import drop from 'lodash/drop';
 import escape from 'lodash/escape';
 import flatten from 'lodash/flatten';*/
 import forEach from 'lodash/forEach';
-/*import includes from 'lodash/includes';
+//import includes from 'lodash/includes';
 import indexOf from 'lodash/indexOf';
 import isArray from 'lodash/isArray';
-import isEmpty from 'lodash/isEmpty';*/
+//import isEmpty from 'lodash/isEmpty';
 import isFunction from 'lodash/isFunction';
-/*import isNumber from 'lodash/isNumber';
+//import isNumber from 'lodash/isNumber';
 import isPlainObject from 'lodash/isPlainObject';
 import isString from 'lodash/isString';
 import isUndefined from 'lodash/isUndefined';
-import keys from 'lodash/keys';
+/*import keys from 'lodash/keys';
 import map from 'lodash/map';
 import noop from 'lodash/noop';
 import reduce from 'lodash/reduce';
@@ -28,9 +28,9 @@ import remove from 'lodash/remove';
 import size from 'lodash/size';
 import slice from 'lodash/slice';
 import sortBy from 'lodash/sortBy';
-import startsWith from 'lodash/startsWith';
+import startsWith from 'lodash/startsWith';*/
 import toArray from 'lodash/toArray';
-import trim from 'lodash/trim';
+/*import trim from 'lodash/trim';
 import uniq from 'lodash/uniq';
 import uniqueId from 'lodash/uniqueId';
 import values from 'lodash/values';*/
@@ -50,7 +50,7 @@ window._external = {
     //jquery
     $,
     //lodash
-    _: {assign, forEach, isFunction},
+    _: {assign, forEach, indexOf, isArray, isFunction, isPlainObject, isString, isUndefined, toArray},
     //moment
     //moment,
     //react
