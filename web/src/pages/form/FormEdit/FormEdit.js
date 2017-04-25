@@ -21,7 +21,7 @@ class FormEdit extends Component {
         const {dispatch, location} = this.props;
         const {query} = location;
         doAction(dispatch, ActionTypes.formEdit.getTemplate, {
-            id: query.id
+            id: query.templateId
         });
     }
 

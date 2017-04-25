@@ -4,6 +4,13 @@ import Util from '../utils/Util';
 
 export default {
 
+    saveForm(config) {
+        return Util.ajax({
+            url: '/form/saveForm.json',
+            ...config
+        });
+    },
+
     getForm(config) {
         return Util.ajax({
             url: '/form/getForm.json',

@@ -29,15 +29,15 @@ const ActionTypes = {
                             timestamp,
                             nonceStr,
                             signature,
-                            jsApiList: []
+                            jsApiList: ['chooseImage', 'uploadImage', 'previewImage']
                         });
                     }
                     if (!attention) {
                         Util.later(function () {
-                            Toast.info('请先关注[组局官]！', 0);
+                            Toast.info('请先关注[组局官]！即将跳转...', 0);
                             Util.later(function () {
                                 Toast.hide();
-                                //location.href = 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzIxMzc5MjcyNQ==&scene=124#wechat_redirect';
+                                location.href = 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzIxMzc5MjcyNQ==&scene=124#wechat_redirect';
                             }, 3000);
                         }, 1);
                     } else if (code && state) {

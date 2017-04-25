@@ -1,6 +1,6 @@
 'use strict';
 
-import {Toast} from 'antd-mobile';
+import {Toast, List, InputItem, TextareaItem, ImagePicker, Button} from 'antd-mobile';
 import $ from 'jquery';
 import assign from 'lodash/assign';
 /*import cloneDeep from 'lodash/cloneDeep';
@@ -46,7 +46,7 @@ import reactMixin from 'react-mixin';
 
 window._external = {
     //antd-mobile
-    Toast,
+    Toast, List, InputItem, TextareaItem, ImagePicker, Button,
     //jquery
     $,
     //lodash

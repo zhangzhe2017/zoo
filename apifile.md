@@ -40,7 +40,6 @@
     * 接口地址: `/form/saveForm.json`
     * 参数
         * templateId: 模板id
-        * title: 表单标题
         * fieldValues: "{field1: value1, field2: value2, ...}"//其他字段值
     * 返回的json格式
     <pre>
@@ -64,7 +63,6 @@
             "message": "",
             "data": {
                 "type": "",//表单类型, 目前只有活动, activity
-                "title": "一个爬山活动",//表单标题
                 "fields": [],//字段信息, 每个字段包含字段标签, 字段名, 字段类型(input/textarea/image)等信息
                 "fieldValues": "{field1: value1, field2: value2, ...}",//字段值
                 "registered": false,//如果type为activity, 则需要这个标识告诉我当前用户是否已报名

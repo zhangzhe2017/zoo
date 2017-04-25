@@ -2,7 +2,6 @@
     "success": true,
     "data": {
         "type": "activity",
-        "title": "发起活动",
         "fields": [
             {
                 "label": "标题",
@@ -29,6 +28,14 @@
                 "name": "description",
                 "type": "textarea"
             }
+        ],
+        "fieldValues": "{\"title\": \"爬山活动\", \"time\": \"2017-05-01 上午9点\", \"address\": \"北高峰\", \"image\": [\"https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg\", \"https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg\"], \"description\": \"在山脚集合, 不准迟到, 迟到罚钱\"}",
+        "registered": false,
+        "creatorNickName": "大犇",
+        "creatorWxid": 1,
+        "attenderList": [
+            "张喆",
+            "墨妃"
         ]
     }
 }
