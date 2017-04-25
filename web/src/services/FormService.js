@@ -16,6 +16,13 @@ export default {
             url: '/form/getForm.json',
             ...config
         });
+    },
+
+    register(config) {
+        return Util.ajax({
+            url: '/form/register.json',
+            ...config
+        });
     }
 
 };

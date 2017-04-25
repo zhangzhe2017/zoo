@@ -2,11 +2,24 @@
     .am-toast-notice-content {
         top: -100px;
     }
-    .am-list-item .am-list-line .am-list-content {
+    .am-list-item .am-list-line .am-list-content, .am-textarea-control {
         padding-top: 18px;
         padding-bottom: 18px;
     }
     .am-image-picker .am-image-picker-list {
         margin-bottom: 0;
+    }
+    .x-detail-list .x-detail-item {
+        font-size: 34px;
+        word-break: break-all;
+        //color: #999;
+    }
+    .x-detail-list .am-textarea-control {
+        padding-top: 26px;
+        padding-bottom: 26px;
+    }
+    .am-list-item .am-input-label,
+    .am-textarea-label {
+        font-weight: bold;
     }
 }

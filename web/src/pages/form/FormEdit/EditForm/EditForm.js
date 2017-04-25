@@ -162,7 +162,7 @@ class EditForm extends Component {
                     <List.Item
                         key={name}
                     >
-                        <div>{label}</div>
+                        <div style={{fontWeight: 'bold'}}>{label}</div>
                         <ImagePicker
                             files={this.getImageFiles(name)}
                             onChange={this.handleImageChange.bind(this, name)}

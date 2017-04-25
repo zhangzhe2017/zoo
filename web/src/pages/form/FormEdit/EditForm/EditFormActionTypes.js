@@ -12,7 +12,7 @@ const ActionTypes = {
 
     feEditForm: {
 
-        saveForm(dispatch, getState) {
+        saveForm(dispatch) {
             const params = this || {};
             doAction(dispatch, AllActionTypes.formEdit.changeState, {loading: true});
             FormService.saveForm({
@@ -25,9 +25,9 @@ const ActionTypes = {
                         Util.later(function () {
                             Toast.hide();
                             Routes.goto({
-                                pathname: '/form/formDetail',
+                                pathname: '/form/view',
                                 query: {
-                                    id
+                                    formId: id
                                 }
                             });
                         }, 3000);
