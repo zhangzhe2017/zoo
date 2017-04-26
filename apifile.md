@@ -19,7 +19,7 @@
         }
      </pre>
 2. 获取模板信息的接口, 用来渲染自定义表单页面
-    * 接口功能描述: 根据模板id, 获取到字段列表, 每个字段包含字段标签, 字段名, 字段类型(input/textarea/image)等信息
+    * 接口功能描述: 根据模板id, 获取到字段列表, 每个字段包含字段标签, 字段名, 字段类型(input/number/textarea/datetime/image)等信息
     * 接口地址: `/template/getTemplate.json`
     * 参数
         * id: 模板id
@@ -64,12 +64,13 @@
             "data": {
                 "type": "",//表单类型, 即模板类型
                 "title": "",//表单标题, 即模板标题
-                "fields": [],//字段信息, 每个字段包含字段标签, 字段名, 字段类型(input/textarea/image)等信息
+                "fields": [],//字段信息, 每个字段包含字段标签, 字段名, 字段类型(input/number/textarea/datetime/image)等信息
                 "fieldValues": "{field1: value1, field2: value2, ...}",//字段值
                 "registered": false,//如果type为activity, 则需要这个标识告诉我当前用户是否已报名
                 "creatorNickName": 活动发起者昵称,
                 "creatorWxid": 活动发起者wxid,
-                "attenderList": 参加者昵称名单
+                "attenderList": 参加者昵称名单,
+                "timestamp": 服务器时间
             }
         }
      </pre>
