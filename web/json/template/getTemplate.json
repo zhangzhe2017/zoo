@@ -1,0 +1,56 @@
+{
+    "success": true,
+    "data": {
+        "type": "activity",
+        "title": "发起活动",
+        "fields": [
+            {
+                "label": "标题",
+                "name": "title",
+                "type": "input",
+                "required": true
+            },
+            {
+                "label": "活动开始时间",
+                "name": "startTime",
+                "type": "datetime",
+                "required": true
+            },
+            {
+                "label": "活动结束时间",
+                "name": "endTime",
+                "type": "datetime",
+                "required": true
+            },
+            {
+                "label": "报名截止时间",
+                "name": "registerEndTime",
+                "type": "datetime",
+                "required": true
+            },
+            {
+                "label": "地点",
+                "name": "address",
+                "type": "input",
+                "required": true
+            },
+            {
+                "label": "总人数",
+                "name": "totalCount",
+                "type": "number",
+                "required": true
+            },
+            {
+                "label": "图片",
+                "name": "image",
+                "type": "image"
+            },
+            {
+                "label": "详细介绍",
+                "name": "description",
+                "type": "textarea",
+                "required": true
+            }
+        ]
+    }
+}

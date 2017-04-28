@@ -37,8 +37,7 @@ export default {
         if (location) {
             _.assign(this.constructor, {
                 currentPathname: null,
-                currentSearch: null,
-                currentKey: null
+                currentSearch: null
             });
         }
         this.destroy && this.destroy();
@@ -48,17 +47,14 @@ export default {
     doInit() {
         const {location} = this.props;
         if (location) {
-            const {pathname, search, key} = location;
-            const {currentPathname, currentSearch, currentKey} = this.constructor;
-            if (pathname !== currentPathname || search !== currentSearch || key !== currentKey) {
-                if (currentKey != null) {
-                    this.reset && this.reset();
-                }
+            const {pathname, search} = location;
+            const {currentPathname, currentSearch} = this.constructor;
+            if (pathname !== currentPathname || search !== currentSearch) {
+                this.reset && this.reset();
                 this.init && this.init();
                 _.assign(this.constructor, {
                     currentPathname: pathname,
-                    currentSearch: search,
-                    currentKey: key
+                    currentSearch: search
                 });
             }
         }

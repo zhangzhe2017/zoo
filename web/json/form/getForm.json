@@ -1,0 +1,65 @@
+{
+    "success": true,
+    "data": {
+        "type": "activity",
+        "title": "发起活动",
+        "fields": [
+            {
+                "label": "标题",
+                "name": "title",
+                "type": "input",
+                "required": true
+            },
+            {
+                "label": "活动开始时间",
+                "name": "startTime",
+                "type": "datetime",
+                "required": true
+            },
+            {
+                "label": "活动结束时间",
+                "name": "endTime",
+                "type": "datetime",
+                "required": true
+            },
+            {
+                "label": "报名截止时间",
+                "name": "registerEndTime",
+                "type": "datetime",
+                "required": true
+            },
+            {
+                "label": "地点",
+                "name": "address",
+                "type": "input",
+                "required": true
+            },
+            {
+                "label": "总人数",
+                "name": "totalCount",
+                "type": "number",
+                "required": true
+            },
+            {
+                "label": "图片",
+                "name": "image",
+                "type": "image"
+            },
+            {
+                "label": "详细介绍",
+                "name": "description",
+                "type": "textarea",
+                "required": true
+            }
+        ],
+        "fieldValues": "{\"title\": \"爬山活动\", \"startTime\": \"2017-05-01 09:00\", \"endTime\": \"2017-05-01 12:00\", \"registerEndTime\": \"2017-05-01 09:00\", \"address\": \"北高峰\", \"totalCount\": 10, \"image\": [\"https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg\", \"https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg\"], \"description\": \"在山脚集合, 不准迟到, 迟到罚钱\"}",
+        "registered": false,
+        "creatorNickName": "大犇",
+        "creatorWxid": 1,
+        "attenderList": [
+            "张喆",
+            "墨妃"
+        ],
+        "timestamp": 1493600400000
+    }
+}

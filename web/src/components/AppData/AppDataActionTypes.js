@@ -18,8 +18,10 @@ const ActionTypes = {
                 data: {code},
                 success: (result = {}) => {
                     const {data = {}} = result;
-                    const {timestamp, nonceStr, signature, attention} = data;
-                    doAction(dispatch, ActionTypes.appData.changeState, {timestamp, nonceStr, signature, attention});
+                    const {timestamp = 0, nonceStr = '', signature = '', attention = false, wxid = ''} = data;
+                    doAction(dispatch, ActionTypes.appData.changeState, {
+                        timestamp, nonceStr, signature, attention, wxid
+                    });
                     if (timestamp && nonceStr && signature) {
                         wx.config({
                             debug: false,
@@ -27,15 +29,17 @@ const ActionTypes = {
                             timestamp,
                             nonceStr,
                             signature,
-                            jsApiList: []
+                            jsApiList: ['chooseImage', 'uploadImage', 'previewImage']
                         });
                     }
                     if (!attention) {
-                        Toast.info('请先关注[组局官]！', 0);
                         Util.later(function () {
-                            Toast.hide();
-                            //location.href = 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzIxMzc5MjcyNQ==&scene=124#wechat_redirect';
-                        }, 3000);
+                            Toast.info('请先关注[组局官]！即将跳转...', 0);
+                            Util.later(function () {
+                                Toast.hide();
+                                location.href = 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzIxMzc5MjcyNQ==&scene=124#wechat_redirect';
+                            }, 3000);
+                        }, 1);
                     } else if (code && state) {
                         Routes.goto(state);
                     }

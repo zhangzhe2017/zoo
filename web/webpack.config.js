@@ -163,7 +163,7 @@ module.exports = {
             template: getPath('src/index-debug.html'),
             filename: 'index-debug.html'
         }),
-        new OpenBrowserPlugin({url: `${host}/index-debug.html`}),
+        new OpenBrowserPlugin({url: `${host}/index-debug.html#/form/add?templateId=1`}),
         vendorExtractor,
         indexExtractor,
         new webpack.LoaderOptionsPlugin({
