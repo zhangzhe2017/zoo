@@ -107,7 +107,7 @@ class FormDetail extends Component {
         const isEnd = registerEndTime && timestamp > registerEndTime;
         const isComplete = totalCount && attenderList.length >= totalCount;
         return (
-            <div className="x-page" style={{marginBottom: 84}}>
+            <div className={`x-page ${type === 'activity' ? 'x-activity-page' : ''}`}>
                 {
                     realTitle ?
                         <h2 className={style.title}>{realTitle}</h2> : ''
