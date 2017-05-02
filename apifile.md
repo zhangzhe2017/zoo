@@ -94,7 +94,8 @@
     * 接口功能描述: 获取我发起的活动列表
     * 接口地址: `/form/getMyFormList.json`
     * 参数
-        * type: "activity"//表单类型
+        * currentPage: 1//第几页
+        * pageSize: 10//每页多少条数据
     * 返回的json格式
         <pre>
         {
@@ -115,7 +116,8 @@
     * 接口功能描述: 获取我参加的活动列表
     * 接口地址: `/form/getAttendedActivityList.json`
     * 参数
-        * 无
+        * currentPage: 1//第几页
+        * pageSize: 10//每页多少条数据
     * 返回的json格式
         <pre>
         {

@@ -15,7 +15,7 @@ const ActionTypes = {
             doAction(dispatch, ActionTypes.formDetail.changeState, {loading: true});
             FormService.getForm({
                 data: {id},
-                success: (result) => {
+                success: (result = {}) => {
                     const {data = {}} = result;
                     const {
                         type = '', title = '', fields = [], fieldValues = '{}', registered = false,
@@ -43,8 +43,7 @@ const ActionTypes = {
             doAction(dispatch, ActionTypes.formDetail.changeState, {loading: true});
             FormService.register({
                 data: {register},
-                success: (result) => {
-                    result = result || {};
+                success: (result = {}) => {
                     const {data = {}} = result;
                     const {qrCodeResult = ''} = data;
                     Util.later(function () {

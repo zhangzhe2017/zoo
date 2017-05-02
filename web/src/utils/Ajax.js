@@ -22,7 +22,7 @@ export default {
             dataType: 'json',
             traditional: true,
             ...config,
-            success(result, textStatus, jqXHR) {
+            success(result = {}, textStatus, jqXHR) {
                 if (result.success) {
                     showSuccessMessage && Toast.success(result.message || successMessage);
                     success && success.apply(this, arguments);

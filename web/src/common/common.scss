@@ -44,4 +44,14 @@
     .x-activity-page {
         margin-bottom: 84px;
     }
+    .x-activity-indicator .am-activity-indicator-spinner {
+        margin: 0 auto;
+    }
+    .x-card {
+        margin: 20px;
+        min-height: 0;
+        .am-card-body {
+            min-height: 0;
+        }
+    }
 }

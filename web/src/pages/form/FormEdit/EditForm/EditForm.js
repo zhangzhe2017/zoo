@@ -96,14 +96,14 @@ class EditForm extends Component {
             count: 1,
             sizeType: ['compressed'],
             sourceType: ['album', 'camera'],
-            success: result => {
-                const localIds = result.localIds;
+            success: (result = {}) => {
+                const {localIds = []} = result;
                 _.forEach(localIds, localId => {
                     wx.uploadImage({
                         localId,
                         isShowProgressTips: 1,
-                        success: result => {
-                            const serverId = result.serverId;
+                        success: (result = {}) => {
+                            const {serverId} = result;
                             const {dispatch, imageFilesMap} = this.props;
                             const imageFiles = imageFilesMap[name];
                             imageFiles.push({
