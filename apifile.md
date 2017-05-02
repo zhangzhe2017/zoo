@@ -5,7 +5,7 @@
     * 参数
         * code: 用来获取授权access_token和openid等信息
     * 返回的json格式
-     <pre>
+        <pre>
         {
             "success": true,
             "message": "",
@@ -17,14 +17,14 @@
                 "wxid": 当前用户id
             }
         }
-     </pre>
+        </pre>
 2. 获取模板信息的接口, 用来渲染自定义表单页面
     * 接口功能描述: 根据模板id, 获取到字段列表, 每个字段包含字段标签, 字段名, 字段类型(input/number/textarea/datetime/image)等信息
     * 接口地址: `/template/getTemplate.json`
     * 参数
         * id: 模板id
     * 返回的json格式
-    <pre>
+        <pre>
         {
             "success": true,
             "message": "",
@@ -34,7 +34,7 @@
                 "fields": []//字段信息
             }
         }
-     </pre>
+        </pre>
 3. 保存自定义表单的接口
     * 接口功能描述: 把用户填写的字段值都保存起来
     * 接口地址: `/form/saveForm.json`
@@ -42,7 +42,7 @@
         * templateId: 模板id
         * fieldValues: "{field1: value1, field2: value2, ...}"//其他字段值
     * 返回的json格式
-    <pre>
+        <pre>
         {
             "success": true,
             "message": "",
@@ -50,14 +50,14 @@
                 "id": 0//保存之后返回的表单id
             }
         }
-     </pre>
+        </pre>
 4. 获取自定义表单的接口
     * 接口功能描述: 获取表单数据, 渲染查看详情的页面
     * 接口地址: `/form/getForm.json`
     * 参数
         * id: 表单id
     * 返回的json格式
-    <pre>
+        <pre>
         {
             "success": true,
             "message": "",
@@ -73,7 +73,7 @@
                 "timestamp": 服务器时间
             }
         }
-     </pre>
+        </pre>
 5. 报名/取消报名的接口
     * 接口功能描述: 查看详情的页面, 点击报名按钮进行报名
     * 接口地址: `/form/register.json`
@@ -81,19 +81,22 @@
         * id: 表单id
         * register: true为报名, false为取消报名
     * 返回的json格式
-    <pre>
+        <pre>
         {
             "success": true,
-            "message": ""
+            "message": "",
+            "data": {
+                "qrCodeResult": "..."
+            }
         }
-     </pre>
+        </pre>
 6. 我发起的活动列表
     * 接口功能描述: 获取我发起的活动列表
     * 接口地址: `/form/getMyFormList.json`
     * 参数
         * type: "activity"//表单类型
     * 返回的json格式
-    <pre>
+        <pre>
         {
             "success": true,
             "message": "",
@@ -107,14 +110,14 @@
                 ...
             ]
         }
-     </pre>
+        </pre>
 7. 我参加的活动列表
     * 接口功能描述: 获取我参加的活动列表
     * 接口地址: `/form/getAttendedActivityList.json`
     * 参数
         * 无
     * 返回的json格式
-    <pre>
+        <pre>
         {
             "success": true,
             "message": "",
@@ -128,4 +131,4 @@
                 ...
             ]
         }
-     </pre>
+        </pre>

@@ -12,7 +12,7 @@ export default {
         okText: '确定',
         cancelText: '取消',
         requiredMessage: '不允许为空',
-        dateTimeFormat: 'YYYY-MM-DD HH:mm:ss',
+        dateTimeFormat: 'YYYY-MM-DD HH:mm',
         dateFormat: 'YYYY-MM-DD'
     }
 

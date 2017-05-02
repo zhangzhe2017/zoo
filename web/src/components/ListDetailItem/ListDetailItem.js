@@ -7,7 +7,7 @@ class ListDetailItem extends Component {
     render() {
         const {type, label, content} = this.props;
         return (
-            type === 'image' ?
+            type === 'textarea' || type === 'image' ?
                 <div className="am-list-item am-list-item-middle">
                     <div className="am-list-line">
                         <div className="am-list-content">
@@ -21,7 +21,7 @@ class ListDetailItem extends Component {
                     </div>
                 </div> :
                 <div className="am-list-item am-textarea-item">
-                    <div className="am-textarea-label am-textarea-label-5">
+                    <div className="am-textarea-label am-textarea-label-7">
                         {label}
                     </div>
                     <div className="am-textarea-control x-detail-item">

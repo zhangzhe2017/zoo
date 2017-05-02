@@ -19,7 +19,7 @@ const ActionTypes = {
                     const {data = {}} = result;
                     const {
                         type = '', title = '', fields = [], fieldValues = '{}', registered = false,
-                        creatorNickName = '', creatorWxid = '', attenderList = []
+                        creatorNickName = '', creatorWxid = '', attenderList = [], timestamp = 0
                     } = data;
                     let fieldValuesObject = null;
                     try {
@@ -29,7 +29,7 @@ const ActionTypes = {
                     }
                     doAction(dispatch, ActionTypes.formDetail.changeState, {
                         type, title, fields, fieldValues: fieldValuesObject, registered, creatorNickName, creatorWxid,
-                        attenderList
+                        attenderList, timestamp
                     });
                 },
                 complete: () => {
@@ -44,12 +44,22 @@ const ActionTypes = {
             FormService.register({
                 data: {register},
                 success: (result) => {
+                    result = result || {};
+                    const {data = {}} = result;
+                    const {qrCodeResult = ''} = data;
                     Util.later(function () {
-                        Toast.info(`${register ? '报名成功' : '已取消报名'}！即将刷新...`, 0);
+                        Toast.info(
+                            register ? `报名成功！即将${qrCodeResult ? '跳转' : '刷新'}...` : '已取消报名！即将刷新...',
+                            0
+                        );
                         Util.later(function () {
                             Toast.hide();
-                            formDetail.reset();
-                            formDetail.init();
+                            if (register && qrCodeResult) {
+                                location.href = qrCodeResult;
+                            } else {
+                                formDetail.reset();
+                                formDetail.init();
+                            }
                         }, 3000);
                     }, 1);
                 },

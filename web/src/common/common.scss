@@ -2,9 +2,13 @@
     .am-toast-notice-content {
         top: -100px;
     }
-    .am-list-item .am-list-line .am-list-content, .am-textarea-control {
+    .am-list-item .am-list-line .am-list-content {
         padding-top: 18px;
         padding-bottom: 18px;
+    }
+    .am-textarea-control {
+        padding-top: 20px;
+        padding-bottom: 20px;
     }
     .am-image-picker .am-image-picker-list {
         margin-bottom: 0;
@@ -21,5 +25,20 @@
     .am-list-item .am-input-label,
     .am-textarea-label {
         font-weight: bold;
+    }
+    .x-list-item.am-list-item .am-list-line .am-list-content {
+        width: 238px;
+        font-weight: bold;
+        flex: initial;
+        margin-right: 10px;
+    }
+    .x-list-item.am-list-item .am-list-line .am-list-extra {
+        flex-basis: initial;
+        color: #000;
+    }
+    .x-required {
+        color: red;
+        font-weight: normal;
+        vertical-align: middle;
     }
 }
