@@ -36,7 +36,7 @@ import toArray from 'lodash/toArray';
 import uniq from 'lodash/uniq';
 import uniqueId from 'lodash/uniqueId';*/
 import values from 'lodash/values';
-import moment from 'moment';
+import moment from 'antd-mobile/node_modules/moment/moment';
 import React, {Component, PropTypes} from 'react';
 import {render} from 'react-dom';
 import {Provider, connect} from 'react-redux';
