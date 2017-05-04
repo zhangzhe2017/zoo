@@ -74,8 +74,13 @@ class EditForm extends Component {
                 Toast.fail(_.values(error)[0].errors[0].message);
             } else {
                 const formData = this.getFormData();
+                const formEdit = FormEdit.instance;
+                let templateId = null;
+                if (formEdit) {
+                    templateId = formEdit.props.location.query.templateId;
+                }
                 doAction(dispatch, ActionTypes.feEditForm.saveForm, {
-                    templateId: FormEdit.instance.props.location.query.templateId,
+                    templateId,
                     fieldValues: JSON.stringify(formData)
                 });
             }

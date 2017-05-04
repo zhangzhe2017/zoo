@@ -11,7 +11,7 @@ const ActionTypes = {
     formDetail: {
 
         getForm(dispatch) {
-            const {id} = this || {};
+            const {id, formDetail} = this || {};
             doAction(dispatch, ActionTypes.formDetail.changeState, {loading: true});
             FormService.getForm({
                 data: {id},
@@ -31,6 +31,16 @@ const ActionTypes = {
                         type, title, fields, fieldValues: fieldValuesObject, registered, creatorNickName, creatorWxid,
                         attenderList, timestamp
                     });
+                    let realTitle = null;
+                    if (type === 'activity') {
+                        realTitle = fieldValuesObject.title;
+                    } else {
+                        realTitle = title;
+                    }
+                    if (realTitle) {
+                        formDetail.pageTitle = realTitle;
+                        formDetail.initShare();
+                    }
                 },
                 complete: () => {
                     doAction(dispatch, ActionTypes.formDetail.changeState, {loading: false});

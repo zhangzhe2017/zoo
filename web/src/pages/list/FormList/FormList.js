@@ -21,6 +21,8 @@ class FormList extends Component {
         currentPage: 0
     };
 
+    pageTitle = '表单列表';
+
     getViewportHeight() {
         var prop = 'clientHeight',
             win = window,
@@ -54,10 +56,14 @@ class FormList extends Component {
     }
 
     init() {
+        const {location} = this.props;
+        const {query} = location;
+        const {pageType} = query;
         Util.later(() => {
             this.renderList();
         }, 1);
         $(window).on('scroll.FormList', Util.buffer(this.renderList).bind(this));
+        this.pageTitle = (pageType === 'myFormList' ? '我发起的活动' : '我参加的活动');
     }
 
     reset() {

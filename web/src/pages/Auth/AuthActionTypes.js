@@ -9,17 +9,17 @@ const {Toast} = window._external;
 
 const ActionTypes = {
 
-    appData: {
+    auth: {
 
         load(dispatch) {
-            const {code, state} = Util.pageParams;
-            doAction(dispatch, ActionTypes.appData.changeState, {loading: true});
+            const {code} = this || {};
+            doAction(dispatch, ActionTypes.auth.changeState, {loading: true});
             AppService.getAppData({
                 data: {code},
                 success: (result = {}) => {
                     const {data = {}} = result;
                     const {timestamp = 0, nonceStr = '', signature = '', attention = false, wxid = ''} = data;
-                    doAction(dispatch, ActionTypes.appData.changeState, {
+                    doAction(dispatch, ActionTypes.auth.changeState, {
                         timestamp, nonceStr, signature, attention, wxid
                     });
                     if (timestamp && nonceStr && signature) {
@@ -29,7 +29,10 @@ const ActionTypes = {
                             timestamp,
                             nonceStr,
                             signature,
-                            jsApiList: ['chooseImage', 'uploadImage', 'previewImage']
+                            jsApiList: [
+                                'chooseImage', 'uploadImage', 'previewImage',
+                                'onMenuShareTimeline', 'onMenuShareAppMessage'
+                            ]
                         });
                     }
                     if (!attention) {
@@ -40,12 +43,13 @@ const ActionTypes = {
                                 location.href = 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzIxMzc5MjcyNQ==&scene=124#wechat_redirect';
                             }, 3000);
                         }, 1);
-                    } else if (code && state) {
-                        Routes.goto(state);
+                    } else if (code) {
+                        const {redirectUrl} = Util.pageParams;
+                        redirectUrl && Routes.goto(redirectUrl);
                     }
                 },
                 complete: () => {
-                    doAction(dispatch, ActionTypes.appData.changeState, {loading: false});
+                    doAction(dispatch, ActionTypes.auth.changeState, {loading: false});
                 }
             });
         }

@@ -8,6 +8,8 @@ const {React, Component, PropTypes, connect, reactMixin} = window._external;
 @reactMixin.decorate(CommonMixin)
 class App extends Component {
 
+    isApp = true;
+
     render() {
         const {children} = this.props;
         return (

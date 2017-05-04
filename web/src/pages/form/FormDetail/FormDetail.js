@@ -26,12 +26,14 @@ class FormDetail extends Component {
     };
 
     bindFns = ['handleRegisterBtnClick'];
+    pageTitle = '表单查看';
 
     init() {
         const {dispatch, location} = this.props;
         const {query} = location;
         doAction(dispatch, ActionTypes.formDetail.getForm, {
-            id: query.formId
+            id: query.formId,
+            formDetail: this
         });
     }
 
@@ -154,8 +156,8 @@ FormDetail.propTypes = {
 export {FormDetail};
 
 export default connect(state => {
-    const {appData, formDetail} = state;
-    const {wxid} = appData;
+    const {auth, formDetail} = state;
+    const {wxid} = auth;
     return {
         ...formDetail,
         wxid
