@@ -40,6 +40,7 @@
     * 接口地址: `/form/saveForm.json`
     * 参数
         * templateId: 模板id
+        * fields: "[...]"//字段信息
         * fieldValues: "{field1: value1, field2: value2, ...}"//其他字段值
     * 返回的json格式
         <pre>
