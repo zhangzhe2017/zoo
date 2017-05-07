@@ -41,13 +41,17 @@ public class FormServiceImpl implements FormService {
     @Override
     public Long saveForm(String templateId, String formValues, String wxid, String name) {
         //判断表单中是否有图片，如果有图片则转存到oss
-/*        JSONArray jsonArray = JSONArray.parseArray(formValues);
+        /*JSONArray jsonArray = JSONArray.parseArray(formValues);
         Iterator itr = jsonArray.iterator();
         while(itr.hasNext()){
             JSONObject ob = (JSONObject)itr.next();
             String type = ob.getString("type");
             if(type.equals("image")){
                 //判断字段中数据情况，若为空则不处理
+                Iterator itrObj = ob.keySet().iterator();
+                while(itrObj.hasNext()){
+                    JSONObject jitrObj.next();
+                }
                 //图片转存
                 String value = ob.getString("value");
                 String mediaLocalPath = WxServiceCenter.downLoadMediaSource(value);
@@ -96,13 +100,14 @@ public class FormServiceImpl implements FormService {
         data.put("creatorNickName",user.getUserName());
         data.put("creatorWxid", wxid);
 
-        String attenders = "";
+        JSONArray attenders = new JSONArray();
         List<Register> registers = registerRepository.getRegistersByFormId(id);
         for(Register register : registers){
             User attender = userRepository.getUserInfoByWxid(register.getAttender());
-            attenders.concat(attender.getUserName()).concat(",");
+            attenders.add(attender.getUserName());
         }
-        data.put("attenderList",attenders.indexOf(0,attenders.length()-1));
+
+        data.put("attenderList",attenders);
         data.put("timestamp", new Date());
 
         boolean isRegistered = registerRepository.isUserRegistered(id,userId);
