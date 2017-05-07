@@ -46,6 +46,7 @@ public class TemplateServiceImpl implements TemplateService {
             jsonObject.put("name",templateField.getFieldName());
             jsonObject.put("type",templateField.getFieldType());
             jsonObject.put("required",templateField.getIsEmpty().equals("true"));
+            jsonObject.put("label",templateField.getFieldLabel());
             jsonArray.add(jsonObject);
         }
         data.put("fields" , jsonArray);

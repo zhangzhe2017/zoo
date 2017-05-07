@@ -17,6 +17,8 @@ public class TemplateField {
 
     private String fieldType;
 
+    private String fieldLabel;
+
     private String isEmpty;
 
     public Long getId() {
@@ -73,6 +75,14 @@ public class TemplateField {
 
     public void setFieldType(String fieldType) {
         this.fieldType = fieldType == null ? null : fieldType.trim();
+    }
+
+    public String getFieldLabel() {
+        return fieldLabel;
+    }
+
+    public void setFieldLabel(String fieldLabel) {
+        this.fieldLabel = fieldLabel == null ? null : fieldLabel.trim();
     }
 
     public String getIsEmpty() {

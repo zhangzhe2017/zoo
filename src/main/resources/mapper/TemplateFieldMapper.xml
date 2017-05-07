@@ -9,6 +9,7 @@
     <result column="field_name" property="fieldName" jdbcType="VARCHAR" />
     <result column="field_option" property="fieldOption" jdbcType="VARCHAR" />
     <result column="field_type" property="fieldType" jdbcType="VARCHAR" />
+    <result column="field_label" property="fieldLabel" jdbcType="VARCHAR" />
     <result column="is_empty" property="isEmpty" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -70,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, gmt_create, gmt_modified, is_delete, field_name, field_option, field_type, is_empty
+    id, gmt_create, gmt_modified, is_delete, field_name, field_option, field_type, field_label, 
+    is_empty
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="weixin.zoo.infrastructure.model.TemplateFieldExample" >
     select
@@ -106,10 +108,12 @@
   <insert id="insert" parameterType="weixin.zoo.infrastructure.model.TemplateField" >
     insert into template_field (id, gmt_create, gmt_modified, 
       is_delete, field_name, field_option, 
-      field_type, is_empty)
+      field_type, field_label, is_empty
+      )
     values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
       #{isDelete,jdbcType=VARCHAR}, #{fieldName,jdbcType=VARCHAR}, #{fieldOption,jdbcType=VARCHAR}, 
-      #{fieldType,jdbcType=VARCHAR}, #{isEmpty,jdbcType=VARCHAR})
+      #{fieldType,jdbcType=VARCHAR}, #{fieldLabel,jdbcType=VARCHAR}, #{isEmpty,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="weixin.zoo.infrastructure.model.TemplateField" >
     insert into template_field
@@ -134,6 +138,9 @@
       </if>
       <if test="fieldType != null" >
         field_type,
+      </if>
+      <if test="fieldLabel != null" >
+        field_label,
       </if>
       <if test="isEmpty != null" >
         is_empty,
@@ -160,6 +167,9 @@
       </if>
       <if test="fieldType != null" >
         #{fieldType,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldLabel != null" >
+        #{fieldLabel,jdbcType=VARCHAR},
       </if>
       <if test="isEmpty != null" >
         #{isEmpty,jdbcType=VARCHAR},
@@ -196,6 +206,9 @@
       <if test="record.fieldType != null" >
         field_type = #{record.fieldType,jdbcType=VARCHAR},
       </if>
+      <if test="record.fieldLabel != null" >
+        field_label = #{record.fieldLabel,jdbcType=VARCHAR},
+      </if>
       <if test="record.isEmpty != null" >
         is_empty = #{record.isEmpty,jdbcType=VARCHAR},
       </if>
@@ -213,6 +226,7 @@
       field_name = #{record.fieldName,jdbcType=VARCHAR},
       field_option = #{record.fieldOption,jdbcType=VARCHAR},
       field_type = #{record.fieldType,jdbcType=VARCHAR},
+      field_label = #{record.fieldLabel,jdbcType=VARCHAR},
       is_empty = #{record.isEmpty,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -239,6 +253,9 @@
       <if test="fieldType != null" >
         field_type = #{fieldType,jdbcType=VARCHAR},
       </if>
+      <if test="fieldLabel != null" >
+        field_label = #{fieldLabel,jdbcType=VARCHAR},
+      </if>
       <if test="isEmpty != null" >
         is_empty = #{isEmpty,jdbcType=VARCHAR},
       </if>
@@ -253,6 +270,7 @@
       field_name = #{fieldName,jdbcType=VARCHAR},
       field_option = #{fieldOption,jdbcType=VARCHAR},
       field_type = #{fieldType,jdbcType=VARCHAR},
+      field_label = #{fieldLabel,jdbcType=VARCHAR},
       is_empty = #{isEmpty,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>

@@ -565,6 +565,76 @@ public class TemplateFieldExample {
             return (Criteria) this;
         }
 
+        public Criteria andFieldLabelIsNull() {
+            addCriterion("field_label is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldLabelIsNotNull() {
+            addCriterion("field_label is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldLabelEqualTo(String value) {
+            addCriterion("field_label =", value, "fieldLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldLabelNotEqualTo(String value) {
+            addCriterion("field_label <>", value, "fieldLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldLabelGreaterThan(String value) {
+            addCriterion("field_label >", value, "fieldLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldLabelGreaterThanOrEqualTo(String value) {
+            addCriterion("field_label >=", value, "fieldLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldLabelLessThan(String value) {
+            addCriterion("field_label <", value, "fieldLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldLabelLessThanOrEqualTo(String value) {
+            addCriterion("field_label <=", value, "fieldLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldLabelLike(String value) {
+            addCriterion("field_label like", value, "fieldLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldLabelNotLike(String value) {
+            addCriterion("field_label not like", value, "fieldLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldLabelIn(List<String> values) {
+            addCriterion("field_label in", values, "fieldLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldLabelNotIn(List<String> values) {
+            addCriterion("field_label not in", values, "fieldLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldLabelBetween(String value1, String value2) {
+            addCriterion("field_label between", value1, value2, "fieldLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldLabelNotBetween(String value1, String value2) {
+            addCriterion("field_label not between", value1, value2, "fieldLabel");
+            return (Criteria) this;
+        }
+
         public Criteria andIsEmptyIsNull() {
             addCriterion("is_empty is null");
             return (Criteria) this;
