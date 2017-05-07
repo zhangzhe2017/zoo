@@ -16,7 +16,7 @@ import org.springframework.context.annotation.ImportResource;
 @Configuration
 @SpringBootApplication
 @ComponentScan(basePackages = {"weixin.zoo"})
-@ImportResource("classpath:applicationContext-mybatis.xml")
+@ImportResource("classpath:*.xml")
 @EnableAutoConfiguration
 public class Application {
     public static void main(String[] args) {

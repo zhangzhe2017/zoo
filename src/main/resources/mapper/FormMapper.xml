@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="weixin.zoo.infrastructure.mapper.FormMapper" >
+  <resultMap id="BaseResultMap" type="weixin.zoo.infrastructure.model.Form" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <result column="is_delete" property="isDelete" jdbcType="VARCHAR" />
+    <result column="template_id" property="templateId" jdbcType="BIGINT" />
+    <result column="form_name" property="formName" jdbcType="VARCHAR" />
+    <result column="form_value" property="formValue" jdbcType="VARCHAR" />
+    <result column="form_owner" property="formOwner" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, gmt_create, gmt_modified, is_delete, template_id, form_name, form_value, form_owner
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="weixin.zoo.infrastructure.model.FormExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from form
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from form
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from form
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="weixin.zoo.infrastructure.model.FormExample" >
+    delete from form
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="weixin.zoo.infrastructure.model.Form" >
+    insert into form (id, gmt_create, gmt_modified, 
+      is_delete, template_id, form_name, 
+      form_value, form_owner)
+    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
+      #{isDelete,jdbcType=VARCHAR}, #{templateId,jdbcType=BIGINT}, #{formName,jdbcType=VARCHAR}, 
+      #{formValue,jdbcType=VARCHAR}, #{formOwner,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="weixin.zoo.infrastructure.model.Form" >
+    insert into form
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+      <if test="templateId != null" >
+        template_id,
+      </if>
+      <if test="formName != null" >
+        form_name,
+      </if>
+      <if test="formValue != null" >
+        form_value,
+      </if>
+      <if test="formOwner != null" >
+        form_owner,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=VARCHAR},
+      </if>
+      <if test="templateId != null" >
+        #{templateId,jdbcType=BIGINT},
+      </if>
+      <if test="formName != null" >
+        #{formName,jdbcType=VARCHAR},
+      </if>
+      <if test="formValue != null" >
+        #{formValue,jdbcType=VARCHAR},
+      </if>
+      <if test="formOwner != null" >
+        #{formOwner,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="weixin.zoo.infrastructure.model.FormExample" resultType="java.lang.Integer" >
+    select count(*) from form
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update form
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.gmtCreate != null" >
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gmtModified != null" >
+        gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDelete != null" >
+        is_delete = #{record.isDelete,jdbcType=VARCHAR},
+      </if>
+      <if test="record.templateId != null" >
+        template_id = #{record.templateId,jdbcType=BIGINT},
+      </if>
+      <if test="record.formName != null" >
+        form_name = #{record.formName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formValue != null" >
+        form_value = #{record.formValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formOwner != null" >
+        form_owner = #{record.formOwner,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update form
+    set id = #{record.id,jdbcType=BIGINT},
+      gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      is_delete = #{record.isDelete,jdbcType=VARCHAR},
+      template_id = #{record.templateId,jdbcType=BIGINT},
+      form_name = #{record.formName,jdbcType=VARCHAR},
+      form_value = #{record.formValue,jdbcType=VARCHAR},
+      form_owner = #{record.formOwner,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="weixin.zoo.infrastructure.model.Form" >
+    update form
+    <set >
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=VARCHAR},
+      </if>
+      <if test="templateId != null" >
+        template_id = #{templateId,jdbcType=BIGINT},
+      </if>
+      <if test="formName != null" >
+        form_name = #{formName,jdbcType=VARCHAR},
+      </if>
+      <if test="formValue != null" >
+        form_value = #{formValue,jdbcType=VARCHAR},
+      </if>
+      <if test="formOwner != null" >
+        form_owner = #{formOwner,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="weixin.zoo.infrastructure.model.Form" >
+    update form
+    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      is_delete = #{isDelete,jdbcType=VARCHAR},
+      template_id = #{templateId,jdbcType=BIGINT},
+      form_name = #{formName,jdbcType=VARCHAR},
+      form_value = #{formValue,jdbcType=VARCHAR},
+      form_owner = #{formOwner,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

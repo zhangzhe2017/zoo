@@ -18,10 +18,10 @@
         <!--</environment>-->
     <!--</environments>-->
     <mappers>
-        <mapper resource="mybatis/mapper/FormMpper.xml"/>
-        <mapper resource="mybatis/mapper/RegisterMapper.xml"/>
-        <mapper resource="mybatis/mapper/TemplateMapper.xml"/>
-        <mapper resource="mybatis/mapper/TemplateFieldMapper.xml"/>
-        <mapper resource="mybatis/mapper/UserMapper.xml"/>
+        <mapper resource="mapper/FormMapper.xml"/>
+        <mapper resource="mapper/RegisterMapper.xml"/>
+        <mapper resource="mapper/TemplateMapper.xml"/>
+        <mapper resource="mapper/TemplateFieldMapper.xml"/>
+        <mapper resource="mapper/UserMapper.xml"/>
     </mappers>
 </configuration>
