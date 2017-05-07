@@ -7,7 +7,7 @@ import CommonMixin from '../../../mixins/CommonMixin';
 import Util from '../../../utils/Util';
 
 const {
-    React, Component, PropTypes, connect, reactMixin, ActivityIndicator, Card, _, moment, $, Link
+    React, Component, PropTypes, connect, reactMixin, ActivityIndicator, Card, _, $, Link
 } = window._external;
 
 @reactMixin.decorate(CommonMixin)
@@ -90,9 +90,9 @@ class FormList extends Component {
                     <Card className="x-card">
                         <Card.Body>
                             <div>标题：{title}</div>
-                            <div style={{marginTop: 8}}>
+                            {/*<div style={{marginTop: 8}}>
                                 创建时间：{createTime ? moment(createTime).format(Util.Const.dateTimeFormat) : ''}
-                            </div>
+                            </div>*/}
                         </Card.Body>
                     </Card>
                 </Link>

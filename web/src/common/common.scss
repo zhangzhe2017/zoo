@@ -52,6 +52,16 @@
         min-height: 0;
         .am-card-body {
             min-height: 0;
+            border-top: 0;
         }
+    }
+    .x-button {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    .am-button-ghost {
+        background-color: #fff;
     }
 }
