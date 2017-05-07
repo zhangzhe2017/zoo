@@ -43,8 +43,10 @@ class FormDetail extends Component {
     }
 
     handleRegisterBtnClick() {
-        const {dispatch, registered} = this.props;
+        const {dispatch, location, registered} = this.props;
+        const {query} = location;
         doAction(dispatch, ActionTypes.formDetail.register, {
+            id: query.formId,
             register: !registered,
             formDetail: this
         });
@@ -129,10 +131,11 @@ class FormDetail extends Component {
                 {
                     type === 'activity' ?
                         <Button
-                            type={registered ? 'default' : 'primary'}
+                            type={registered ? 'ghost' : 'primary'}
                             style={{position: 'fixed', bottom: 0, width: '100%'}}
                             onClick={this.handleRegisterBtnClick}
                             disabled={wxid === creatorWxid || isEnd || !registered && isComplete}
+                            className="x-button"
                         >
                             {
                                 isEnd ? '报名已截止' : (

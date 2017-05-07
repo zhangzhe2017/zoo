@@ -49,10 +49,10 @@ const ActionTypes = {
         },
 
         register(dispatch) {
-            const {register, formDetail} = this || {};
+            const {id, register, formDetail} = this || {};
             doAction(dispatch, ActionTypes.formDetail.changeState, {loading: true});
             FormService.register({
-                data: {register},
+                data: {id, register},
                 success: (result = {}) => {
                     const {data = {}} = result;
                     const {qrCodeResult = ''} = data;

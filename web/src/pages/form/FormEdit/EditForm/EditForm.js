@@ -17,14 +17,14 @@ class EditForm extends Component {
     static defaultState = {
         imageFilesMap: {
             image: [
-                {
+                /*{
                     url: 'https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg',
                     serverId: '1'
                 },
                 {
                     url: 'https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg',
                     serverId: '2'
-                }
+                }*/
             ]
         }
     };
@@ -81,6 +81,7 @@ class EditForm extends Component {
                 }
                 doAction(dispatch, ActionTypes.feEditForm.saveForm, {
                     templateId,
+                    title: formData.title,
                     fields: JSON.stringify(fields),
                     fieldValues: JSON.stringify(formData)
                 });
@@ -280,6 +281,7 @@ class EditForm extends Component {
                         <Button
                             type="primary"
                             onClick={this.handleSaveBtnClick}
+                            className="x-button"
                         >
                             保存
                         </Button> : ''
