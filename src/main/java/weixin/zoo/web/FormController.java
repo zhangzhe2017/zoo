@@ -28,7 +28,7 @@ public class FormController {
     @RequestMapping("/saveForm")
     @ResponseBody
     public String saveForm(HttpServletRequest request) {
-        String id = request.getParameter("tempalteId");
+        String id = request.getParameter("templateId");
         String fieldValues = request.getParameter("fieldValues");
 
         JSONObject jsonObject = JSON.parseObject(fieldValues);
