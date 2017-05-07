@@ -29,7 +29,7 @@ public class AppController {
         JSONObject result = new JSONObject();
         String code = request.getParameter("code");
         if(StringUtils.isEmpty(code))
-            return ResultUtils.assembleResult("false","","");;
+            return ResultUtils.assembleResult(false,"","");
 
         //首先使用code直接获取webaccessToken以及openid，判断accessToken是否失效，若失效则刷新。
         JSONObject jsonObject = userService.getUserInfo(code);
@@ -45,7 +45,7 @@ public class AppController {
             e.printStackTrace();
         }
 
-        return ResultUtils.assembleResult("true", "true", result.toString());
+        return ResultUtils.assembleResult(true, "true", result);
     }
 
 }
