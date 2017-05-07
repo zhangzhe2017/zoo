@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import weixin.zoo.service.UserService;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import weixin.zoo.utils.*;
 
@@ -32,6 +33,8 @@ public class AppController {
 
         //首先使用code直接获取webaccessToken以及openid，判断accessToken是否失效，若失效则刷新。
         JSONObject jsonObject = userService.getUserInfo(code);
+
+        HttpSession httpSession = request.getSession();
 
         String url = request.getRequestURL().toString();
         try {
