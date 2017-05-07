@@ -21,9 +21,22 @@ public class FormRepositoryImpl implements FormRepository{
     private FormMapper formMapper;
 
     @Override
-    public long saveForm(String templateId, String formValue, String wxid,String name) {
+    public long saveForm(String templateId, String formValue, String wxid ,String name) {
         Form form =  transferForm(templateId,formValue,wxid,name);
-        return formMapper.insertSelective(form);
+        int num = formMapper.insert(form);
+        if(num>0){
+            FormExample formExample =  new FormExample();
+            formExample.createCriteria().andIsDeleteEqualTo("n").andTemplateIdEqualTo(Long.valueOf(templateId))
+                    .andFormNameEqualTo(name)
+                    .andFormOwnerEqualTo(wxid)
+                    .andFormValueEqualTo(formValue);
+            List<Form> forms = formMapper.selectByExample(formExample);
+            Form formAdd = forms.get(0);
+
+            return formAdd.getId();
+        }
+
+        return 0;
     }
 
     @Override
