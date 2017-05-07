@@ -202,8 +202,6 @@ public class HttpHelper {
                 obj.put("downloadFilePath", downloadFile.getAbsolutePath());
                 obj.put("httpcode", response.getStatusLine().getStatusCode());
 
-
-
                 return obj;
             } else {
                 if (response.getStatusLine().getStatusCode() != 200) {

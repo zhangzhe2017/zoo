@@ -16,7 +16,7 @@ import java.util.Arrays;
  *
  * 计算公众平台的消息签名接口.
  */
-class SHA1 {
+public class SHA1 {
 
 	/**
 	 * 用SHA1算法生成安全签名

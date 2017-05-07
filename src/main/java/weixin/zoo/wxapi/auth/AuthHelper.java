@@ -15,6 +15,7 @@ public class AuthHelper {
     private static final long cacheTime = 1000 * 60 * 55 * 2;
 
     public static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
     /*
      *   先用本地读取accessToken，如果过期或者本地无则重新获取；
      */
@@ -120,5 +121,6 @@ public class AuthHelper {
         JSONObject response = HttpHelper.httpGet(url);
         return response;
     }
+
 
 }
