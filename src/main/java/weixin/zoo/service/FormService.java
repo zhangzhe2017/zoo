@@ -24,7 +24,7 @@ public interface FormService {
      * 根据表单id，以及用户id来获取表单数据。
      * 本接口方法要拿到表单页全部数据，包括：活动内容、活动发起人、活动当前参与者、当前用户是否报名
      */
-    public String getForm(Long id, String userId);
+    public Object getForm(Long id, String userId);
 
     /*
      * 活动报名接口
@@ -34,7 +34,7 @@ public interface FormService {
      * 报名功能中如果存在群二维码，需要转换成链接返回
      *
      */
-    public String doRegister(long id, boolean rOc, String userId);
+    public Object doRegister(long id, boolean rOc, String userId);
 
     /*
      * 获取用户已发起表单列表

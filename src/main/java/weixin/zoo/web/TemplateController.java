@@ -26,7 +26,7 @@ public class TemplateController {
         String id = request.getParameter("id");
         JSONObject jsonObject = templateService.getTemplate(Long.valueOf(id));
 
-        return ResultUtils.assembleResult("true", "true", jsonObject.toString());
+        return ResultUtils.assembleResult(true, "true", jsonObject);
     }
 
 }

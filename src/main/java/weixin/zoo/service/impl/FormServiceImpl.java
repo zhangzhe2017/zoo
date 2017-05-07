@@ -63,7 +63,7 @@ public class FormServiceImpl implements FormService {
     }
 
     @Override
-    public String getForm(Long id, String userId) {
+    public Object getForm(Long id, String userId) {
         JSONObject data = new JSONObject();
         //表单信息需要查询五张表：
         //1. form表  2. template  3.user 4. register 5.template_field
@@ -100,11 +100,11 @@ public class FormServiceImpl implements FormService {
         boolean isRegistered = registerRepository.isUserRegistered(id,userId);
         data.put("registered", isRegistered);
 
-        return data.toString();
+        return data;
     }
 
     @Override
-    public String doRegister(long id, boolean rOc, String userId) {
+    public Object doRegister(long id, boolean rOc, String userId) {
         if(rOc)
             registerRepository.registerUser(id,userId);
         else

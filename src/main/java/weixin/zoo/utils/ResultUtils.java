@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class ResultUtils {
 
-    public static String assembleResult(String success, String message, String data){
+    public static String assembleResult(boolean success, String message, Object data){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("success", success);
         jsonObject.put("message", message);
