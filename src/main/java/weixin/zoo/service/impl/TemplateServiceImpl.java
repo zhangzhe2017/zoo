@@ -2,6 +2,8 @@ package weixin.zoo.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.stereotype.Service;
 import weixin.zoo.infrastructure.model.Template;
 import weixin.zoo.infrastructure.model.TemplateField;
 import weixin.zoo.infrastructure.repository.TemplateFieldRepository;
@@ -11,6 +13,8 @@ import weixin.zoo.service.TemplateService;
 /**
  * Created by viczhang.zhangz on 2017/5/3.
  */
+@Service
+@EnableAutoConfiguration
 public class TemplateServiceImpl implements TemplateService {
 
     @Autowired

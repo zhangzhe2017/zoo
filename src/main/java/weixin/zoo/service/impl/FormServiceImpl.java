@@ -3,6 +3,8 @@ package weixin.zoo.service.impl;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.stereotype.Service;
 import weixin.zoo.infrastructure.model.*;
 import weixin.zoo.infrastructure.repository.*;
 import weixin.zoo.service.FormService;
@@ -17,6 +19,8 @@ import java.util.List;
 /**
  * Created by viczhang.zhangz on 2017/5/3.
  */
+@Service
+@EnableAutoConfiguration
 public class FormServiceImpl implements FormService {
 
     @Autowired

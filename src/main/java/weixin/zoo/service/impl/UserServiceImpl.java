@@ -2,6 +2,8 @@ package weixin.zoo.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.stereotype.Service;
 import weixin.zoo.service.UserService;
 import weixin.zoo.wxapi.Env;
 import weixin.zoo.wxapi.auth.AuthHelper;
@@ -12,6 +14,8 @@ import  weixin.zoo.service.common.aes.*;
 /**
  * Created by viczhang.zhangz on 2017/4/28.
  */
+@Service
+@EnableAutoConfiguration
 public class UserServiceImpl implements UserService {
 
     /*
