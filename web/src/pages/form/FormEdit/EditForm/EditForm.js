@@ -68,7 +68,7 @@ class EditForm extends Component {
     }*/
 
     handleSaveBtnClick() {
-        const {dispatch, form} = this.props;
+        const {dispatch, form, fields} = this.props;
         form.validateFields({force: true}, (error) => {
             if (error) {
                 Toast.fail(_.values(error)[0].errors[0].message);
@@ -81,6 +81,7 @@ class EditForm extends Component {
                 }
                 doAction(dispatch, ActionTypes.feEditForm.saveForm, {
                     templateId,
+                    fields: JSON.stringify(fields),
                     fieldValues: JSON.stringify(formData)
                 });
             }
