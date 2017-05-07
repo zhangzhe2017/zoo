@@ -8,7 +8,7 @@ import {createForm} from 'rc-form';
 import {FormEdit} from '../FormEdit';
 
 const {
-    React, Component, connect, reactMixin, List, InputItem, TextareaItem, ImagePicker, _, Button
+    React, Component, connect, reactMixin, List, InputItem, TextareaItem, ImagePicker, _, Button, DatePicker, Toast
 } = window._external;
 
 @reactMixin.decorate(CommonMixin)
@@ -16,16 +16,16 @@ class EditForm extends Component {
 
     static defaultState = {
         imageFilesMap: {
-            /*image: [
+            image: [
                 {
                     url: 'https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg',
-                    serverId: '2121'
+                    serverId: '1'
                 },
                 {
                     url: 'https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg',
-                    serverId: '2122'
+                    serverId: '2'
                 }
-            ]*/
+            ]
         }
     };
 
@@ -51,6 +51,11 @@ class EditForm extends Component {
                 serverId && fieldValues.push(serverId);
             });
         });
+        _.forEach(formData, (value, key) => {
+            if (value && value._isAMomentObject) {
+                formData[key] = value.valueOf();
+            }
+        });
         return formData;
     }
 
@@ -63,11 +68,22 @@ class EditForm extends Component {
     }*/
 
     handleSaveBtnClick() {
-        const {dispatch} = this.props;
-        const formData = this.getFormData();
-        doAction(dispatch, ActionTypes.feEditForm.saveForm, {
-            templateId: FormEdit.instance.props.location.query.templateId,
-            fieldValues: JSON.stringify(formData)
+        const {dispatch, form} = this.props;
+        form.validateFields({force: true}, (error) => {
+            if (error) {
+                Toast.fail(_.values(error)[0].errors[0].message);
+            } else {
+                const formData = this.getFormData();
+                const formEdit = FormEdit.instance;
+                let templateId = null;
+                if (formEdit) {
+                    templateId = formEdit.props.location.query.templateId;
+                }
+                doAction(dispatch, ActionTypes.feEditForm.saveForm, {
+                    templateId,
+                    fieldValues: JSON.stringify(formData)
+                });
+            }
         });
     }
 
@@ -85,14 +101,14 @@ class EditForm extends Component {
             count: 1,
             sizeType: ['compressed'],
             sourceType: ['album', 'camera'],
-            success: result => {
-                const localIds = result.localIds;
+            success: (result = {}) => {
+                const {localIds = []} = result;
                 _.forEach(localIds, localId => {
                     wx.uploadImage({
                         localId,
                         isShowProgressTips: 1,
-                        success: result => {
-                            const serverId = result.serverId;
+                        success: (result = {}) => {
+                            const {serverId} = result;
                             const {dispatch, imageFilesMap} = this.props;
                             const imageFiles = imageFilesMap[name];
                             imageFiles.push({
@@ -130,40 +146,118 @@ class EditForm extends Component {
         });
     }
 
+    validateImages(label, name, required, rule, value, callback) {
+        const {imageFilesMap} = this.props;
+        const imageFiles = imageFilesMap[name];
+        if (required && (!imageFiles || !imageFiles.length)) {
+            callback(`${label}不能为空！`);
+        } else {
+            callback();
+        }
+    }
+
     render() {
         const {form, title, fields} = this.props;
         const {getFieldProps} = form;
         const items = [];
         _.forEach(fields, field => {
-            const {label, name, type} = field;
+            const {label, name, type, extra, required} = field;
+            const requiredMark = required ? <span className="x-required">*</span> : '';
             if (type === 'input') {
                 items.push(
                     <InputItem
-                        {...getFieldProps(name)}
+                        {...getFieldProps(
+                            name,
+                            {
+                                rules: [
+                                    {required, message: `${label}不能为空！`}
+                                ]
+                            }
+                        )}
                         key={name}
                         clear={true}
+                        extra={extra}
+                        labelNumber={7}
                     >
-                        {label}
+                        {label} {requiredMark}
+                    </InputItem>
+                );
+            } else if (type === 'number') {
+                items.push(
+                    <InputItem
+                        {...getFieldProps(
+                            name,
+                            {
+                                rules: [
+                                    {required, message: `${label}不能为空！`}
+                                ]
+                            }
+                        )}
+                        key={name}
+                        clear={true}
+                        type="number"
+                        extra={extra}
+                        labelNumber={7}
+                    >
+                        {label} {requiredMark}
                     </InputItem>
                 );
             } else if (type === 'textarea') {
                 items.push(
                     <TextareaItem
-                        {...getFieldProps(name)}
+                        {...getFieldProps(
+                            name,
+                            {
+                                rules: [
+                                    {required, message: `${label}不能为空！`}
+                                ]
+                            }
+                        )}
                         key={name}
-                        title={label}
+                        title={<div>{label} {requiredMark}</div>}
                         autoHeight={true}
                         clear={true}
                         rows={2}
+                        labelNumber={7}
                     />
+                );
+            } else if (type === 'datetime') {
+                items.push(
+                    <DatePicker
+                        {...getFieldProps(
+                            name,
+                            {
+                                rules: [
+                                    {required, message: `${label}不能为空！`}
+                                ]
+                            }
+                        )}
+                        key={name}
+                        mode="datetime"
+                        extra=""
+                    >
+                        <List.Item
+                            className="x-list-item"
+                        >
+                            {label} {requiredMark}
+                        </List.Item>
+                    </DatePicker>
                 );
             } else if (type === 'image') {
                 items.push(
                     <List.Item
                         key={name}
                     >
-                        <div style={{fontWeight: 'bold'}}>{label}</div>
+                        <div style={{fontWeight: 'bold'}}>{label} {requiredMark}</div>
                         <ImagePicker
+                            {...getFieldProps(
+                                name,
+                                {
+                                    rules: [
+                                        {validator: this.validateImages.bind(this, label, name, required)}
+                                    ]
+                                }
+                            )}
                             files={this.getImageFiles(name)}
                             onChange={this.handleImageChange.bind(this, name)}
                             onAddImageClick={this.handleImageAddClick.bind(this, name)}
@@ -184,7 +278,6 @@ class EditForm extends Component {
                     items.length ?
                         <Button
                             type="primary"
-                            style={{marginTop: '0.25rem'}}
                             onClick={this.handleSaveBtnClick}
                         >
                             保存

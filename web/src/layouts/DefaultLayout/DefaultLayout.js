@@ -1,7 +1,6 @@
 'use strict';
 
 import CommonMixin from '../../mixins/CommonMixin';
-import AppData from '../../components/AppData/AppData';
 
 const {React, Component, PropTypes, connect, reactMixin} = window._external;
 
@@ -12,7 +11,6 @@ class DefaultLayout extends Component {
         const {children} = this.props;
         return (
             <div className="x-layout">
-                <AppData/>
                 <div className="x-layout-pageContent">
                     {children}
                 </div>

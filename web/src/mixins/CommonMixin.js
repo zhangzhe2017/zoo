@@ -44,6 +44,26 @@ export default {
         this.constructor.instance = null;
     },
 
+    initShare() {
+        wx.ready(() => {
+            const {location} = this.props;
+            const {pathname, search} = location;
+            const redirectUrl = `http://www.zujuguan.com/index.html?redirectUrl=${encodeURIComponent(pathname + search)}#`;
+            const shareConfig = {
+                title: this.pageTitle,
+                desc: this.pageDesc,
+                imgUrl: this.pageImage,
+                link: `http://www.zujuguan.com/auth?redirectUrl=${encodeURIComponent(redirectUrl)}`,
+                success: () => {
+                },
+                cancel: () => {
+                }
+            };
+            wx.onMenuShareTimeline(shareConfig);
+            wx.onMenuShareAppMessage(shareConfig);
+        });
+    },
+
     doInit() {
         const {location} = this.props;
         if (location) {
@@ -52,6 +72,9 @@ export default {
             if (pathname !== currentPathname || search !== currentSearch) {
                 this.reset && this.reset();
                 this.init && this.init();
+                if (!this.isApp && !this.isAuth) {
+                    this.initShare();
+                }
                 _.assign(this.constructor, {
                     currentPathname: pathname,
                     currentSearch: search

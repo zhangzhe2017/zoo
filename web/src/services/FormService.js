@@ -23,6 +23,20 @@ export default {
             url: '/form/register.json',
             ...config
         });
+    },
+
+    getMyFormList(config) {
+        return Util.ajax({
+            url: '/form/getMyFormList.json',
+            ...config
+        });
+    },
+
+    getAttendedActivityList(config) {
+        return Util.ajax({
+            url: '/form/getAttendedActivityList.json',
+            ...config
+        });
     }
 
 };

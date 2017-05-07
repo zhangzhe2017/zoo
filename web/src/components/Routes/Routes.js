@@ -3,9 +3,10 @@
 import App from '../../layouts/App';
 import CommonMixin from '../../mixins/CommonMixin';
 import NotFound from '../../pages/NotFound/NotFound';
-import Blank from '../../pages/Blank/Blank';
+import Auth from '../../pages/Auth/Auth';
 import FormEdit from '../../pages/form/FormEdit/FormEdit';
 import FormDetail from '../../pages/form/FormDetail/FormDetail';
+import FormList from '../../pages/list/FormList/FormList';
 
 const {React, Component, PropTypes, Router, Route, IndexRedirect, connect, reactMixin} = window._external;
 
@@ -43,10 +44,11 @@ class Routes extends Component {
         return (
             <Router history={history}>
                 <Route path="/" component={App}>
-                    <IndexRedirect to="blank"/>
-                    <Route path="blank" component={Blank}/>
+                    <IndexRedirect to="auth"/>
+                    <Route path="auth" component={Auth}/>
                     <Route path="form/add" component={FormEdit}/>
                     <Route path="form/view" component={FormDetail}/>
+                    <Route path="list/formList" component={FormList}/>
                     <Route path="*" component={NotFound}/>
                 </Route>
             </Router>

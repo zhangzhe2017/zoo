@@ -17,7 +17,7 @@ const ActionTypes = {
             doAction(dispatch, AllActionTypes.formEdit.changeState, {loading: true});
             FormService.saveForm({
                 data: params,
-                success: (result) => {
+                success: (result = {}) => {
                     const {data = {}} = result;
                     const {id} = data;
                     Util.later(function () {

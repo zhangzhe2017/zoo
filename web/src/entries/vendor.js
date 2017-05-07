@@ -1,12 +1,14 @@
 'use strict';
 
-import {Toast, List, InputItem, TextareaItem, ImagePicker, Button} from 'antd-mobile';
+import {
+    Toast, List, InputItem, TextareaItem, ImagePicker, Button, DatePicker, ActivityIndicator, Card
+} from 'antd-mobile';
 import $ from 'jquery';
 import assign from 'lodash/assign';
 /*import cloneDeep from 'lodash/cloneDeep';
-import compact from 'lodash/compact';
+import compact from 'lodash/compact';*/
 import concat from 'lodash/concat';
-import difference from 'lodash/difference';
+/*import difference from 'lodash/difference';
 import drop from 'lodash/drop';
 import escape from 'lodash/escape';
 import flatten from 'lodash/flatten';*/
@@ -32,9 +34,9 @@ import startsWith from 'lodash/startsWith';*/
 import toArray from 'lodash/toArray';
 /*import trim from 'lodash/trim';
 import uniq from 'lodash/uniq';
-import uniqueId from 'lodash/uniqueId';
-import values from 'lodash/values';*/
-//import moment from 'moment';
+import uniqueId from 'lodash/uniqueId';*/
+import values from 'lodash/values';
+import moment from 'antd-mobile/node_modules/moment/moment';
 import React, {Component, PropTypes} from 'react';
 import {render} from 'react-dom';
 import {Provider, connect} from 'react-redux';
@@ -46,13 +48,15 @@ import reactMixin from 'react-mixin';
 
 window._external = {
     //antd-mobile
-    Toast, List, InputItem, TextareaItem, ImagePicker, Button,
+    Toast, List, InputItem, TextareaItem, ImagePicker, Button, DatePicker, ActivityIndicator, Card,
     //jquery
     $,
     //lodash
-    _: {assign, forEach, indexOf, isArray, isFunction, isPlainObject, isString, isUndefined, toArray},
+    _: {
+        assign, forEach, indexOf, isArray, isFunction, isPlainObject, isString, isUndefined, toArray, values, concat
+    },
     //moment
-    //moment,
+    moment,
     //react
     React, Component, PropTypes,
     //react-dom

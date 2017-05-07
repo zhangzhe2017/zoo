@@ -5,8 +5,9 @@ import {doAction} from '../../../redux/actions/Action';
 import ActionTypes from '../../../redux/actions/ActionTypes';
 import CommonMixin from '../../../mixins/CommonMixin';
 import ListDetailItem from '../../../components/ListDetailItem/ListDetailItem';
+import Util from '../../../utils/Util';
 
-const {React, Component, PropTypes, connect, reactMixin, List, _, Button} = window._external;
+const {React, Component, PropTypes, connect, reactMixin, List, _, Button, moment} = window._external;
 
 @reactMixin.decorate(CommonMixin)
 class FormDetail extends Component {
@@ -20,16 +21,19 @@ class FormDetail extends Component {
         registered: false,
         creatorNickName: '',
         creatorWxid: '',
-        attenderList: []
+        attenderList: [],
+        timestamp: 0
     };
 
     bindFns = ['handleRegisterBtnClick'];
+    pageTitle = '表单查看';
 
     init() {
         const {dispatch, location} = this.props;
         const {query} = location;
         doAction(dispatch, ActionTypes.formDetail.getForm, {
-            id: query.formId
+            id: query.formId,
+            formDetail: this
         });
     }
 
@@ -55,7 +59,7 @@ class FormDetail extends Component {
 
     render() {
         const {
-            type, title, fields, fieldValues, registered, creatorNickName, creatorWxid, attenderList, wxid
+            type, title, fields, fieldValues, registered, creatorNickName, creatorWxid, attenderList, timestamp, wxid
         } = this.props;
         let realTitle = null;
         if (type === 'activity') {
@@ -65,7 +69,7 @@ class FormDetail extends Component {
         }
         const items = [];
         _.forEach(fields, field => {
-            const {name, label, type} = field;
+            const {name, label, type, extra} = field;
             if (name === 'title') {
                 return;
             }
@@ -84,13 +88,28 @@ class FormDetail extends Component {
                         </div>
                     );
                 });
+            } else if (type === 'datetime') {
+                content = fieldValues[name];
+                if (content) {
+                    content = moment(content).format(Util.Const.dateTimeFormat);
+                }
             } else {
                 content = fieldValues[name];
             }
-            items.push(<ListDetailItem key={name} type={type} label={label} content={content}/>);
+            items.push(
+                <ListDetailItem
+                    key={name}
+                    type={type}
+                    label={label}
+                    content={_.isArray(content) ? content : `${content || ''}${extra || ''}`}
+                />
+            );
         });
+        const {registerEndTime, totalCount} = fieldValues;
+        const isEnd = registerEndTime && timestamp > registerEndTime;
+        const isComplete = totalCount && attenderList.length >= totalCount;
         return (
-            <div className="x-page">
+            <div className={`x-page ${type === 'activity' ? 'x-activity-page' : ''}`}>
                 {
                     realTitle ?
                         <h2 className={style.title}>{realTitle}</h2> : ''
@@ -101,8 +120,9 @@ class FormDetail extends Component {
                             <ListDetailItem label="发起人" content={creatorNickName}/>
                             {items}
                             <ListDetailItem
-                                label={`已报名`}
-                                content={`(${attenderList.length}人) ${attenderList.join(', ')}`}
+                                label={`已报名 (${attenderList.length}人)`}
+                                type="textarea"
+                                content={attenderList.join(', ')}
                             />
                         </List> : ''
                 }
@@ -110,11 +130,17 @@ class FormDetail extends Component {
                     type === 'activity' ?
                         <Button
                             type={registered ? 'default' : 'primary'}
-                            style={{marginTop: '0.25rem'}}
+                            style={{position: 'fixed', bottom: 0, width: '100%'}}
                             onClick={this.handleRegisterBtnClick}
-                            disabled={wxid === creatorWxid}
+                            disabled={wxid === creatorWxid || isEnd || !registered && isComplete}
                         >
-                            {registered ? '取消报名' : '我要报名'}
+                            {
+                                isEnd ? '报名已截止' : (
+                                    registered ? '取消报名' : (
+                                        isComplete ? '报名人数已满' : '我要报名'
+                                    )
+                                )
+                            }
                         </Button> : ''
                 }
             </div>
@@ -130,8 +156,8 @@ FormDetail.propTypes = {
 export {FormDetail};
 
 export default connect(state => {
-    const {appData, formDetail} = state;
-    const {wxid} = appData;
+    const {auth, formDetail} = state;
+    const {wxid} = auth;
     return {
         ...formDetail,
         wxid

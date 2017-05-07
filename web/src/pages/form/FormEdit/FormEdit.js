@@ -17,11 +17,14 @@ class FormEdit extends Component {
         fields: []
     };
 
+    pageTitle = '表单填写';
+
     init() {
         const {dispatch, location} = this.props;
         const {query} = location;
         doAction(dispatch, ActionTypes.formEdit.getTemplate, {
-            id: query.templateId
+            id: query.templateId,
+            formEdit: this
         });
     }
 
@@ -29,7 +32,7 @@ class FormEdit extends Component {
         const {dispatch} = this.props;
         doAction(dispatch, ActionTypes.formEdit.replaceState, FormEdit.defaultState);
         const editForm = OriginEditForm.instance;
-        editForm.reset();
+        editForm && editForm.reset();
     }
 
     render() {
