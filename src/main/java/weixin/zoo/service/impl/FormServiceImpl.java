@@ -1,5 +1,6 @@
 package weixin.zoo.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,29 +42,33 @@ public class FormServiceImpl implements FormService {
     @Override
     public Long saveForm(String templateId, String formValues, String wxid, String name) {
         //判断表单中是否有图片，如果有图片则转存到oss
-        /*JSONArray jsonArray = JSONArray.parseArray(formValues);
-        Iterator itr = jsonArray.iterator();
-        while(itr.hasNext()){
-            JSONObject ob = (JSONObject)itr.next();
-            String type = ob.getString("type");
-            if(type.equals("image")){
-                //判断字段中数据情况，若为空则不处理
-                Iterator itrObj = ob.keySet().iterator();
-                while(itrObj.hasNext()){
-                    JSONObject jitrObj.next();
-                }
-                //图片转存
-                String value = ob.getString("value");
-                String mediaLocalPath = WxServiceCenter.downLoadMediaSource(value);
-                String str = mediaLocalPath.trim();
-                String key = str.substring(str.lastIndexOf("//"));
-                boolean upload = OssUtils.uploadFile(mediaLocalPath, key);
-                if(upload){
-                    String url = OssUtils.getFileUrl(key);
-                    ob.put("value",url);
+        //从template找到对应的fields，和formValues中name做匹配，找到其中的image类型做转存。
+        List<TemplateField> templateFields = getImageFieldsFromTemplate(Long.valueOf(templateId));
+
+        JSONObject jsonObject = JSON.parseObject(formValues);
+        for(String key : jsonObject.keySet()){
+            for(TemplateField templateField : templateFields){
+                if(templateField.getFieldName().equals(key) && !jsonObject.getString(key).isEmpty()){
+                    //转存
+                    //获取到的value为list结构,遍历处理
+                    JSONArray result = new JSONArray();
+                    JSONArray jsonArray = jsonObject.getJSONArray(key);
+                    Iterator itr = jsonArray.iterator();
+                    while(itr.hasNext()){
+                        String value = (String)itr.next();
+                        String mediaLocalPath = WxServiceCenter.downLoadMediaSource(value);
+                        String str = mediaLocalPath.trim();
+                        String keyStr = str.substring(str.lastIndexOf("//"));
+                        boolean upload = OssUtils.uploadFile(mediaLocalPath, keyStr);
+                        if(upload){
+                            String url = OssUtils.getFileUrl(keyStr);
+                            result.add(url);
+                        }
+                    }
+                    jsonObject.put(key, result);
                 }
             }
-        }*/
+        }
         return formRepository.saveForm(templateId, formValues, wxid, name);
     }
 
@@ -78,7 +83,7 @@ public class FormServiceImpl implements FormService {
 
         //获取template信息
         long templateId =  form.getTemplateId();
-        Template template = templateRepository.getTemplateById(id);
+        Template template = templateRepository.getTemplateById(templateId);
         //根据fields获取详细数据
         String[] fieldIds = template.getFiledIds().split(",");
         JSONArray jsonArray = new JSONArray();
@@ -147,5 +152,26 @@ public class FormServiceImpl implements FormService {
     public List<Register> getAttendListByUserId(String userId) {
         List<Register> registers = registerRepository.getAttendListByUserId(userId);
         return registers;
+    }
+
+
+    /*
+     * 从模板中找到image类型的字段
+     */
+    private List<TemplateField> getImageFieldsFromTemplate(long templateId){
+        List<TemplateField> templateFields = new ArrayList<>();
+        //获取模板基础信息
+        Template template = templateRepository.getTemplateById(templateId);
+
+        //根据fields获取详细数据
+        String[] fieldIds = template.getFiledIds().split(",");
+        for(String field: fieldIds){
+            TemplateField templateField = templateFieldRepository.getTemplateField(Long.valueOf(field));
+            if(templateField.getFieldType().equals("image")){
+                templateFields.add(templateField);
+            }
+        }
+
+        return templateFields;
     }
 }

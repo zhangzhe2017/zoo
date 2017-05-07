@@ -1,6 +1,9 @@
 package weixin.zoo.service;
 
 import com.alibaba.fastjson.JSONObject;
+import weixin.zoo.infrastructure.model.TemplateField;
+
+import java.util.List;
 
 /**
  * Created by viczhang.zhangz on 2017/5/3.

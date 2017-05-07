@@ -11,6 +11,9 @@ import weixin.zoo.infrastructure.repository.TemplateFieldRepository;
 import weixin.zoo.infrastructure.repository.TemplateRepository;
 import weixin.zoo.service.TemplateService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by viczhang.zhangz on 2017/5/3.
  */
@@ -53,4 +56,6 @@ public class TemplateServiceImpl implements TemplateService {
 
         return data;
     }
+
+
 }
