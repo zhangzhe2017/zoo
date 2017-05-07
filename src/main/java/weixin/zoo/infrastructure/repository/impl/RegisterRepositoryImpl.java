@@ -59,7 +59,7 @@ public class RegisterRepositoryImpl implements RegisterRepository {
         register.setIsDelete("y");
         register.setGmtModified(new Date());
 
-        return registerMapper.updateByExample(register,registerExample);
+        return registerMapper.updateByExampleSelective(register,registerExample);
     }
 
     @Override
