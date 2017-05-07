@@ -41,12 +41,13 @@ public class FormServiceImpl implements FormService {
     @Override
     public Long saveForm(String templateId, String formValues, String wxid, String name) {
         //判断表单中是否有图片，如果有图片则转存到oss
-        JSONArray jsonArray = JSONArray.parseArray(formValues);
+/*        JSONArray jsonArray = JSONArray.parseArray(formValues);
         Iterator itr = jsonArray.iterator();
         while(itr.hasNext()){
             JSONObject ob = (JSONObject)itr.next();
             String type = ob.getString("type");
             if(type.equals("image")){
+                //判断字段中数据情况，若为空则不处理
                 //图片转存
                 String value = ob.getString("value");
                 String mediaLocalPath = WxServiceCenter.downLoadMediaSource(value);
@@ -58,7 +59,7 @@ public class FormServiceImpl implements FormService {
                     ob.put("value",url);
                 }
             }
-        }
+        }*/
         return formRepository.saveForm(templateId, formValues, wxid, name);
     }
 
@@ -76,10 +77,17 @@ public class FormServiceImpl implements FormService {
         Template template = templateRepository.getTemplateById(id);
         //根据fields获取详细数据
         String[] fieldIds = template.getFiledIds().split(",");
+        JSONArray jsonArray = new JSONArray();
         for(String field: fieldIds){
             TemplateField templateField = templateFieldRepository.getTemplateField(Long.valueOf(field));
-            data.put(templateField.getFieldName(),templateField.getFieldType());
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("name",templateField.getFieldName());
+            jsonObject.put("type",templateField.getFieldType());
+            jsonObject.put("required",templateField.getIsEmpty().equals("true"));
+            jsonObject.put("label",templateField.getFieldLabel());
+            jsonArray.add(jsonObject);
         }
+        data.put("fields",jsonArray);
         data.put("type",template.getTemplateType());
 
         //用户数据获取
