@@ -43,7 +43,9 @@ public class TemplateServiceImpl implements TemplateService {
         for(String field: fieldIds){
             TemplateField templateField = templateFieldRepository.getTemplateField(Long.valueOf(field));
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put(templateField.getFieldName(),templateField.getFieldType());
+            jsonObject.put("name",templateField.getFieldName());
+            jsonObject.put("type",templateField.getFieldType());
+            jsonObject.put("required",templateField.getIsEmpty().equals("true"));
             jsonArray.add(jsonObject);
         }
         data.put("fields" , jsonArray);
