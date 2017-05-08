@@ -33,8 +33,9 @@ import sortBy from 'lodash/sortBy';
 import startsWith from 'lodash/startsWith';*/
 import toArray from 'lodash/toArray';
 /*import trim from 'lodash/trim';
-import uniq from 'lodash/uniq';
-import uniqueId from 'lodash/uniqueId';*/
+import uniq from 'lodash/uniq';*/
+import uniqBy from 'lodash/uniqBy';
+//import uniqueId from 'lodash/uniqueId';
 import values from 'lodash/values';
 import moment from 'antd-mobile/node_modules/moment/moment';
 import React, {Component, PropTypes} from 'react';
@@ -53,7 +54,8 @@ window._external = {
     $,
     //lodash
     _: {
-        assign, forEach, indexOf, isArray, isFunction, isPlainObject, isString, isUndefined, toArray, values, concat
+        assign, forEach, indexOf, isArray, isFunction, isPlainObject, isString, isUndefined, toArray, uniqBy, values,
+        concat
     },
     //moment
     moment,

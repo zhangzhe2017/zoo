@@ -38,9 +38,12 @@ const ActionTypes = {
                 success: (result = {}) => {
                     const {data = []} = result;
                     const {listData} = getState().formList;
+                    const listDataLen = listData.length;
+                    const resultListData = _.uniqBy(_.concat(listData, data), 'id');
+                    const resultListDataLen = resultListData.length;
                     doAction(dispatch, ActionTypes.formList.changeState, {
-                        finished: data.length < pageSize,
-                        listData: [..._.concat(listData, data)],
+                        finished: /*data.length < pageSize || */resultListDataLen === listDataLen,
+                        listData: [...resultListData],
                         currentPage
                     });
                     Util.later(() => {

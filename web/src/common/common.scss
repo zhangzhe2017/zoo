@@ -41,7 +41,7 @@
         font-weight: normal;
         vertical-align: middle;
     }
-    .x-activity-page {
+    .x-fixedButton-page {
         margin-bottom: 84px;
     }
     .x-activity-indicator .am-activity-indicator-spinner {
@@ -60,6 +60,9 @@
         border-top-right-radius: 0;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
     }
     .am-button-ghost {
         background-color: #fff;

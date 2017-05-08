@@ -111,7 +111,7 @@ class FormDetail extends Component {
         const isEnd = registerEndTime && timestamp > registerEndTime;
         const isComplete = totalCount && attenderList.length >= totalCount;
         return (
-            <div className={`x-page ${type === 'activity' ? 'x-activity-page' : ''}`}>
+            <div className={`x-page ${type === 'activity' ? 'x-fixedButton-page' : ''}`}>
                 {
                     realTitle ?
                         <h2 className={style.title}>{realTitle}</h2> : ''
@@ -132,7 +132,6 @@ class FormDetail extends Component {
                     type === 'activity' ?
                         <Button
                             type={registered ? 'ghost' : 'primary'}
-                            style={{position: 'fixed', bottom: 0, width: '100%'}}
                             onClick={this.handleRegisterBtnClick}
                             disabled={wxid === creatorWxid || isEnd || !registered && isComplete}
                             className="x-button"
