@@ -9,6 +9,8 @@
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="user_tag" property="userTag" jdbcType="VARCHAR" />
+    <result column="user_sex" property="userSex" jdbcType="VARCHAR" />
+    <result column="user_headimgurl" property="userHeadimgurl" jdbcType="VARCHAR" />
     <result column="latest_access_time" property="latestAccessTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -70,7 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, gmt_create, gmt_modified, is_delete, user_id, user_name, user_tag, latest_access_time
+    id, gmt_create, gmt_modified, is_delete, user_id, user_name, user_tag, user_sex, 
+    user_headimgurl, latest_access_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="weixin.zoo.infrastructure.model.UserExample" >
     select
@@ -106,10 +109,12 @@
   <insert id="insert" parameterType="weixin.zoo.infrastructure.model.User" >
     insert into user (id, gmt_create, gmt_modified, 
       is_delete, user_id, user_name, 
-      user_tag, latest_access_time)
+      user_tag, user_sex, user_headimgurl, 
+      latest_access_time)
     values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
       #{isDelete,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
-      #{userTag,jdbcType=VARCHAR}, #{latestAccessTime,jdbcType=TIMESTAMP})
+      #{userTag,jdbcType=VARCHAR}, #{userSex,jdbcType=VARCHAR}, #{userHeadimgurl,jdbcType=VARCHAR}, 
+      #{latestAccessTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="weixin.zoo.infrastructure.model.User" >
     insert into user
@@ -134,6 +139,12 @@
       </if>
       <if test="userTag != null" >
         user_tag,
+      </if>
+      <if test="userSex != null" >
+        user_sex,
+      </if>
+      <if test="userHeadimgurl != null" >
+        user_headimgurl,
       </if>
       <if test="latestAccessTime != null" >
         latest_access_time,
@@ -160,6 +171,12 @@
       </if>
       <if test="userTag != null" >
         #{userTag,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null" >
+        #{userSex,jdbcType=VARCHAR},
+      </if>
+      <if test="userHeadimgurl != null" >
+        #{userHeadimgurl,jdbcType=VARCHAR},
       </if>
       <if test="latestAccessTime != null" >
         #{latestAccessTime,jdbcType=TIMESTAMP},
@@ -196,6 +213,12 @@
       <if test="record.userTag != null" >
         user_tag = #{record.userTag,jdbcType=VARCHAR},
       </if>
+      <if test="record.userSex != null" >
+        user_sex = #{record.userSex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userHeadimgurl != null" >
+        user_headimgurl = #{record.userHeadimgurl,jdbcType=VARCHAR},
+      </if>
       <if test="record.latestAccessTime != null" >
         latest_access_time = #{record.latestAccessTime,jdbcType=TIMESTAMP},
       </if>
@@ -213,6 +236,8 @@
       user_id = #{record.userId,jdbcType=VARCHAR},
       user_name = #{record.userName,jdbcType=VARCHAR},
       user_tag = #{record.userTag,jdbcType=VARCHAR},
+      user_sex = #{record.userSex,jdbcType=VARCHAR},
+      user_headimgurl = #{record.userHeadimgurl,jdbcType=VARCHAR},
       latest_access_time = #{record.latestAccessTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -239,6 +264,12 @@
       <if test="userTag != null" >
         user_tag = #{userTag,jdbcType=VARCHAR},
       </if>
+      <if test="userSex != null" >
+        user_sex = #{userSex,jdbcType=VARCHAR},
+      </if>
+      <if test="userHeadimgurl != null" >
+        user_headimgurl = #{userHeadimgurl,jdbcType=VARCHAR},
+      </if>
       <if test="latestAccessTime != null" >
         latest_access_time = #{latestAccessTime,jdbcType=TIMESTAMP},
       </if>
@@ -253,6 +284,8 @@
       user_id = #{userId,jdbcType=VARCHAR},
       user_name = #{userName,jdbcType=VARCHAR},
       user_tag = #{userTag,jdbcType=VARCHAR},
+      user_sex = #{userSex,jdbcType=VARCHAR},
+      user_headimgurl = #{userHeadimgurl,jdbcType=VARCHAR},
       latest_access_time = #{latestAccessTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>

@@ -17,6 +17,10 @@ public class User {
 
     private String userTag;
 
+    private String userSex;
+
+    private String userHeadimgurl;
+
     private Date latestAccessTime;
 
     public Long getId() {
@@ -73,6 +77,22 @@ public class User {
 
     public void setUserTag(String userTag) {
         this.userTag = userTag == null ? null : userTag.trim();
+    }
+
+    public String getUserSex() {
+        return userSex;
+    }
+
+    public void setUserSex(String userSex) {
+        this.userSex = userSex == null ? null : userSex.trim();
+    }
+
+    public String getUserHeadimgurl() {
+        return userHeadimgurl;
+    }
+
+    public void setUserHeadimgurl(String userHeadimgurl) {
+        this.userHeadimgurl = userHeadimgurl == null ? null : userHeadimgurl.trim();
     }
 
     public Date getLatestAccessTime() {

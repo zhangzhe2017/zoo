@@ -32,24 +32,27 @@ public class FormController {
         String fieldValues = request.getParameter("fieldValues");
 
         JSONObject jsonObject = JSON.parseObject(fieldValues);
-        String  formName = jsonObject.getString("title");
+        String formName = jsonObject.getString("title");
 
-        long formId = formService.saveForm(id, fieldValues, "test", formName);
+        //从session里取到wxid
+        String wxid = (String)request.getSession().getAttribute("wxid");
+
+        long formId = formService.saveForm(id, fieldValues, wxid, formName);
         JSONObject result = new JSONObject();
         result.put("id",formId);
 
         return ResultUtils.assembleResult(true, "true", result);
-
     }
 
     @RequestMapping("/getForm")
     @ResponseBody
     public String getForm(HttpServletRequest request){
         String id = request.getParameter("id");
-        Object form = formService.getForm(Long.valueOf(id),"test");
+        //从session里取到wxid
+        String wxid = (String)request.getSession().getAttribute("wxid");
+        Object form = formService.getForm(Long.valueOf(id),wxid);
 
         return ResultUtils.assembleResult(true, "true", form);
-
     }
 
     @RequestMapping("/register")
@@ -57,20 +60,18 @@ public class FormController {
     public String register(HttpServletRequest request){
         String id = request.getParameter("id");
         String rOc = request.getParameter("register");
-
-        Object form = formService.doRegister(Long.valueOf(id), rOc.equals("true"), "test");
+        String wxid = (String)request.getSession().getAttribute("wxid");
+        Object form = formService.doRegister(Long.valueOf(id), rOc.equals("true"), wxid);
 
         return ResultUtils.assembleResult(true, "true", form);
-
     }
 
     @RequestMapping("/getMyFormList")
     @ResponseBody
     public String getMyFormList(HttpServletRequest request){
+        String wxid = (String)request.getSession().getAttribute("wxid");
 
-        String uesr = "test";
-
-        List<Form> forms = formService.getFormsByUserId(uesr, "activity");
+        List<Form> forms = formService.getFormsByUserId(wxid, "activity");
 
         JSONArray jsonArray = new JSONArray();
         for(Form form : forms){
@@ -87,9 +88,9 @@ public class FormController {
     @RequestMapping("/getAttendedActivityList")
     @ResponseBody
     public String getAttendedActivityList(HttpServletRequest request){
-        String uesr = "test";
+        String wxid = (String)request.getSession().getAttribute("wxid");
 
-        List<Register> registers = formService.getAttendListByUserId(uesr);
+        List<Register> registers = formService.getAttendListByUserId(wxid);
 
         JSONArray jsonArray = new JSONArray();
         for(Register register : registers){
@@ -101,7 +102,6 @@ public class FormController {
         }
 
         return ResultUtils.assembleResult(true, "true", jsonArray);
-
     }
 
 }

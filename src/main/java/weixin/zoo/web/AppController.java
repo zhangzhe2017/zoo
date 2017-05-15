@@ -41,6 +41,7 @@ public class AppController {
             result = userService.getJsapiSignatrue(url);
             result.put("attention",jsonObject.getString("subscribe"));
             result.put("wxid",jsonObject.getString("openid"));
+            httpSession.setAttribute("wxid",jsonObject.getString("openid"));
         } catch (Exception e) {
             e.printStackTrace();
         }

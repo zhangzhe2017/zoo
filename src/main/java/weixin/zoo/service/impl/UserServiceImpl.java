@@ -2,8 +2,11 @@ package weixin.zoo.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Service;
+import weixin.zoo.infrastructure.model.User;
+import weixin.zoo.infrastructure.repository.UserRepository;
 import weixin.zoo.service.UserService;
 import weixin.zoo.wxapi.Env;
 import weixin.zoo.wxapi.auth.AuthHelper;
@@ -18,8 +21,12 @@ import  weixin.zoo.service.common.aes.*;
 @EnableAutoConfiguration
 public class UserServiceImpl implements UserService {
 
+    @Autowired
+    private UserRepository userRepository;
+
     /*
      * 根据code获取到用户信息，包括基本信息以及是否关注本公众号
+     * 同时将用户信息入库
      */
     public JSONObject getUserInfo(String code){
         try{
@@ -41,6 +48,14 @@ public class UserServiceImpl implements UserService {
             response = HttpHelper.httpGet(url);
             if(!StringUtils.isEmpty(response.getString("errcode")))
                 return null;
+
+            //把用户信息插入，如果有的话更新
+            User user = userRepository.getUserInfoByWxid(response.getString("openid"));
+            if(user == null){
+                userRepository.insertUserInfo(response);
+            }else{
+                userRepository.updateUserInfo(response);
+            }
 
             return response;
         }catch (Exception e){
