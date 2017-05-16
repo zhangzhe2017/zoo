@@ -104,4 +104,13 @@ public class FormController {
         return ResultUtils.assembleResult(true, "true", jsonArray);
     }
 
+    @RequestMapping("/receiveUserPayInfo")
+    @ResponseBody
+    public String receiveUserPayInfo(HttpServletRequest request){
+        String id = request.getParameter("id");
+        String wxid = (String)request.getSession().getAttribute("wxid");
+        formService.receiveUserPayInfo(Long.valueOf(id), wxid);
+        return ResultUtils.assembleResult(true, "true", "true");
+    }
+
 }

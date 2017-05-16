@@ -154,6 +154,18 @@ public class FormServiceImpl implements FormService {
         return registers;
     }
 
+    @Override
+    public boolean receiveUserPayInfo(long id, String userId) {
+        //先判断是否存在报名信息，如果不存在报名信息则新增一条报名信息
+        boolean isRegistered = registerRepository.isUserRegistered(id,userId);
+        if(isRegistered){
+            registerRepository.updateRegisterPayed(id,userId);
+        }else{
+            registerRepository.registerPayedInfo(id, userId);
+        }
+
+        return true;
+    }
 
     /*
      * 从模板中找到image类型的字段

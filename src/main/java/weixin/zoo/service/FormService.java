@@ -47,4 +47,9 @@ public interface FormService {
      * 获取用户已报名的活动列表，仅面向activity类型form
      */
     public List<Register> getAttendListByUserId(String userId);
+
+    /*
+     * 获取支付信息
+     */
+    public boolean receiveUserPayInfo(long id, String userId);
 }

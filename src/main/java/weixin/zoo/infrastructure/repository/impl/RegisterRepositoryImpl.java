@@ -69,4 +69,29 @@ public class RegisterRepositoryImpl implements RegisterRepository {
 
         return registerMapper.selectByExample(registerExample);
     }
+
+    @Override
+    public int updateRegisterPayed(long formId, String userId) {
+        Register register = new Register();
+        register.setStatus("payed");
+        register.setGmtModified(new Date());
+
+        RegisterExample registerExample = new RegisterExample();
+        registerExample.createCriteria().andFormIdEqualTo(formId).andIsDeleteEqualTo("n").andAttenderEqualTo(userId);
+
+        return registerMapper.updateByExampleSelective(register,registerExample);
+    }
+
+    @Override
+    public int registerPayedInfo(long formId, String userId) {
+        Register register = new Register();
+        register.setIsDelete("n");
+        register.setGmtModified(new Date());
+        register.setGmtCreate(new Date());
+        register.setAttender(userId);
+        register.setFormId(formId);
+        register.setStatus("payed");
+
+        return registerMapper.insertSelective(register);
+    }
 }

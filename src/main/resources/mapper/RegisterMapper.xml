@@ -2,10 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="weixin.zoo.infrastructure.mapper.RegisterMapper" >
   <resultMap id="BaseResultMap" type="weixin.zoo.infrastructure.model.Register" >
-    <result column="id" property="id" jdbcType="BIGINT" />
+    <id column="id" property="id" jdbcType="BIGINT" />
     <result column="gmt_create" property="gmtCreate" jdbcType="DATE" />
     <result column="gmt_modified" property="gmtModified" jdbcType="DATE" />
     <result column="is_delete" property="isDelete" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
     <result column="attender" property="attender" jdbcType="VARCHAR" />
     <result column="form_id" property="formId" jdbcType="BIGINT" />
   </resultMap>
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, gmt_create, gmt_modified, is_delete, attender, form_id
+    id, gmt_create, gmt_modified, is_delete, status, attender, form_id
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="weixin.zoo.infrastructure.model.RegisterExample" >
     select
@@ -85,6 +86,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from register
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from register
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
   <delete id="deleteByExample" parameterType="weixin.zoo.infrastructure.model.RegisterExample" >
     delete from register
     <if test="_parameter != null" >
@@ -93,11 +104,11 @@
   </delete>
   <insert id="insert" parameterType="weixin.zoo.infrastructure.model.Register" >
     insert into register (id, gmt_create, gmt_modified, 
-      is_delete, attender, form_id
-      )
+      is_delete, status, attender, 
+      form_id)
     values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=DATE}, #{gmtModified,jdbcType=DATE}, 
-      #{isDelete,jdbcType=VARCHAR}, #{attender,jdbcType=VARCHAR}, #{formId,jdbcType=BIGINT}
-      )
+      #{isDelete,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{attender,jdbcType=VARCHAR}, 
+      #{formId,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="weixin.zoo.infrastructure.model.Register" >
     insert into register
@@ -113,6 +124,9 @@
       </if>
       <if test="isDelete != null" >
         is_delete,
+      </if>
+      <if test="status != null" >
+        status,
       </if>
       <if test="attender != null" >
         attender,
@@ -133,6 +147,9 @@
       </if>
       <if test="isDelete != null" >
         #{isDelete,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
       </if>
       <if test="attender != null" >
         #{attender,jdbcType=VARCHAR},
@@ -163,6 +180,9 @@
       <if test="record.isDelete != null" >
         is_delete = #{record.isDelete,jdbcType=VARCHAR},
       </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
       <if test="record.attender != null" >
         attender = #{record.attender,jdbcType=VARCHAR},
       </if>
@@ -180,10 +200,45 @@
       gmt_create = #{record.gmtCreate,jdbcType=DATE},
       gmt_modified = #{record.gmtModified,jdbcType=DATE},
       is_delete = #{record.isDelete,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
       attender = #{record.attender,jdbcType=VARCHAR},
       form_id = #{record.formId,jdbcType=BIGINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="weixin.zoo.infrastructure.model.Register" >
+    update register
+    <set >
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=DATE},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=DATE},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="attender != null" >
+        attender = #{attender,jdbcType=VARCHAR},
+      </if>
+      <if test="formId != null" >
+        form_id = #{formId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="weixin.zoo.infrastructure.model.Register" >
+    update register
+    set gmt_create = #{gmtCreate,jdbcType=DATE},
+      gmt_modified = #{gmtModified,jdbcType=DATE},
+      is_delete = #{isDelete,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      attender = #{attender,jdbcType=VARCHAR},
+      form_id = #{formId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

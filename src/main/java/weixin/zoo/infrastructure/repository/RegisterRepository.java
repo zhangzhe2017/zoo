@@ -34,4 +34,14 @@ public interface RegisterRepository {
      */
     public List<Register> getAttendListByUserId(String userId);
 
+    /*
+     * 更新报名数据为已支付
+     */
+    public int updateRegisterPayed(long formId, String userId);
+
+    /*
+     * 新增一条已支付报名数据
+     */
+    public int registerPayedInfo(long formId, String userId);
+
 }

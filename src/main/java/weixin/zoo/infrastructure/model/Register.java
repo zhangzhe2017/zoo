@@ -11,6 +11,8 @@ public class Register {
 
     private String isDelete;
 
+    private String status;
+
     private String attender;
 
     private Long formId;
@@ -45,6 +47,14 @@ public class Register {
 
     public void setIsDelete(String isDelete) {
         this.isDelete = isDelete == null ? null : isDelete.trim();
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
     }
 
     public String getAttender() {
