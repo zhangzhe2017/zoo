@@ -79,6 +79,7 @@ public class FormController {
             jsonObject.put("id",form.getId());
             jsonObject.put("title",form.getFormName());
             jsonObject.put("type","activity");
+            jsonObject.put("formOwner",form.getFormOwner());
             jsonArray.add(jsonObject);
         }
 
@@ -98,6 +99,9 @@ public class FormController {
             jsonObject.put("id",register.getFormId());
             jsonObject.put("title","test");
             jsonObject.put("type","activity");
+
+            Form form = formService.getFormById(register.getFormId());
+            jsonObject.put("formOwner",form.getFormOwner());
             jsonArray.add(jsonObject);
         }
 

@@ -52,4 +52,9 @@ public interface FormService {
      * 获取支付信息
      */
     public boolean receiveUserPayInfo(long id, String userId);
+
+    /*
+     * 根据formId获取form信息
+     */
+    public Form getFormById(Long id);
 }

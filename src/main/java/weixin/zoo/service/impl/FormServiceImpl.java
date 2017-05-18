@@ -167,6 +167,12 @@ public class FormServiceImpl implements FormService {
         return true;
     }
 
+    @Override
+    public Form getFormById(Long id) {
+        Form form = formRepository.getFormById(id);
+        return form;
+    }
+
     /*
      * 从模板中找到image类型的字段
      */
