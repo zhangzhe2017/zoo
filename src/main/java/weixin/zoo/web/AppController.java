@@ -6,11 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.support.HttpRequestHandlerServlet;
 import weixin.zoo.service.UserService;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
 import weixin.zoo.utils.*;
+import weixin.zoo.wxapi.Env;
 
 /**
  * Created by viczhang.zhangz on 2017/4/28.
@@ -49,4 +57,23 @@ public class AppController {
         return ResultUtils.assembleResult(true, "true", result);
     }
 
+    @RequestMapping("/redirectShareUrl")
+    @ResponseBody
+    public void getShareUrl(HttpServletRequest request, HttpServletResponse response){
+        String redirectUrl = request.getParameter("redirectUrl");
+        try {
+            redirectUrl = URLEncoder.encode(redirectUrl,"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        String shareUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?";
+        shareUrl = shareUrl.concat("appid=").concat(Env.APP_ID).concat("&redirect_uri=").concat(redirectUrl).concat("&response_type=snsapi_userinfo ")
+                .concat("&scope=SCOPE").concat("#wechat_redirect");
+
+        try {
+            response.sendRedirect(shareUrl);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
