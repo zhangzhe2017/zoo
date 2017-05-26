@@ -70,7 +70,7 @@ public class UserRepositoryImpl implements UserRepository {
         user.setUserName(nickName);
         user.setUserHeadimgurl(headImg);
 
-        return userMapper.updateByExample(user,userExample);
+        return userMapper.updateByExampleSelective(user,userExample);
     }
 
 
