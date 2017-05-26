@@ -41,10 +41,13 @@ public class AuthHelper {
                 jsonAccess.put("accessToken", jsontemp);
 
                 FileUtils.write2File(jsonAccess, "accesstoken");
+
+                return accessToken;
             } else {
                 throw new OApiException(1,"access_token");
             }
         }
+        accessToken = accessTokenValue.getString("access_token");
 
         return accessToken;
     }
@@ -74,11 +77,13 @@ public class AuthHelper {
                 jsonAccess.put("jsTicket", jsontemp);
 
                 FileUtils.write2File(jsonAccess, "jsTicket");
+
+                return jsTicket;
             } else {
                 throw new OApiException(1,"jsTicket");
             }
         }
-
+        jsTicket = jsTicketObject.getString("jsTicket");
         return jsTicket;
     }
 
