@@ -160,7 +160,7 @@ class EditForm extends Component {
         const file = files[index];
         const urls = [];
         _.forEach(files, file => {
-            urls.push(file);
+            urls.push(file.url);
         });
         wx.previewImage({
             current: file.url,
