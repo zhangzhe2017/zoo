@@ -12,7 +12,7 @@ const ActionTypes = {
     auth: {
 
         load(dispatch) {
-            const {code} = this || {};
+            const {code, redirectUrl} = Util.pageParams;
             doAction(dispatch, ActionTypes.auth.changeState, {loading: true});
             AppService.getAppData({
                 data: {code},
@@ -37,7 +37,6 @@ const ActionTypes = {
                     }
                     const redirectTo = () => {
                         if (code) {
-                            const {redirectUrl} = Util.pageParams;
                             redirectUrl && Routes.goto(redirectUrl);
                         }
                     };
