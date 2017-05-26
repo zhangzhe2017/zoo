@@ -48,7 +48,7 @@ public class AppController {
         String url = request.getHeader("Referer");
         try {
             result = userService.getJsapiSignatrue(url);
-            result.put("attention",jsonObject.getString("subscribe"));
+            result.put("attention",jsonObject.getString("subscribe").equals("1"));
             result.put("wxid",jsonObject.getString("openid"));
             httpSession.setAttribute("wxid",jsonObject.getString("openid"));
         } catch (Exception e) {
