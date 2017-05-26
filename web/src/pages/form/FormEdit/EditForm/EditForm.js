@@ -6,6 +6,7 @@ import ActionTypes from '../../../../redux/actions/ActionTypes';
 import CommonMixin from '../../../../mixins/CommonMixin';
 import {createForm} from 'rc-form';
 import {FormEdit} from '../FormEdit';
+import Util from '../../../../utils/Util';
 
 const {
     React, Component, connect, reactMixin, List, InputItem, TextareaItem, ImagePicker, _, Button, DatePicker, Toast
@@ -113,13 +114,32 @@ class EditForm extends Component {
                             const {serverId} = result;
                             const {dispatch, imageFilesMap} = this.props;
                             const imageFiles = imageFilesMap[name];
-                            imageFiles.push({
+                            let url = null;
+                            if (window.__wxjs_is_wkwebview) {
+                                url = Util.blankImageData;
+                            } else {
+                                url = localId;
+                            }
+                            const imageFile = {
                                 serverId,
-                                url: localId
-                            });
+                                url
+                            };
+                            imageFiles.push(imageFile);
                             doAction(dispatch, ActionTypes.feEditForm.changeState, {
                                 imageFilesMap: {...imageFilesMap}
                             });
+                            if (window.__wxjs_is_wkwebview) {
+                                wx.getLocalImgData({
+                                    localId,
+                                    success: function (result) {
+                                        const {localData} = result;
+                                        imageFile.url = localData;
+                                        doAction(dispatch, ActionTypes.feEditForm.changeState, {
+                                            imageFilesMap: {...imageFilesMap}
+                                        });
+                                    }
+                                });
+                            }
                         }
                     });
                 });
@@ -140,7 +160,7 @@ class EditForm extends Component {
         const file = files[index];
         const urls = [];
         _.forEach(files, file => {
-            urls.push(file);
+            urls.push(file.url);
         });
         wx.previewImage({
             current: file.url,

@@ -31,7 +31,8 @@ const ActionTypes = {
                             signature,
                             jsApiList: [
                                 'chooseImage', 'uploadImage', 'previewImage',
-                                'onMenuShareTimeline', 'onMenuShareAppMessage'
+                                'onMenuShareTimeline', 'onMenuShareAppMessage',
+                                'getLocalImgData'
                             ]
                         });
                     }
