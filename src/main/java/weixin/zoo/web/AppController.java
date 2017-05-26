@@ -67,8 +67,8 @@ public class AppController {
             e.printStackTrace();
         }
         String shareUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?";
-        shareUrl = shareUrl.concat("appid=").concat(Env.APP_ID).concat("&redirect_uri=").concat(redirectUrl).concat("&response_type=snsapi_userinfo ")
-                .concat("&scope=SCOPE").concat("#wechat_redirect");
+        shareUrl = shareUrl.concat("appid=").concat(Env.APP_ID).concat("&redirect_uri=").concat(redirectUrl).concat("&response_type=code")
+                .concat("&scope=snsapi_userinfo").concat("#wechat_redirect");
 
         try {
             response.sendRedirect(shareUrl);
