@@ -48,12 +48,12 @@ export default {
         wx.ready(() => {
             const {location} = this.props;
             const {pathname, search} = location;
-            const redirectUrl = `http://www.zujuguan.com/index.html?redirectUrl=${encodeURIComponent(pathname + search)}#`;
+            const redirectUrl = `http://www.zujuguan.com/index.html?redirectUrl=${encodeURIComponent(pathname + search)}`;
             const shareConfig = {
                 title: this.pageTitle,
                 desc: this.pageDesc,
                 imgUrl: this.pageImage,
-                link: `http://www.zujuguan.com/auth?redirectUrl=${encodeURIComponent(redirectUrl)}`,
+                link: `http://www.zujuguan.com/app/redirectShareUrl?redirectUrl=${encodeURIComponent(redirectUrl)}`,
                 success: () => {
                 },
                 cancel: () => {
