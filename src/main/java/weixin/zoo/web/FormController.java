@@ -97,11 +97,11 @@ public class FormController {
         for(Register register : registers){
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("id",register.getFormId());
-            jsonObject.put("title","test");
             jsonObject.put("type","activity");
 
             Form form = formService.getFormById(register.getFormId());
             jsonObject.put("formOwner",form.getFormOwner());
+            jsonObject.put("title",form.getFormName());
             jsonArray.add(jsonObject);
         }
 
