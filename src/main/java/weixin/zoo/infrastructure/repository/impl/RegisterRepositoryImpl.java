@@ -7,6 +7,8 @@ import weixin.zoo.infrastructure.mapper.RegisterMapper;
 import weixin.zoo.infrastructure.model.Register;
 import weixin.zoo.infrastructure.model.RegisterExample;
 import weixin.zoo.infrastructure.repository.RegisterRepository;
+import weixin.zoo.utils.ActivityStatusEnum;
+
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class RegisterRepositoryImpl implements RegisterRepository {
     @Override
     public List<Register> getRegistersByFormId(long formId) {
         RegisterExample registerExample = new RegisterExample();
-        registerExample.createCriteria().andFormIdEqualTo(formId).andIsDeleteEqualTo("n");
+        registerExample.createCriteria().andFormIdEqualTo(formId).andStatusEqualTo(ActivityStatusEnum.ATTEND.getName()).andIsDeleteEqualTo("n");
 
         return registerMapper.selectByExample(registerExample);
     }
@@ -31,7 +33,7 @@ public class RegisterRepositoryImpl implements RegisterRepository {
     @Override
     public boolean isUserRegistered(long formId, String userId) {
         RegisterExample registerExample = new RegisterExample();
-        registerExample.createCriteria().andFormIdEqualTo(formId).andAttenderEqualTo(userId).andIsDeleteEqualTo("n");
+        registerExample.createCriteria().andFormIdEqualTo(formId).andAttenderEqualTo(userId).andStatusEqualTo(ActivityStatusEnum.ATTEND.getName()).andIsDeleteEqualTo("n");
 
         List<Register> registers = registerMapper.selectByExample(registerExample);
         if(registers.isEmpty())
@@ -47,6 +49,7 @@ public class RegisterRepositoryImpl implements RegisterRepository {
         register.setGmtCreate(new Date());
         register.setAttender(userId);
         register.setFormId(formId);
+        register.setStatus(ActivityStatusEnum.ATTEND.getName());
         return registerMapper.insertSelective(register);
     }
 
@@ -56,8 +59,8 @@ public class RegisterRepositoryImpl implements RegisterRepository {
         registerExample.createCriteria().andFormIdEqualTo(formId).andIsDeleteEqualTo("n").andAttenderEqualTo(userId);
 
         Register register = new Register();
-        register.setIsDelete("y");
         register.setGmtModified(new Date());
+        register.setStatus(ActivityStatusEnum.CANCEL.getName());
 
         return registerMapper.updateByExampleSelective(register,registerExample);
     }
@@ -65,7 +68,7 @@ public class RegisterRepositoryImpl implements RegisterRepository {
     @Override
     public List<Register> getAttendListByUserId(String userId) {
         RegisterExample registerExample = new RegisterExample();
-        registerExample.createCriteria().andIsDeleteEqualTo("n").andAttenderEqualTo(userId);
+        registerExample.createCriteria().andIsDeleteEqualTo("n").andStatusEqualTo(ActivityStatusEnum.ATTEND.getName()).andAttenderEqualTo(userId);
 
         return registerMapper.selectByExample(registerExample);
     }
@@ -73,7 +76,7 @@ public class RegisterRepositoryImpl implements RegisterRepository {
     @Override
     public int updateRegisterPayed(long formId, String userId) {
         Register register = new Register();
-        register.setStatus("payed");
+        register.setStatus(ActivityStatusEnum.PAY.getName());
         register.setGmtModified(new Date());
 
         RegisterExample registerExample = new RegisterExample();
@@ -90,7 +93,7 @@ public class RegisterRepositoryImpl implements RegisterRepository {
         register.setGmtCreate(new Date());
         register.setAttender(userId);
         register.setFormId(formId);
-        register.setStatus("payed");
+        register.setStatus(ActivityStatusEnum.PAY.getName());
 
         return registerMapper.insertSelective(register);
     }
