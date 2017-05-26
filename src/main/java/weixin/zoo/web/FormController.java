@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import weixin.zoo.infrastructure.model.Form;
 import weixin.zoo.infrastructure.model.Register;
 import weixin.zoo.service.FormService;
+import weixin.zoo.utils.ActivityTypeEnum;
 import weixin.zoo.utils.ResultUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -78,7 +79,7 @@ public class FormController {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("id",form.getId());
             jsonObject.put("title",form.getFormName());
-            jsonObject.put("type","activity");
+            jsonObject.put("type", ActivityTypeEnum.ACTIVITY.getName());
             jsonObject.put("formOwner",form.getFormOwner());
             jsonArray.add(jsonObject);
         }
@@ -97,7 +98,7 @@ public class FormController {
         for(Register register : registers){
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("id",register.getFormId());
-            jsonObject.put("type","activity");
+            jsonObject.put("type",ActivityTypeEnum.ACTIVITY.getName());
 
             Form form = formService.getFormById(register.getFormId());
             jsonObject.put("formOwner",form.getFormOwner());
