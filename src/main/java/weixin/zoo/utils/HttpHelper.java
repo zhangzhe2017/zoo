@@ -3,6 +3,7 @@ package weixin.zoo.utils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -47,14 +48,11 @@ public class HttpHelper {
                 String resultStr = EntityUtils.toString(entity, "utf-8");
 
                 JSONObject result = JSON.parseObject(resultStr);
-                if (result.getInteger("errcode") == 0) {
+                if (StringUtils.isEmpty(result.getString("errcode"))) {
                     return result;
                 } else {
                     System.out.println("request url=" + url + ",return value=");
                     System.out.println(resultStr);
-                    int errCode = result.getInteger("errcode");
-                    String errMsg = result.getString("errmsg");
-                    throw new OApiException(errCode, errMsg);
                 }
             }
         } catch (IOException e) {
@@ -99,7 +97,7 @@ public class HttpHelper {
                 String resultStr = EntityUtils.toString(entity, "utf-8");
 
                 JSONObject result = JSON.parseObject(resultStr);
-                if (result.getInteger("errcode") == 0) {
+                if (StringUtils.isEmpty(result.getString("errcode"))) {
                 	result.remove("errcode");
                 	result.remove("errmsg");
                     return result;
