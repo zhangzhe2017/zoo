@@ -48,12 +48,7 @@ public class HttpHelper {
                 String resultStr = EntityUtils.toString(entity, "utf-8");
 
                 JSONObject result = JSON.parseObject(resultStr);
-                if (StringUtils.isEmpty(result.getString("errcode"))) {
-                    return result;
-                } else {
-                    System.out.println("request url=" + url + ",return value=");
-                    System.out.println(resultStr);
-                }
+                return result;
             }
         } catch (IOException e) {
             System.out.println("request url=" + url + ", exception, msg=" + e.getMessage());
@@ -97,17 +92,8 @@ public class HttpHelper {
                 String resultStr = EntityUtils.toString(entity, "utf-8");
 
                 JSONObject result = JSON.parseObject(resultStr);
-                if (StringUtils.isEmpty(result.getString("errcode"))) {
-                	result.remove("errcode");
-                	result.remove("errmsg");
-                    return result;
-                } else {
-                    System.out.println("request url=" + url + ",return value=");
-                    System.out.println(resultStr);
-                    int errCode = result.getInteger("errcode");
-                    String errMsg = result.getString("errmsg");
-                    throw new OApiException(errCode, errMsg);
-                }
+                return result;
+
             }
         } catch (IOException e) {
             System.out.println("request url=" + url + ", exception, msg=" + e.getMessage());
