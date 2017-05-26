@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public JSONObject getJsapiSignatrue(String url) throws Exception {
         String nonceStr = "zujuguan";
-        Long timestamp = new Date().getTime();
+        Long timestamp = new Date().getTime() /1000;
         String accessToken = AuthHelper.getAccessToken();
         String jsTicket =  AuthHelper.getJsTicket(accessToken);
 
