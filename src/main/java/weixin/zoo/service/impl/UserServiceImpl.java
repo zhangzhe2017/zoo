@@ -15,6 +15,8 @@ import weixin.zoo.utils.*;
 import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Formatter;
+
 import  weixin.zoo.service.common.aes.*;
 
 /**
@@ -90,33 +92,32 @@ public class UserServiceImpl implements UserService {
 
     private String getValidateSHA1(String jsTicket, String timestamp, String nonceStr, String url){
         try {
-            String[] array = new String[] { jsTicket, timestamp, nonceStr, url };
-            StringBuffer sb = new StringBuffer();
-            // 字符串排序
-            Arrays.sort(array);
-            for (int i = 0; i < 3; i++) {
-                sb.append(array[i]);
-            }
-            String str = sb.toString();
+            //注意这里参数名必须全部小写，且必须有序
+            String string1 = "jsapi_ticket=" + jsTicket +
+                    "&noncestr=" + nonceStr +
+                    "&timestamp=" + timestamp +
+                    "&url=" + url;
             // SHA1签名生成
-            MessageDigest md = MessageDigest.getInstance("SHA-1");
-            md.update(str.getBytes());
-            byte[] digest = md.digest();
+            MessageDigest crypt = MessageDigest.getInstance("SHA-1");
+            crypt.reset();
+            crypt.update(string1.getBytes("UTF-8"));
+            String signature = byteToHex(crypt.digest());
 
-            StringBuffer hexstr = new StringBuffer();
-            String shaHex = "";
-            for (int i = 0; i < digest.length; i++) {
-                shaHex = Integer.toHexString(digest[i] & 0xFF);
-                if (shaHex.length() < 2) {
-                    hexstr.append(0);
-                }
-                hexstr.append(shaHex);
-            }
-            return hexstr.toString();
+            return signature;
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return null;
+    }
+
+    private static String byteToHex(final byte[] hash) {
+        Formatter formatter = new Formatter();
+        for (byte b : hash)
+        {
+            formatter.format("%02x", b);
+        }
+        String result = formatter.toString();
+        formatter.close();
+        return result;
     }
 }
