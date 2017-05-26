@@ -21,9 +21,8 @@ class Auth extends Component {
     isAuth = true;
 
     init() {
-        const {dispatch, location} = this.props;
-        const {code} = location.query;
-        doAction(dispatch, ActionTypes.auth.load, {code});
+        const {dispatch} = this.props;
+        doAction(dispatch, ActionTypes.auth.load);
     }
 
     reset() {
