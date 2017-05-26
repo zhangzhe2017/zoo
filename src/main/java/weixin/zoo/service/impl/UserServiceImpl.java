@@ -11,6 +11,9 @@ import weixin.zoo.service.UserService;
 import weixin.zoo.wxapi.Env;
 import weixin.zoo.wxapi.auth.AuthHelper;
 import weixin.zoo.utils.*;
+
+import java.security.MessageDigest;
+import java.util.Arrays;
 import java.util.Date;
 import  weixin.zoo.service.common.aes.*;
 
@@ -74,7 +77,7 @@ public class UserServiceImpl implements UserService {
         String accessToken = AuthHelper.getAccessToken();
         String jsTicket =  AuthHelper.getJsTicket(accessToken);
 
-        String signature = SHA1.getSHA1(jsTicket, String.valueOf(timestamp), nonceStr, url);
+        String signature = getValidateSHA1(jsTicket, String.valueOf(timestamp), nonceStr, url);
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("timestamp", timestamp);
@@ -82,5 +85,38 @@ public class UserServiceImpl implements UserService {
         jsonObject.put("signature", signature);
 
         return jsonObject;
+    }
+
+
+    private String getValidateSHA1(String jsTicket, String timestamp, String nonceStr, String url){
+        try {
+            String[] array = new String[] { jsTicket, timestamp, nonceStr, url };
+            StringBuffer sb = new StringBuffer();
+            // 字符串排序
+            Arrays.sort(array);
+            for (int i = 0; i < 3; i++) {
+                sb.append(array[i]);
+            }
+            String str = sb.toString();
+            // SHA1签名生成
+            MessageDigest md = MessageDigest.getInstance("SHA-1");
+            md.update(str.getBytes());
+            byte[] digest = md.digest();
+
+            StringBuffer hexstr = new StringBuffer();
+            String shaHex = "";
+            for (int i = 0; i < digest.length; i++) {
+                shaHex = Integer.toHexString(digest[i] & 0xFF);
+                if (shaHex.length() < 2) {
+                    hexstr.append(0);
+                }
+                hexstr.append(shaHex);
+            }
+            return hexstr.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
