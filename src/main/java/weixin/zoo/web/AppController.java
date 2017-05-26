@@ -44,7 +44,8 @@ public class AppController {
 
         HttpSession httpSession = request.getSession();
 
-        String url = request.getRequestURL().toString();
+        //String url = request.getRequestURL().toString();
+        String url = request.getHeader("Referer");
         try {
             result = userService.getJsapiSignatrue(url);
             result.put("attention",jsonObject.getString("subscribe"));
