@@ -26,12 +26,11 @@ import java.net.URI;
 
 public class HttpHelper {
 
-	public static JSONObject httpGet(String url) throws OApiException {
+    public static JSONObject httpGet(String url) throws OApiException {
         HttpGet httpGet = new HttpGet(url);
         CloseableHttpResponse response = null;
         CloseableHttpClient httpClient = HttpClients.createDefault();
-        RequestConfig requestConfig = RequestConfig.custom().
-        		setSocketTimeout(2000).setConnectTimeout(2000).build();
+        RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(2000).setConnectTimeout(2000).build();
         httpGet.setConfig(requestConfig);
 
         try {
@@ -40,7 +39,7 @@ public class HttpHelper {
             if (response.getStatusLine().getStatusCode() != 200) {
 
                 System.out.println("request url failed, http code=" + response.getStatusLine().getStatusCode()
-                                   + ", url=" + url);
+                        + ", url=" + url);
                 return null;
             }
             HttpEntity entity = response.getEntity();
@@ -62,11 +61,12 @@ public class HttpHelper {
             System.out.println("request url=" + url + ", exception, msg=" + e.getMessage());
             e.printStackTrace();
         } finally {
-            if (response != null) try {
+            if (response != null)
+                try {
                 response.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+                } catch (IOException e) {
+            e.printStackTrace();
+        }
         }
 
         return null;
