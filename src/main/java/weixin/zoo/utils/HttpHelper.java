@@ -199,18 +199,7 @@ public class HttpHelper {
                     String resultStr = EntityUtils.toString(entity, "utf-8");
 
                     JSONObject result = JSON.parseObject(resultStr);
-                    if (result.getInteger("errcode") == 0) {
-                        // ³É¹¦
-                    	result.remove("errcode");
-                    	result.remove("errmsg");
-                        return result;
-                    } else {
-                        System.out.println("request url=" + url + ",return value=");
-                        System.out.println(resultStr);
-                        int errCode = result.getInteger("errcode");
-                        String errMsg = result.getString("errmsg");
-                        throw new OApiException(errCode, errMsg);
-                    }
+                    return result;
                 }
             }
         } catch (IOException e) {
