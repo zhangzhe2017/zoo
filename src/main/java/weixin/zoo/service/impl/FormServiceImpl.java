@@ -57,7 +57,7 @@ public class FormServiceImpl implements FormService {
                         String value = (String)itr.next();
                         String mediaLocalPath = WxServiceCenter.downLoadMediaSource(value);
                         String str = mediaLocalPath.trim();
-                        String keyStr = str.substring(str.lastIndexOf("//"));
+                        String keyStr = str.substring(str.lastIndexOf("//")+1);
                         boolean upload = OssUtils.uploadFile(mediaLocalPath, keyStr);
                         if(upload){
                             String url = OssUtils.getFileUrl(keyStr);

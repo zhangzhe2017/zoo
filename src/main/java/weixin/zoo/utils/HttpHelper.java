@@ -126,7 +126,7 @@ public class HttpHelper {
             byte[] getData = readInputStream(inputStream);
 
             //文件保存位置
-            String fileName = urlPath.substring(urlPath.lastIndexOf("="));
+            String fileName = urlPath.substring(urlPath.lastIndexOf("=")+1).concat(".jpg");
             file = new File(downloadDir +File.separator + fileName);
             FileOutputStream fos = new FileOutputStream(file);
             fos.write(getData);
