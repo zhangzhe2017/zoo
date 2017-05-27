@@ -20,9 +20,12 @@ import org.apache.http.impl.client.RedirectLocations;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
-import java.io.File;
-import java.io.IOException;
+
+import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.URI;
+import java.net.URL;
+import java.net.URLConnection;
 
 
 public class HttpHelper {
@@ -56,35 +59,34 @@ public class HttpHelper {
         } finally {
             if (response != null)
                 try {
-                response.close();
+                    response.close();
                 } catch (IOException e) {
-            e.printStackTrace();
-        }
+                    e.printStackTrace();
+                }
         }
 
         return null;
     }
-	
-	
-	public static JSONObject httpPost(String url, Object data) throws OApiException {
+
+    public static JSONObject httpPost(String url, Object data) throws OApiException {
         HttpPost httpPost = new HttpPost(url);
         CloseableHttpResponse response = null;
         CloseableHttpClient httpClient = HttpClients.createDefault();
         RequestConfig requestConfig = RequestConfig.custom().
-        		setSocketTimeout(2000).setConnectTimeout(2000).build();
+                setSocketTimeout(2000).setConnectTimeout(2000).build();
         httpPost.setConfig(requestConfig);
         httpPost.addHeader("Content-Type", "application/json");
 
         try {
-        	StringEntity requestEntity = new StringEntity(JSON.toJSONString(data), "utf-8");
+            StringEntity requestEntity = new StringEntity(JSON.toJSONString(data), "utf-8");
             httpPost.setEntity(requestEntity);
-            
+
             response = httpClient.execute(httpPost, new BasicHttpContext());
 
             if (response.getStatusLine().getStatusCode() != 200) {
 
                 System.out.println("request url failed, http code=" + response.getStatusLine().getStatusCode()
-                                   + ", url=" + url);
+                        + ", url=" + url);
                 return null;
             }
             HttpEntity entity = response.getEntity();
@@ -108,111 +110,50 @@ public class HttpHelper {
 
         return null;
     }
-	
-	
-	public static JSONObject uploadMedia(String url, File file) throws OApiException {
-        HttpPost httpPost = new HttpPost(url);
-        CloseableHttpResponse response = null;
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(2000).setConnectTimeout(2000).build();
-        httpPost.setConfig(requestConfig);
 
-        HttpEntity requestEntity = MultipartEntityBuilder.create().addPart("media",
-        		new FileBody(file, ContentType.APPLICATION_OCTET_STREAM, file.getName())).build();
-        httpPost.setEntity(requestEntity);
-
+    public static String downloadFile(String urlPath, String downloadDir) {
+        File file = null;
         try {
-            response = httpClient.execute(httpPost, new BasicHttpContext());
+            URL url = new URL(urlPath);
+            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+            //设置超时间为3秒
+            conn.setConnectTimeout(3*1000);
+            //防止屏蔽程序抓取而返回403错误
+            conn.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
+            //得到输入流
+            InputStream inputStream = conn.getInputStream();
+            //获取自己数组
+            byte[] getData = readInputStream(inputStream);
 
-            if (response.getStatusLine().getStatusCode() != 200) {
-
-                System.out.println("request url failed, http code=" + response.getStatusLine().getStatusCode()
-                                   + ", url=" + url);
-                return null;
+            //文件保存位置
+            String fileName = urlPath.substring(urlPath.lastIndexOf("="));
+            file = new File(downloadDir +File.separator + fileName);
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(getData);
+            if(fos!=null){
+                fos.close();
             }
-            HttpEntity entity = response.getEntity();
-            if (entity != null) {
-                String resultStr = EntityUtils.toString(entity, "utf-8");
-
-                JSONObject result = JSON.parseObject(resultStr);
-                if (result.getInteger("errcode") == 0) {
-                    // 成功
-                	result.remove("errcode");
-                	result.remove("errmsg");
-                    return result;
-                } else {
-                    System.out.println("request url=" + url + ",return value=");
-                    System.out.println(resultStr);
-                    int errCode = result.getInteger("errcode");
-                    String errMsg = result.getString("errmsg");
-                    throw new OApiException(errCode, errMsg);
-                }
+            if(inputStream!=null){
+                inputStream.close();
             }
-        } catch (IOException e) {
-            System.out.println("request url=" + url + ", exception, msg=" + e.getMessage());
+            System.out.println("info:"+url+" download success");
+
+        }catch (Exception e){
             e.printStackTrace();
-        } finally {
-            if (response != null) try {
-                response.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
 
-        return null;
+        return file.getPath();
     }
 
-
-	public static JSONObject downloadMedia(String url, String fileDir) throws OApiException {
-        HttpGet httpGet = new HttpGet(url);
-        CloseableHttpResponse response = null;
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(2000).setConnectTimeout(2000).build();
-        httpGet.setConfig(requestConfig);
-
-        try {
-            HttpContext localContext = new BasicHttpContext();
-
-            response = httpClient.execute(httpGet, localContext);
-
-            RedirectLocations locations = (RedirectLocations) localContext.getAttribute(HttpClientContext.REDIRECT_LOCATIONS);
-            if (locations != null) {
-                URI downloadUrl = locations.getAll().get(0);
-                String filename = downloadUrl.toURL().getFile();
-                System.out.println("downloadUrl=" + downloadUrl);
-                File downloadFile = new File(fileDir + File.separator + filename);
-                FileUtils.writeByteArrayToFile(downloadFile, EntityUtils.toByteArray(response.getEntity()));
-                JSONObject obj = new JSONObject();
-                obj.put("downloadFilePath", downloadFile.getAbsolutePath());
-                obj.put("httpcode", response.getStatusLine().getStatusCode());
-
-                return obj;
-            } else {
-                if (response.getStatusLine().getStatusCode() != 200) {
-
-                    System.out.println("request url failed, http code=" + response.getStatusLine().getStatusCode()
-                                       + ", url=" + url);
-                    return null;
-                }
-                HttpEntity entity = response.getEntity();
-                if (entity != null) {
-                    String resultStr = EntityUtils.toString(entity, "utf-8");
-
-                    JSONObject result = JSON.parseObject(resultStr);
-                    return result;
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("request url=" + url + ", exception, msg=" + e.getMessage());
-            e.printStackTrace();
-        } finally {
-            if (response != null) try {
-                response.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    public static  byte[] readInputStream(InputStream inputStream) throws IOException {
+        byte[] buffer = new byte[1024];
+        int len = 0;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        while((len = inputStream.read(buffer)) != -1) {
+            bos.write(buffer, 0, len);
         }
-
-        return null;
+        bos.close();
+        return bos.toByteArray();
     }
+
 }

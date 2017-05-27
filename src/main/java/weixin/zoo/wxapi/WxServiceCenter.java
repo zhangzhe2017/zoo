@@ -16,8 +16,8 @@ public class WxServiceCenter {
         try{
             String accessToken = AuthHelper.getAccessToken();
             String url = Env.OAPI_HOST + "/cgi-bin/media/get?" + "access_token=" + accessToken + "&media_id=" + medieId;
-            JSONObject jsonObject = HttpHelper.downloadMedia(url , Env.FILE_DIR);
-            return jsonObject.getString("downloadFilePath");
+            String filePath = HttpHelper.downloadFile(url , Env.FILE_DIR);
+            return filePath;
         }catch (Exception e){
              e.printStackTrace();
         }
