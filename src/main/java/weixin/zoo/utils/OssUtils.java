@@ -11,7 +11,7 @@ import java.util.Date;
  */
 public class OssUtils {
 
-    private static String endpoint = "zujuguan.oss-cn-shanghai.aliyuncs.com";
+    private static String endpoint = "http://oss-cn-shanghai.aliyuncs.com";
     private static String accessKeyId = "LTAIv4EUi6dHexuL";
     private static String accessKeySecret = "qzfLAnbddlKOxa5DTuEy9Z4Au0PMdf";
     private static String bucketName = "zujuguan";
