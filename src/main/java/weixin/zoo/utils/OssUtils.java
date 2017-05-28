@@ -27,14 +27,13 @@ public class OssUtils {
 
     public static boolean uploadFile(String filePath, String key){
         OSSClient client = init();
+
         try {
             InputStream inputStream = new FileInputStream(filePath);
             client.putObject(bucketName, key, inputStream);
         } catch (Exception e){
             e.printStackTrace();
             return false;
-        }finally {
-            client.shutdown();
         }
 
         return true;
@@ -48,8 +47,6 @@ public class OssUtils {
             return url.toString();
         } catch (Exception e){
             e.printStackTrace();
-        }finally {
-            client.shutdown();
         }
 
         return null;
