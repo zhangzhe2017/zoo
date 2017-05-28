@@ -68,7 +68,7 @@ public class FormServiceImpl implements FormService {
                 }
             }
         }
-        return formRepository.saveForm(templateId, formValues, wxid, name);
+        return formRepository.saveForm(templateId, jsonObject.toJSONString(), wxid, name);
     }
 
     @Override
