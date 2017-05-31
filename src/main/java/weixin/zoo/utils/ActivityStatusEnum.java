@@ -7,7 +7,7 @@ package weixin.zoo.utils;
  */
 public enum ActivityStatusEnum {
 
-    ATTEND("报名",1), PAY("付款",2), CANCEL("取消",3), REFUND("退款",4);
+    ATTEND("attend",1), PAY("pay",2), CANCEL("cancel",3), REFUND("refund",4);
 
     private String name;
     private int index;
