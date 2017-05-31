@@ -25,7 +25,7 @@ class FormDetail extends Component {
         timestamp: 0
     };
 
-    bindFns = ['handleRegisterBtnClick'];
+    bindFns = [];
     pageTitle = '表单查看';
 
     init() {
@@ -42,13 +42,14 @@ class FormDetail extends Component {
         doAction(dispatch, ActionTypes.formDetail.replaceState, FormDetail.defaultState);
     }
 
-    handleRegisterBtnClick() {
+    handleRegisterBtnClick(qrCodeUrl) {
         const {dispatch, location, registered} = this.props;
         const {query} = location;
         doAction(dispatch, ActionTypes.formDetail.register, {
             id: query.formId,
             register: !registered,
-            formDetail: this
+            formDetail: this,
+            qrCodeUrl
         });
     }
 
@@ -63,8 +64,9 @@ class FormDetail extends Component {
         const {
             type, title, fields, fieldValues, registered, creatorNickName, creatorWxid, attenderList, timestamp, wxid
         } = this.props;
+        const isActivity = type === 'activity';
         let realTitle = null;
-        if (type === 'activity') {
+        if (isActivity) {
             realTitle = fieldValues.title;
         } else {
             realTitle = title;
@@ -72,7 +74,7 @@ class FormDetail extends Component {
         const items = [];
         _.forEach(fields, field => {
             const {name, label, type, extra} = field;
-            if (name === 'title') {
+            if (isActivity && (name === 'title' || name === 'qrCode')) {
                 return;
             }
             let content = null;
@@ -111,7 +113,7 @@ class FormDetail extends Component {
         const isEnd = registerEndTime && timestamp > registerEndTime;
         const isComplete = totalCount && attenderList.length >= totalCount;
         return (
-            <div className={`x-page ${type === 'activity' ? 'x-fixedButton-page' : ''}`}>
+            <div className={`x-page ${isActivity ? 'x-fixedButton-page' : ''}`}>
                 {
                     realTitle ?
                         <h2 className={style.title}>{realTitle}</h2> : ''
@@ -129,10 +131,15 @@ class FormDetail extends Component {
                         </List> : ''
                 }
                 {
-                    type === 'activity' ?
+                    isActivity ?
                         <Button
                             type={registered ? 'ghost' : 'primary'}
-                            onClick={this.handleRegisterBtnClick}
+                            onClick={
+                                this.handleRegisterBtnClick.bind(
+                                    this,
+                                    (fieldValues['qrCode'] || [])[0] || ''
+                                )
+                            }
                             disabled={wxid === creatorWxid || isEnd || !registered && isComplete}
                             className="x-button"
                         >

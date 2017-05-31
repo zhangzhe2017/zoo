@@ -1,6 +1,3 @@
 {
-    "success": true,
-    "data": {
-        "qrCodeResult": "http://www.baidu.com/"
-    }
+    "success": true
 }

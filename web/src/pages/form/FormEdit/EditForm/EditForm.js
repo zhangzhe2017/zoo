@@ -17,16 +17,16 @@ class EditForm extends Component {
 
     static defaultState = {
         imageFilesMap: {
-            image: [
-                /*{
+            /*image: [
+                {
                     url: 'https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg',
                     serverId: '1'
                 },
                 {
                     url: 'https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg',
                     serverId: '2'
-                }*/
-            ]
+                }
+            ]*/
         }
     };
 
@@ -34,7 +34,10 @@ class EditForm extends Component {
 
     reset() {
         const {dispatch, form} = this.props;
-        doAction(dispatch, ActionTypes.feEditForm.replaceState, EditForm.defaultState);
+        doAction(dispatch, ActionTypes.feEditForm.replaceState, {
+            ...EditForm.defaultState,
+            imageFilesMap: {}
+        });
         form.resetFields();
     }
 
@@ -106,7 +109,9 @@ class EditForm extends Component {
             sourceType: ['album', 'camera'],
             success: (result = {}) => {
                 const {localIds = []} = result;
-                _.forEach(localIds, localId => {
+                Util.debug(`localIds=${JSON.stringify(localIds)}`);
+                _.forEach(localIds, (localId, index) => {
+                    Util.debug(`uploadImage, index=${index}, localId=${localId}`);
                     wx.uploadImage({
                         localId,
                         isShowProgressTips: 1,
@@ -125,15 +130,18 @@ class EditForm extends Component {
                                 url
                             };
                             imageFiles.push(imageFile);
+                            Util.debug(`uploadImage success, index=${index}, serverId=${serverId}, name=${name}, imageFilesMap=${JSON.stringify(imageFilesMap)}`);
                             doAction(dispatch, ActionTypes.feEditForm.changeState, {
                                 imageFilesMap: {...imageFilesMap}
                             });
                             if (window.__wxjs_is_wkwebview) {
                                 wx.getLocalImgData({
                                     localId,
-                                    success: function (result) {
+                                    success: (result = {}) => {
                                         const {localData} = result;
+                                        const {dispatch, imageFilesMap} = this.props;
                                         imageFile.url = localData;
+                                        Util.debug(`getLocalImgData success, index=${index}, serverId=${serverId}, name=${name}, imageFilesMap=${JSON.stringify(imageFilesMap)}`);
                                         doAction(dispatch, ActionTypes.feEditForm.changeState, {
                                             imageFilesMap: {...imageFilesMap}
                                         });

@@ -1,5 +1,7 @@
 'use strict';
 
+const {_} = window._external;
+
 export default {
 
     renderLog(componentName) {
@@ -18,6 +20,11 @@ export default {
 
     log(message) {
         console.log(message);
+        const {debugMsgEl} = this;
+        if (debugMsgEl) {
+            debugMsgEl.html(debugMsgEl.html() + _.escape(message) + '<br/>');
+            debugMsgEl.scrollTop(debugMsgEl.prop('scrollHeight'))
+        }
     }
 
 };

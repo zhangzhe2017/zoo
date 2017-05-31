@@ -1,7 +1,7 @@
 'use strict';
 
 import {
-    Toast, List, InputItem, TextareaItem, ImagePicker, Button, DatePicker, ActivityIndicator, Card
+    Toast, List, InputItem, TextareaItem, ImagePicker, Button, DatePicker, ActivityIndicator, Card, Result, Icon
 } from 'antd-mobile';
 import $ from 'jquery';
 import assign from 'lodash/assign';
@@ -9,9 +9,9 @@ import assign from 'lodash/assign';
 import compact from 'lodash/compact';*/
 import concat from 'lodash/concat';
 /*import difference from 'lodash/difference';
-import drop from 'lodash/drop';
+import drop from 'lodash/drop';*/
 import escape from 'lodash/escape';
-import flatten from 'lodash/flatten';*/
+//import flatten from 'lodash/flatten';
 import forEach from 'lodash/forEach';
 //import includes from 'lodash/includes';
 import indexOf from 'lodash/indexOf';
@@ -49,13 +49,13 @@ import reactMixin from 'react-mixin';
 
 window._external = {
     //antd-mobile
-    Toast, List, InputItem, TextareaItem, ImagePicker, Button, DatePicker, ActivityIndicator, Card,
+    Toast, List, InputItem, TextareaItem, ImagePicker, Button, DatePicker, ActivityIndicator, Card, Result, Icon,
     //jquery
     $,
     //lodash
     _: {
-        assign, forEach, indexOf, isArray, isFunction, isPlainObject, isString, isUndefined, toArray, uniqBy, values,
-        concat
+        assign, concat, escape, forEach, indexOf, isArray, isFunction, isPlainObject, isString, isUndefined, toArray,
+        uniqBy, values
     },
     //moment
     moment,

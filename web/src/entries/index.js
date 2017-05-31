@@ -4,10 +4,11 @@ import FastClick from 'fastclick';
 import '../common/common.scss';
 import Reducers from '../redux/reducers/Reducers';
 import Routes from '../components/Routes/Routes';
+import Util from '../utils/Util';
 
 const {
     React, render, hashHistory, createStore, combineReducers, applyMiddleware, thunk, Provider, syncHistoryWithStore,
-    routerReducer
+    routerReducer, $
 } = window._external;
 
 const reducers = combineReducers({
@@ -23,3 +24,12 @@ render(
     document.getElementById('root')
 );
 FastClick.attach(document.body);
+
+if (Util.isDebug()) {
+    $(() => {
+        const debugMsgEl = Util.debugMsgEl = $('<div class="x-debug-msg"></div>').appendTo('body');
+        $('<input type="button" value="debug" class="x-debug-button"/>').on('click', () => {
+            debugMsgEl.toggle();
+        }).appendTo('body');
+    });
+}

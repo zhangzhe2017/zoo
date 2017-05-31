@@ -1,8 +1,10 @@
 'use strict';
 
 import {doAction} from '../../../redux/actions/Action';
+import AllActionTypes from '../../../redux/actions/ActionTypes';
 import FormService from '../../../services/FormService';
 import Util from '../../../utils/Util';
+import {Routes} from '../../../components/Routes/Routes';
 
 const {Toast} = window._external;
 
@@ -49,28 +51,24 @@ const ActionTypes = {
         },
 
         register(dispatch) {
-            const {id, register, formDetail} = this || {};
+            const {id, register, formDetail, qrCodeUrl} = this || {};
             doAction(dispatch, ActionTypes.formDetail.changeState, {loading: true});
             FormService.register({
                 data: {id, register},
-                success: (result = {}) => {
-                    const {data = {}} = result;
-                    const {qrCodeResult = ''} = data;
-                    Util.later(function () {
-                        Toast.info(
-                            register ? `报名成功！即将${qrCodeResult ? '跳转' : '刷新'}...` : '已取消报名！即将刷新...',
-                            0
-                        );
+                success: () => {
+                    if (register) {
+                        doAction(dispatch, AllActionTypes.registerSuccess.changeState, {qrCodeUrl});
+                        Routes.goto('/result/registerSuccess');
+                    } else {
                         Util.later(function () {
-                            Toast.hide();
-                            if (register && qrCodeResult) {
-                                location.href = qrCodeResult;
-                            } else {
+                            Toast.info('已取消报名！即将刷新...', 0);
+                            Util.later(function () {
+                                Toast.hide();
                                 formDetail.reset();
                                 formDetail.init();
-                            }
-                        }, 3000);
-                    }, 1);
+                            }, 3000);
+                        }, 1);
+                    }
                 },
                 complete: () => {
                     doAction(dispatch, ActionTypes.formDetail.changeState, {loading: false});

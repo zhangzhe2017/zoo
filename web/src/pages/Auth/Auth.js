@@ -25,10 +25,10 @@ class Auth extends Component {
         doAction(dispatch, ActionTypes.auth.load);
     }
 
-    reset() {
+    /*reset() {
         const {dispatch} = this.props;
         doAction(dispatch, ActionTypes.auth.replaceState, Auth.defaultState);
-    }
+    }*/
 
     render() {
         return (
