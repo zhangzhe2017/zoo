@@ -37,7 +37,7 @@ class FormEdit extends Component {
 
     render() {
         return (
-            <div className="x-page x-fixedButton-page">
+            <div className="x-page">
                 <EditForm/>
             </div>
         );

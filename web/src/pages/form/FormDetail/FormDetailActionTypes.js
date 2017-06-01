@@ -34,13 +34,17 @@ const ActionTypes = {
                         attenderList, timestamp
                     });
                     let realTitle = null;
-                    if (type === 'activity') {
+                    const isActivity = type === 'activity';
+                    if (isActivity) {
                         realTitle = fieldValuesObject.title;
                     } else {
                         realTitle = title;
                     }
                     if (realTitle) {
                         formDetail.pageTitle = realTitle;
+                        if (isActivity) {
+                            formDetail.pageDesc = fieldValuesObject.description;
+                        }
                         formDetail.initShare();
                     }
                 },

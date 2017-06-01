@@ -38,10 +38,10 @@ const ActionTypes = {
                     }
                     const redirectTo = () => {
                         if (code) {
-                            redirectUrl && Routes.goto(redirectUrl);
+                            redirectUrl && Routes.replace(redirectUrl);
                         }
                     };
-                    if (!attention) {
+                    /*if (!attention) {
                         Util.later(function () {
                             //Toast.info('请关注公众号[组局官]！页面即将跳转...', 0);
                             Toast.info('请关注公众号[组局官]！页面即将跳转...', 0);
@@ -53,7 +53,8 @@ const ActionTypes = {
                         }, 1);
                     } else {
                         redirectTo();
-                    }
+                    }*/
+                    redirectTo();
                 },
                 complete: () => {
                     doAction(dispatch, ActionTypes.auth.changeState, {loading: false});

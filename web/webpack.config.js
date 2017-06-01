@@ -13,7 +13,7 @@ var HtmlPlugin = require('html-webpack-plugin');
 var OpenBrowserPlugin = require('open-browser-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var autoprefixer = require('autoprefixer');
-var pxtorem = require('postcss-pxtorem');
+//var pxtorem = require('postcss-pxtorem');
 
 var vendorExtractor = new ExtractTextPlugin('css/vendor.css');
 var indexExtractor = new ExtractTextPlugin('css/index.css');
@@ -170,7 +170,7 @@ module.exports = {
             test: /\.scss$/,
             options: {
                 postcss: [
-                    autoprefixer(),
+                    autoprefixer()/*,
                     pxtorem({
                         rootValue: 100,
                         unitPrecision: 5,
@@ -179,7 +179,7 @@ module.exports = {
                         replace: true,
                         mediaQuery: false,
                         minPixelValue: 0
-                    })
+                    })*/
                 ]
             }
         })
