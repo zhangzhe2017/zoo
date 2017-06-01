@@ -12,6 +12,7 @@ import weixin.zoo.infrastructure.repository.TemplateRepository;
 import weixin.zoo.service.TemplateService;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -57,5 +58,21 @@ public class TemplateServiceImpl implements TemplateService {
         return data;
     }
 
+    @Override
+    public Long saveVote(String type, String name, String fields, String wxid) {
+        //转换fields,逐条保存后获取id
+        JSONArray ids = new JSONArray();
+        JSONArray jsonArray = JSONArray.parseArray(fields);
+        Iterator itr = jsonArray.iterator();
+        while(itr.hasNext()){
+            JSONObject jsonObject = (JSONObject)itr.next();
+            Long id = templateFieldRepository.saveTemplateField(jsonObject, wxid);
+            ids.add(id);
+        }
+
+        Long id = templateRepository.saveTemplate(type,name,wxid,fields);
+
+        return id;
+    }
 
 }

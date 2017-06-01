@@ -35,12 +35,12 @@ public class TemplateFieldRepositoryImpl implements TemplateFieldRepository {
     }
 
     @Override
-    public long saveTemplateField(JSONObject fieldJson) {
-        TemplateField templateField = transferTemplateField(fieldJson);
+    public long saveTemplateField(JSONObject fieldJson, String wxid) {
+        TemplateField templateField = transferTemplateField(fieldJson, wxid);
         return templateFieldMapper.insertSelective(templateField);
     }
 
-    private TemplateField transferTemplateField(JSONObject fieldJson){
+    private TemplateField transferTemplateField(JSONObject fieldJson, String wxid){
         TemplateField templateField = new TemplateField();
         templateField.setGmtCreate(new Date());
         templateField.setGmtModified(new Date());
@@ -49,6 +49,8 @@ public class TemplateFieldRepositoryImpl implements TemplateFieldRepository {
         templateField.setFieldName(fieldJson.getString("fieldName"));
         templateField.setFieldOption(fieldJson.getString("fieldOption"));
         templateField.setFieldType(fieldJson.getString("fieldType"));
+        templateField.setFieldLabel(fieldJson.getString("fieldLabel"));
+        templateField.setCreator(wxid);
         return templateField;
     }
 }

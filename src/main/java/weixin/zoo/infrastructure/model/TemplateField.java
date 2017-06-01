@@ -9,6 +9,8 @@ public class TemplateField {
 
     private Date gmtModified;
 
+    private String creator;
+
     private String isDelete;
 
     private String fieldName;
@@ -43,6 +45,14 @@ public class TemplateField {
 
     public void setGmtModified(Date gmtModified) {
         this.gmtModified = gmtModified;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator == null ? null : creator.trim();
     }
 
     public String getIsDelete() {

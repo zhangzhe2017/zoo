@@ -16,5 +16,5 @@ public interface TemplateFieldRepository {
     /*
      * 保存模板字段
      */
-    public long saveTemplateField(JSONObject fieldJson);
+    public long saveTemplateField(JSONObject fieldJson, String wxid);
 }

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import weixin.zoo.service.TemplateService;
 import weixin.zoo.utils.ResultUtils;
-
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -27,6 +26,20 @@ public class TemplateController {
         JSONObject jsonObject = templateService.getTemplate(Long.valueOf(id));
 
         return ResultUtils.assembleResult(true, "true", jsonObject);
+    }
+
+    @RequestMapping("/proposeVote")
+    @ResponseBody
+    public String proposeVote(HttpServletRequest request){
+        //requeset里 有fieldsArray 以及 template基础信息
+        String type = request.getParameter("type");
+        String name = request.getParameter("name");
+        String fields = request.getParameter("fields");
+
+        String wxid = (String)request.getSession().getAttribute("wxid");
+
+        Long id = templateService.saveVote(type,name,fields,wxid);
+        return ResultUtils.assembleResult(true, "true", id);
     }
 
 }

@@ -12,4 +12,9 @@ public interface TemplateRepository {
      */
     public Template getTemplateById(long id);
 
+    /*
+     * 新增模板数据
+     */
+    public Long saveTemplate(String type, String name, String owner, String fields);
+
 }
