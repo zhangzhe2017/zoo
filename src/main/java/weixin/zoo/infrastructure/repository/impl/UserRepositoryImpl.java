@@ -49,27 +49,15 @@ public class UserRepositoryImpl implements UserRepository {
         user.setIsDelete("n");
         user.setLatestAccessTime(new Date());
         user.setUserId(wxid);
-        user.setUserName(getUTF8string(nickName));
+        try {
+            user.setUserName(new String(nickName.getBytes("gbk"),"utf-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         user.setUserSex(sex);
         user.setUserHeadimgurl(headImg);
 
         return userMapper.insertSelective(user);
-    }
-
-    private String getUTF8string(String str){
-        StringBuffer sb = new StringBuffer();
-        sb.append(str);
-        String xmString = "";
-        String xmlUTF8="";
-        try {
-            xmString = new String(sb.toString().getBytes("UTF-8"));
-            xmlUTF8 = URLEncoder.encode(xmString, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        // return to String Formed
-        return xmlUTF8;
     }
 
     @Override
