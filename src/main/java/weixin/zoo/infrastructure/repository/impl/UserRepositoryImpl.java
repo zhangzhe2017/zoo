@@ -9,6 +9,8 @@ import weixin.zoo.infrastructure.model.User;
 import weixin.zoo.infrastructure.model.UserExample;
 import weixin.zoo.infrastructure.repository.UserRepository;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.List;
 
@@ -47,11 +49,27 @@ public class UserRepositoryImpl implements UserRepository {
         user.setIsDelete("n");
         user.setLatestAccessTime(new Date());
         user.setUserId(wxid);
-        user.setUserName(nickName);
+        user.setUserName(getUTF8string(nickName));
         user.setUserSex(sex);
         user.setUserHeadimgurl(headImg);
 
         return userMapper.insertSelective(user);
+    }
+
+    private String getUTF8string(String str){
+        StringBuffer sb = new StringBuffer();
+        sb.append(str);
+        String xmString = "";
+        String xmlUTF8="";
+        try {
+            xmString = new String(sb.toString().getBytes("UTF-8"));
+            xmlUTF8 = URLEncoder.encode(xmString, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        // return to String Formed
+        return xmlUTF8;
     }
 
     @Override
