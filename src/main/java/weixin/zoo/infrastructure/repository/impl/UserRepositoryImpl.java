@@ -49,11 +49,7 @@ public class UserRepositoryImpl implements UserRepository {
         user.setIsDelete("n");
         user.setLatestAccessTime(new Date());
         user.setUserId(wxid);
-        try {
-            user.setUserName(new String(nickName.getBytes("gbk"),"utf-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+        user.setUserName(nickName);
         user.setUserSex(sex);
         user.setUserHeadimgurl(headImg);
 
