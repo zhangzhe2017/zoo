@@ -44,6 +44,8 @@ const ActionTypes = {
                         formDetail.pageTitle = realTitle;
                         if (isActivity) {
                             formDetail.pageDesc = fieldValuesObject.description;
+                        } else {
+                            formDetail.pageDesc = '';
                         }
                         formDetail.initShare();
                     }
