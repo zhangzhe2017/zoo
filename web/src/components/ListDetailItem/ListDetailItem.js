@@ -15,7 +15,7 @@ class ListDetailItem extends Component {
                                 {label}
                             </div>
                             <div>
-                                {type === 'textarea' ? <pre>{content}</pre> : ''}
+                                {type === 'textarea' ? <pre className="x-pre">{content}</pre> : ''}
                                 {type === 'image' ? content : ''}
                             </div>
                         </div>

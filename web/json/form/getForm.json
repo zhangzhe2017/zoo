@@ -60,7 +60,7 @@
                 "required": true
             }
         ],
-        "fieldValues": "{\"title\": \"爬山活动\", \"startTime\": 1493568632909, \"endTime\": 1493568632909, \"registerEndTime\": 1493568632909, \"address\": \"北高峰\", \"totalCount\": 10, \"qrCode\": [\"https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg\"], \"image\": [\"https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg\", \"https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg\"], \"description\": \"在山脚集合, 不准迟到, 迟到罚钱\"}",
+        "fieldValues": "{\"title\": \"爬山活动\", \"startTime\": 1493568632909, \"endTime\": 1493568632909, \"registerEndTime\": 1493568632909, \"address\": \"北高峰\", \"totalCount\": 10, \"qrCode\": [\"https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg\"], \"image\": [\"https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg\", \"https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg\"], \"description\": \"在山脚集合, 不准迟到, 迟到罚钱.\\n    111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111\"}",
         "registered": false,
         "creatorNickName": "大犇",
         "creatorWxid": "o1ZWOv4Zsf4JcZJDhY8cN4COsy_o",
