@@ -9,6 +9,8 @@ import weixin.zoo.infrastructure.model.User;
 import weixin.zoo.infrastructure.model.UserExample;
 import weixin.zoo.infrastructure.repository.UserRepository;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.List;
 
