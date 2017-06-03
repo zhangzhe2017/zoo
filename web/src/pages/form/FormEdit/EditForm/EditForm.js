@@ -1,6 +1,5 @@
 'use strict';
 
-import style from './EditForm.scss';
 import {doAction} from '../../../../redux/actions/Action';
 import ActionTypes from '../../../../redux/actions/ActionTypes';
 import CommonMixin from '../../../../mixins/CommonMixin';
@@ -130,7 +129,7 @@ class EditForm extends Component {
                                 url
                             };
                             imageFiles.push(imageFile);
-                            Util.debug(`uploadImage success, index=${index}, serverId=${serverId}, name=${name}, imageFilesMap=${JSON.stringify(imageFilesMap)}`);
+                            Util.debug(`uploadImage success, index=${index}, serverId=${serverId}, name=${name}, imageFiles.length=${imageFiles.length}`);
                             doAction(dispatch, ActionTypes.feEditForm.changeState, {
                                 imageFilesMap: {...imageFilesMap}
                             });
@@ -141,7 +140,7 @@ class EditForm extends Component {
                                         const {localData} = result;
                                         const {dispatch, imageFilesMap} = this.props;
                                         imageFile.url = localData;
-                                        Util.debug(`getLocalImgData success, index=${index}, serverId=${serverId}, name=${name}, imageFilesMap=${JSON.stringify(imageFilesMap)}`);
+                                        Util.debug(`getLocalImgData success, index=${index}, serverId=${serverId}, name=${name}, imageFilesMap[name].length=${imageFilesMap[name].length}`);
                                         doAction(dispatch, ActionTypes.feEditForm.changeState, {
                                             imageFilesMap: {...imageFilesMap}
                                         });
@@ -278,7 +277,7 @@ class EditForm extends Component {
                     <List.Item
                         key={name}
                     >
-                        <div style={{fontWeight: 'bold'}}>{label} {requiredMark}</div>
+                        <div className="x-label">{label} {requiredMark}</div>
                         <ImagePicker
                             {...getFieldProps(
                                 name,
@@ -301,7 +300,7 @@ class EditForm extends Component {
             <form>
                 {
                     title ?
-                        <h2 className={style.title}>{title}</h2> : ''
+                        <h2 className="x-title">{title}</h2> : ''
                 }
                 <List>{items}</List>
                 {

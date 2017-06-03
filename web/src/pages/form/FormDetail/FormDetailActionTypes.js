@@ -72,7 +72,7 @@ const ActionTypes = {
                                 Toast.hide();
                                 formDetail.reset();
                                 formDetail.init();
-                            }, 3000);
+                            }, 1000);
                         }, 1);
                     }
                 },

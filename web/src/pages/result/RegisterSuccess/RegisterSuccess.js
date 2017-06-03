@@ -21,13 +21,13 @@ class RegisterSuccess extends Component {
         return (
             <div className="x-page">
                 <Result
-                    img={<Icon type="check-circle" className="icon" style={{fill: '#1F90E6'}}/>}
+                    img={<Icon type="check-circle" className="icon x-icon-success"/>}
                     title="报名成功"
                     message={
                         qrCodeUrl ?
                             <div>
-                                长按识别二维码加群<br/>
-                                <img style={{width: '100%', height: 'auto', marginTop: '10px'}} src={qrCodeUrl}/>
+                                长按识别二维码<br/>
+                                <img className="x-marginTop-10 x-image" src={qrCodeUrl}/>
                             </div> : ''
                     }
                 />

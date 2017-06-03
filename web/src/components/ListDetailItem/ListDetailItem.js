@@ -11,7 +11,7 @@ class ListDetailItem extends Component {
                 <div className="am-list-item am-list-item-middle">
                     <div className="am-list-line">
                         <div className="am-list-content">
-                            <div style={{fontWeight: 'bold'}}>
+                            <div className="x-label">
                                 {label}
                             </div>
                             <div>

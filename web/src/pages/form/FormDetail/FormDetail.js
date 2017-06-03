@@ -1,6 +1,5 @@
 'use strict';
 
-import style from './FormDetail.scss';
 import {doAction} from '../../../redux/actions/Action';
 import ActionTypes from '../../../redux/actions/ActionTypes';
 import CommonMixin from '../../../mixins/CommonMixin';
@@ -83,9 +82,9 @@ class FormDetail extends Component {
                 const urls = fieldValues[name];
                 _.forEach(urls, (url, index) => {
                     content.push(
-                        <div key={index} style={{marginTop: '20px'}}>
+                        <div key={index} className="x-marginTop-20">
                             <img
-                                style={{width: '100%', height: 'auto'}}
+                                className="x-image"
                                 src={url}
                                 onClick={this.handleImageClick.bind(this, url, urls)}
                             />
@@ -116,7 +115,7 @@ class FormDetail extends Component {
             <div className="x-page">
                 {
                     realTitle ?
-                        <h2 className={style.title}>{realTitle}</h2> : ''
+                        <h2 className="x-title">{realTitle}</h2> : ''
                 }
                 {
                     items.length ?

@@ -1,6 +1,5 @@
 'use strict';
 
-import style from './FormList.scss';
 import {doAction} from '../../../redux/actions/Action';
 import ActionTypes from '../../../redux/actions/ActionTypes';
 import CommonMixin from '../../../mixins/CommonMixin';
@@ -90,9 +89,6 @@ class FormList extends Component {
                     <Card className="x-card">
                         <Card.Body>
                             <div>标题：{title}</div>
-                            {/*<div style={{marginTop: 8}}>
-                                创建时间：{createTime ? moment(createTime).format(Util.Const.dateTimeFormat) : ''}
-                            </div>*/}
                         </Card.Body>
                     </Card>
                 </Link>
@@ -100,11 +96,11 @@ class FormList extends Component {
         });
         return (
             <div className="x-page">
-                <h2 className={style.title}>{pageType === 'myFormList' ? '我发起的活动' : '我参加的活动'}</h2>
+                <h2 className="x-title">{pageType === 'myFormList' ? '我发起的活动' : '我参加的活动'}</h2>
                 {items}
-                <div id="loadingDiv" style={{margin: '20px 0'}}>
+                <div id="loadingDiv" className="x-margin-20-0">
                     {
-                        finished ? <div style={{textAlign: 'center', color: '#999'}}>没有更多了</div> :
+                        finished ? <div className="x-noMore">没有更多了</div> :
                             <ActivityIndicator size="large" className="x-activity-indicator"/>
                     }
                 </div>

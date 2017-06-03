@@ -49,7 +49,7 @@ const ActionTypes = {
                                 Toast.hide();
                                 //location.href = 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzIxMzc5MjcyNQ==&scene=124#wechat_redirect';
                                 redirectTo();
-                            }, 3000);
+                            }, 1000);
                         }, 1);
                     } else {
                         redirectTo();

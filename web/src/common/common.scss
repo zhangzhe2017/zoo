@@ -1,4 +1,338 @@
 :global {
+    .am-list .am-list-item.am-textarea-item {
+        min-height: 90px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    .am-list .am-list-item.am-textarea-item:after {
+        left: 30px;
+        border-bottom: 1px solid #ddd;
+    }
+    .am-list .am-list-item.am-textarea-item.am-textarea-item-single-line .am-textarea-control textarea {
+        line-height: 51px;
+    }
+    .am-textarea-label {
+        min-height: 90px;
+        font-size: 34px;
+        line-height: 90px;
+        margin-right: 10px;
+    }
+    .am-textarea-label.am-textarea-label-2 {
+        width: 68px;
+    }
+    .am-textarea-label.am-textarea-label-3 {
+        width: 102px;
+    }
+    .am-textarea-label.am-textarea-label-4 {
+        width: 136px;
+    }
+    .am-textarea-label.am-textarea-label-5 {
+        width: 170px;
+    }
+    .am-textarea-label.am-textarea-label-6 {
+        width: 204px;
+    }
+    .am-textarea-label.am-textarea-label-7 {
+        width: 238px;
+    }
+    .am-textarea-control {
+        padding-top: 23px;
+        padding-bottom: 21px;
+    }
+    .am-textarea-control textarea {
+        font-size: 34px;
+        line-height: 51px;
+    }
+    .am-textarea-clear {
+        width: 42px;
+        height: 42px;
+        margin-top: 24px;
+        background-size: 42px auto;
+    }
+    .am-textarea-count {
+        bottom: 12px;
+        right: 10px;
+        font-size: 28px;
+    }
+    .am-textarea-error .am-textarea-error-extra {
+        margin-top: 24px;
+        width: 42px;
+        height: 42px;
+        margin-left: 16px;
+        background-size: 42px 42px;
+    }
+    .am-list-header {
+        padding: 30px 30px 18px 30px;
+        font-size: 28px;
+    }
+    .am-list-footer {
+        padding: 18px 30px 30px 30px;
+        font-size: 28px;
+    }
+    .am-list-body:after {
+        border-bottom: 1px solid #ddd;
+    }
+    .am-list-body div:not(:last-child) .am-list-line:after {
+        border-bottom: 1px solid #ddd;
+    }
+    .am-list-item {
+        padding-left: 30px;
+        min-height: 90px;
+    }
+    .am-list-item.am-list-item-top .am-list-line .am-list-arrow {
+        margin-top: 4px;
+    }
+    .am-list-item img {
+        width: 44px;
+        height: 44px;
+    }
+    .am-list-item .am-list-thumb:first-child {
+        margin-right: 30px;
+    }
+    .am-list-item .am-list-thumb:last-child {
+        margin-left: 16px;
+    }
+    .am-list-item .am-list-line {
+        padding-right: 30px;
+        min-height: 90px;
+    }
+    .am-list-item .am-list-line .am-list-content {
+        font-size: 34px;
+        padding-top: 14px;
+        padding-bottom: 14px;
+    }
+    .am-list-item .am-list-line .am-list-extra {
+        font-size: 32px;
+        padding-top: 14px;
+        padding-bottom: 14px;
+    }
+    .am-list-item .am-list-line .am-list-brief {
+        font-size: 30px;
+        margin-top: 12px;
+    }
+    .am-list-item .am-list-line .am-list-arrow {
+        width: 30px;
+        height: 30px;
+        margin-left: 16px;
+    }
+    .am-list-item .am-list-line-multiple {
+        padding: 25px 30px 25px 0;
+    }
+    .am-list-item select {
+        font-size: 34px;
+    }
+    .am-button {
+        font-size: 36px;
+        height: 84px;
+        line-height: 84px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        border: 1px solid #ddd;
+    }
+    .am-button-primary {
+        border: 1px solid #108ee9;
+    }
+    .am-button-ghost {
+        border: 1px solid #108ee9;
+    }
+    .am-button-ghost.am-button-active {
+        border: 1px solid #108ee9;
+    }
+    .am-button-inline {
+        padding: 0 30px;
+    }
+    .am-button-small {
+        font-size: 26px;
+        height: 60px;
+        line-height: 60px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        padding: 0 30px;
+    }
+    .am-list-item.am-input-item {
+        height: 90px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    .am-list-item.am-input-item:after {
+        left: 30px;
+        border-bottom: 1px solid #ddd;
+    }
+    .am-list-item .am-input-label {
+        font-size: 34px;
+        margin-right: 10px;
+    }
+    .am-list-item .am-input-label.am-input-label-2 {
+        width: 68px;
+    }
+    .am-list-item .am-input-label.am-input-label-3 {
+        width: 102px;
+    }
+    .am-list-item .am-input-label.am-input-label-4 {
+        width: 136px;
+    }
+    .am-list-item .am-input-label.am-input-label-5 {
+        width: 170px;
+    }
+    .am-list-item .am-input-label.am-input-label-6 {
+        width: 204px;
+    }
+    .am-list-item .am-input-label.am-input-label-7 {
+        width: 238px;
+    }
+    .am-list-item .am-input-control {
+        font-size: 34px;
+    }
+    .am-list-item .am-input-control input {
+        font-size: 34px;
+    }
+    .am-list-item .am-input-clear {
+        width: 42px;
+        height: 42px;
+        background-size: 42px auto;
+        background-position: 4px 4px;
+    }
+    .am-list-item .am-input-extra {
+        max-height: 42px;
+        font-size: 30px;
+        margin-left: 10px;
+    }
+    .am-list-item.am-input-error .am-input-error-extra {
+        height: 42px;
+        width: 42px;
+        margin-left: 12px;
+        background-size: 42px auto;
+    }
+    .am-picker-popup-header {
+        background-size: 100% 1px;
+    }
+    .am-picker-popup-header:after {
+        border-bottom: 1px solid #ddd;
+    }
+    .am-picker-popup-item {
+        font-size: 34px;
+        padding: 18px 30px;
+    }
+    .am-picker-col {
+        height: 476px;
+    }
+    .am-picker-col-content {
+        padding: 204px 0;
+    }
+    .am-picker-col-item {
+        font-size: 32px;
+        height: 68px;
+        line-height: 68px;
+    }
+    .am-picker-col-item-selected {
+        font-size: 34px;
+    }
+    .am-picker-col-mask {
+        background-size: 100% 204px;
+    }
+    .am-picker-col-indicator {
+        height: 68px;
+        top: 204px;
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+    }
+    .am-toast {
+        font-size: 28px;
+    }
+    .am-toast-notice-content .am-toast-text {
+        border-radius: 6px;
+        padding: 18px 30px;
+    }
+    .am-toast-notice-content .am-toast-text.am-toast-text-icon {
+        border-radius: 14px;
+        padding: 30px 30px;
+    }
+    .am-toast-notice-content .am-toast-text.am-toast-text-icon .am-toast-text-info {
+        margin-top: 12px;
+    }
+    .am-result {
+        padding-top: 42px;
+        padding-bottom: 42px;
+    }
+    .am-result:after {
+        border-bottom: 1px solid #ddd;
+    }
+    .am-result .am-result-pic {
+        width: 120px;
+        height: 120px;
+        line-height: 120px;
+        background-size: 120px 120px;
+    }
+    .am-result .am-result-title,
+    .am-result .am-result-message {
+        font-size: 42px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    .am-result .am-result-title {
+        margin-top: 30px;
+    }
+    .am-result .am-result-message {
+        margin-top: 30px;
+        font-size: 32px;
+    }
+    .am-result .am-result-button {
+        padding: 0 30px;
+        margin-top: 30px;
+    }
+    .am-card {
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        padding-bottom: 12px;
+    }
+    .am-card-header {
+        font-size: 34px;
+        padding: 18px 30px;
+    }
+    .am-card-header-content img {
+        margin-right: 10px;
+    }
+    .am-card-header-extra {
+        font-size: 34px;
+    }
+    .am-card-body {
+        border-top: 1px solid #ddd;
+        padding: 30px 30px 12px;
+        font-size: 30px;
+    }
+    .am-card-footer {
+        font-size: 28px;
+        padding: 0 30px;
+    }
+    .am-activity-indicator-spinner {
+        width: 40px;
+        height: 40px;
+    }
+    .am-activity-indicator-tip {
+        font-size: 28px;
+        margin-left: 16px;
+    }
+    .am-activity-indicator.am-activity-indicator-toast .am-activity-indicator-toast {
+        top: 8px;
+    }
+    .am-activity-indicator-content {
+        padding: 30px 30px;
+        border-radius: 14px;
+        font-size: 30px;
+        line-height: 40px;
+    }
+    .am-activity-indicator-spinner-lg {
+        width: 64px;
+        height: 64px;
+    }
+    /******************************************************************************************************************/
+    body {
+        user-select: text;
+    }
     .am-toast-notice-content {
         top: -100px;
     }
@@ -72,6 +406,9 @@
         z-index: 1;
         background-color: #fff;
         word-break: break-all;
+        overflow: auto;
+        border: 1px solid red;
+        box-sizing: border-box;
     }
     .x-debug-button {
         position: fixed;
@@ -89,5 +426,36 @@
         word-break: break-all;
         margin-top: 10px;
         margin-bottom: 0;
+        font-family: sans-serif;
+    }
+    .x-marginTop-10 {
+        margin-top: 10px;
+    }
+    .x-marginTop-20 {
+        margin-top: 20px;
+    }
+    .x-margin-20-0 {
+        margin: 20px 0;
+    }
+    .x-label {
+        font-weight: bold;
+    }
+    .am-list-item .x-image, .x-image {
+        width: 100%;
+        height: auto;
+    }
+    .x-noMore {
+        text-align: center;
+        color: #999;
+    }
+    .x-icon-success {
+        fill: #1F90E6;
+    }
+    .x-title {
+        text-align: center;
+        background-color: #eee;
+        padding: 20px;
+        margin: 0;
+        font-size: 48px;
     }
 }

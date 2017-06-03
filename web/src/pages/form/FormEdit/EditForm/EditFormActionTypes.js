@@ -30,7 +30,7 @@ const ActionTypes = {
                                     formId: id
                                 }
                             });
-                        }, 3000);
+                        }, 1000);
                     }, 1);
                 },
                 complete: () => {
