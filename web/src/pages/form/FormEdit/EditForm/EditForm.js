@@ -188,6 +188,7 @@ class EditForm extends Component {
     render() {
         const {form, title, fields} = this.props;
         const {getFieldProps} = form;
+        const formData = this.getFormData();
         const items = [];
         _.forEach(fields, field => {
             const {label, name, type, extra, required} = field;
@@ -207,6 +208,7 @@ class EditForm extends Component {
                         clear={true}
                         extra={extra}
                         labelNumber={7}
+                        placeholder={label}
                     >
                         {label} {requiredMark}
                     </InputItem>
@@ -227,6 +229,7 @@ class EditForm extends Component {
                         type="number"
                         extra={extra}
                         labelNumber={7}
+                        placeholder={label}
                     >
                         {label} {requiredMark}
                     </InputItem>
@@ -248,6 +251,7 @@ class EditForm extends Component {
                         clear={true}
                         rows={2}
                         labelNumber={7}
+                        placeholder={label}
                     />
                 );
             } else if (type === 'datetime') {
@@ -265,10 +269,12 @@ class EditForm extends Component {
                         mode="datetime"
                         extra=""
                     >
-                        <List.Item
-                            className="x-list-item"
-                        >
+                        <List.Item className="x-list-item">
                             {label} {requiredMark}
+                            {
+                                !formData[name] ?
+                                    <input type="text" className="x-placeholder" placeholder={label} readOnly/> : ''
+                            }
                         </List.Item>
                     </DatePicker>
                 );

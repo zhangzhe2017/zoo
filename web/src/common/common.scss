@@ -458,4 +458,21 @@
         margin: 0;
         font-size: 48px;
     }
+    .x-placeholder {
+        position: absolute;
+        top: 23px;
+        left: 248px;
+        color: #000;
+        font-size: 34px;
+        appearance: none;
+        width: 100%;
+        padding: 0;
+        border: 0;
+        background-color: transparent;
+        line-height: 1;
+        box-sizing: border-box;
+    }
+    .x-placeholder::-webkit-input-placeholder {
+        color: #bbb;
+    }
 }
