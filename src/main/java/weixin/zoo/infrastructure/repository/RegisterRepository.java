@@ -22,7 +22,7 @@ public interface RegisterRepository {
     /*
      * 新增一条报名记录
      */
-    public int registerUser(long formId, String userId);
+    public int registerUser(long formId, String userId, String fieldValues);
 
     /*
      * 取消报名记录

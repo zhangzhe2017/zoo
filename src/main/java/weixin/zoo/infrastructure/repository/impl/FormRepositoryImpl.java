@@ -21,15 +21,16 @@ public class FormRepositoryImpl implements FormRepository{
     private FormMapper formMapper;
 
     @Override
-    public long saveForm(String templateId, String formValue, String wxid ,String name) {
-        Form form =  transferForm(templateId,formValue,wxid,name);
+    public long saveForm(String templateId, String formValue, String wxid ,String name, String fieldIds) {
+        Form form =  transferForm(templateId,formValue,wxid,name,fieldIds);
         int num = formMapper.insert(form);
         if(num>0){
             FormExample formExample =  new FormExample();
             formExample.createCriteria().andIsDeleteEqualTo("n").andTemplateIdEqualTo(Long.valueOf(templateId))
                     .andFormNameEqualTo(name)
                     .andFormOwnerEqualTo(wxid)
-                    .andFormValueEqualTo(formValue);
+                    .andFormValueEqualTo(formValue)
+                    .andFieldIdsEqualTo(fieldIds);
             List<Form> forms = formMapper.selectByExample(formExample);
             Form formAdd = forms.get(0);
 
@@ -52,7 +53,7 @@ public class FormRepositoryImpl implements FormRepository{
         return formMapper.selectByExample(formExample);
     }
 
-    private Form transferForm(String templateId, String formValue, String wxid, String name){
+    private Form transferForm(String templateId, String formValue, String wxid, String name, String fieldIds){
         Form form = new Form();
         form.setGmtCreate(new Date());
         form.setGmtModified(new Date());
@@ -61,6 +62,7 @@ public class FormRepositoryImpl implements FormRepository{
         form.setFormOwner(wxid);
         form.setFormValue(formValue);
         form.setTemplateId(Long.valueOf(templateId));
+        form.setFieldIds(fieldIds);
         return form;
     }
 }

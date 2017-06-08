@@ -42,7 +42,7 @@ public class RegisterRepositoryImpl implements RegisterRepository {
     }
 
     @Override
-    public int registerUser(long formId, String userId) {
+    public int registerUser(long formId, String userId, String fieldValues) {
         Register register = new Register();
         register.setIsDelete("n");
         register.setGmtModified(new Date());
@@ -50,6 +50,7 @@ public class RegisterRepositoryImpl implements RegisterRepository {
         register.setAttender(userId);
         register.setFormId(formId);
         register.setStatus(ActivityStatusEnum.ATTEND.getName());
+        register.setFormValue(fieldValues);
         return registerMapper.insertSelective(register);
     }
 

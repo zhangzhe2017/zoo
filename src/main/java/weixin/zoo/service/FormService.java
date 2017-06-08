@@ -17,7 +17,7 @@ public interface FormService {
      * 表单中的图片，需要转存至oss
      *
      */
-    public Long saveForm(String templateId, String formValues, String wxid, String name);
+    public Long saveForm(String templateId, String formValues, String wxid, String name, String fields);
 
     /*
      * 获取表单数据
@@ -34,7 +34,7 @@ public interface FormService {
      * 报名功能中如果存在群二维码，需要转换成链接返回
      *
      */
-    public Object doRegister(long id, boolean rOc, String userId);
+    public Object doRegister(long id, boolean rOc, String userId, String fieldValues);
 
     /*
      * 获取用户已发起表单列表
@@ -57,4 +57,9 @@ public interface FormService {
      * 根据formId获取form信息
      */
     public Form getFormById(Long id);
+
+    /*
+     * 修改form表单数据
+     */
+    public Long updateForm(long id, String formValues, String name);
 }

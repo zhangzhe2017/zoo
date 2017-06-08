@@ -12,7 +12,7 @@ public interface FormRepository {
     /*
      * 保存表单
      */
-    public long saveForm(String templateId, String formValue, String wxid, String name);
+    public long saveForm(String templateId, String formValue, String wxid, String name,String fieldIds);
 
     /*
      * 根据表单id获取表单数据

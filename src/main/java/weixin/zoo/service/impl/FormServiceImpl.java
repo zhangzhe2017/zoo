@@ -3,6 +3,7 @@ package weixin.zoo.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,7 @@ public class FormServiceImpl implements FormService {
     private RegisterRepository registerRepository;
 
     @Override
-    public Long saveForm(String templateId, String formValues, String wxid, String name) {
+    public Long saveForm(String templateId, String formValues, String wxid, String name, String fields) {
         //判断表单中是否有图片，如果有图片则转存到oss
         //从template找到对应的fields，和formValues中name做匹配，找到其中的image类型做转存。
         List<TemplateField> templateFields = getImageFieldsFromTemplate(Long.valueOf(templateId));
@@ -68,7 +69,20 @@ public class FormServiceImpl implements FormService {
                 }
             }
         }
-        return formRepository.saveForm(templateId, jsonObject.toJSONString(), wxid, name);
+
+        JSONArray ids = new JSONArray();
+        if(!StringUtils.isEmpty(fields)){
+            //转换fields,逐条保存后获取id
+            JSONArray jsonArray = JSONArray.parseArray(fields);
+            Iterator itr = jsonArray.iterator();
+            while(itr.hasNext()){
+                JSONObject jsonObjectField = (JSONObject)itr.next();
+                Long id = templateFieldRepository.saveTemplateField(jsonObjectField, wxid);
+                ids.add(id);
+            }
+        }
+
+        return formRepository.saveForm(templateId, jsonObject.toJSONString(), wxid, name, ids.toJSONString());
     }
 
     @Override
@@ -117,13 +131,28 @@ public class FormServiceImpl implements FormService {
         boolean isRegistered = registerRepository.isUserRegistered(id,userId);
         data.put("registered", isRegistered);
 
+
+        //加一个formFields字段
+        String[] formFieldIds = form.getFieldIds().split(",");
+        JSONArray formJsonArray = new JSONArray();
+        for(String field: formFieldIds){
+            TemplateField templateField = templateFieldRepository.getTemplateField(Long.valueOf(field));
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("name",templateField.getFieldName());
+            jsonObject.put("type",templateField.getFieldType());
+            jsonObject.put("required",templateField.getIsEmpty().equals("true"));
+            jsonObject.put("label",templateField.getFieldLabel());
+            formJsonArray.add(jsonObject);
+        }
+        data.put("formFields",formJsonArray);
+
         return data;
     }
 
     @Override
-    public Object doRegister(long id, boolean rOc, String userId) {
+    public Object doRegister(long id, boolean rOc, String userId, String fieldValues) {
         if(rOc)
-            registerRepository.registerUser(id,userId);
+            registerRepository.registerUser(id,userId,fieldValues);
         else
             registerRepository.cancelRegister(id,userId);
 
@@ -156,7 +185,7 @@ public class FormServiceImpl implements FormService {
     @Override
     public boolean receiveUserPayInfo(long id, String userId) {
         //先判断是否存在报名信息，如果不存在报名信息则新增一条报名信息
-        boolean isRegistered = registerRepository.isUserRegistered(id,userId);
+        boolean isRegistered = registerRepository.isUserRegistered(id, userId);
         if(isRegistered){
             registerRepository.updateRegisterPayed(id,userId);
         }else{
@@ -170,6 +199,40 @@ public class FormServiceImpl implements FormService {
     public Form getFormById(Long id) {
         Form form = formRepository.getFormById(id);
         return form;
+    }
+
+    @Override
+    public Long updateForm(long id, String formValues, String name) {
+        //form表单中的字段全部保存，其中要特殊处理的是image类型的数据。图片类型，如果是oss的图片则不用替换，如果是微信服务器的图片则要转存一次
+
+        List<TemplateField> templateFields = getImageFieldsFromTemplate(Long.valueOf(1l));
+
+        JSONObject jsonObject = JSON.parseObject(formValues);
+        for(String key : jsonObject.keySet()){
+            for(TemplateField templateField : templateFields){
+                if(templateField.getFieldName().equals(key) && !jsonObject.getString(key).isEmpty()){
+                    //转存
+                    //获取到的value为list结构,遍历处理
+                    JSONArray result = new JSONArray();
+                    JSONArray jsonArray = jsonObject.getJSONArray(key);
+                    Iterator itr = jsonArray.iterator();
+                    while(itr.hasNext()){
+                        String value = (String)itr.next();
+                        String mediaLocalPath = WxServiceCenter.downLoadMediaSource(value);
+                        //图片上传
+                        String keyStr = String.valueOf(new Date().getTime() /1000).concat(".jpg");
+                        boolean upload = OssUtils.uploadFile(mediaLocalPath, keyStr);
+                        if(upload){
+                            String url = OssUtils.getFileUrl(keyStr);
+                            result.add(url);
+                        }
+                    }
+                    jsonObject.put(key, result);
+                }
+            }
+        }
+
+        return null;
     }
 
     /*

@@ -31,14 +31,15 @@ public class FormController {
     public String saveForm(HttpServletRequest request) {
         String id = request.getParameter("templateId");
         String fieldValues = request.getParameter("fieldValues");
-
         JSONObject jsonObject = JSON.parseObject(fieldValues);
+
         String formName = jsonObject.getString("title");
+        String fields = request.getParameter("fields");
 
         //从session里取到wxid
         String wxid = (String)request.getSession().getAttribute("wxid");
 
-        long formId = formService.saveForm(id, fieldValues, wxid, formName);
+        long formId = formService.saveForm(id, fieldValues, wxid, formName,fields);
         JSONObject result = new JSONObject();
         result.put("id",formId);
 
@@ -62,7 +63,9 @@ public class FormController {
         String id = request.getParameter("id");
         String rOc = request.getParameter("register");
         String wxid = (String)request.getSession().getAttribute("wxid");
-        Object form = formService.doRegister(Long.valueOf(id), rOc.equals("true"), wxid);
+        String fieldValues = request.getParameter("fieldValues");
+
+        Object form = formService.doRegister(Long.valueOf(id), rOc.equals("true"), wxid, fieldValues);
 
         return ResultUtils.assembleResult(true, "true", form);
     }
