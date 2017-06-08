@@ -17,6 +17,8 @@ public class Register {
 
     private Long formId;
 
+    private String formValue;
+
     public Long getId() {
         return id;
     }
@@ -71,5 +73,13 @@ public class Register {
 
     public void setFormId(Long formId) {
         this.formId = formId;
+    }
+
+    public String getFormValue() {
+        return formValue;
+    }
+
+    public void setFormValue(String formValue) {
+        this.formValue = formValue == null ? null : formValue.trim();
     }
 }

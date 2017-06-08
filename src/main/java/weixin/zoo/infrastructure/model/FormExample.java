@@ -355,6 +355,76 @@ public class FormExample {
             return (Criteria) this;
         }
 
+        public Criteria andFieldIdsIsNull() {
+            addCriterion("field_ids is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldIdsIsNotNull() {
+            addCriterion("field_ids is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldIdsEqualTo(String value) {
+            addCriterion("field_ids =", value, "fieldIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldIdsNotEqualTo(String value) {
+            addCriterion("field_ids <>", value, "fieldIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldIdsGreaterThan(String value) {
+            addCriterion("field_ids >", value, "fieldIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldIdsGreaterThanOrEqualTo(String value) {
+            addCriterion("field_ids >=", value, "fieldIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldIdsLessThan(String value) {
+            addCriterion("field_ids <", value, "fieldIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldIdsLessThanOrEqualTo(String value) {
+            addCriterion("field_ids <=", value, "fieldIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldIdsLike(String value) {
+            addCriterion("field_ids like", value, "fieldIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldIdsNotLike(String value) {
+            addCriterion("field_ids not like", value, "fieldIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldIdsIn(List<String> values) {
+            addCriterion("field_ids in", values, "fieldIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldIdsNotIn(List<String> values) {
+            addCriterion("field_ids not in", values, "fieldIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldIdsBetween(String value1, String value2) {
+            addCriterion("field_ids between", value1, value2, "fieldIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andFieldIdsNotBetween(String value1, String value2) {
+            addCriterion("field_ids not between", value1, value2, "fieldIds");
+            return (Criteria) this;
+        }
+
         public Criteria andTemplateIdIsNull() {
             addCriterion("template_id is null");
             return (Criteria) this;

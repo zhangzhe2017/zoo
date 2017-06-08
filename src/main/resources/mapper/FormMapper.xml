@@ -6,6 +6,7 @@
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
     <result column="is_delete" property="isDelete" jdbcType="VARCHAR" />
+    <result column="field_ids" property="fieldIds" jdbcType="VARCHAR" />
     <result column="template_id" property="templateId" jdbcType="BIGINT" />
     <result column="form_name" property="formName" jdbcType="VARCHAR" />
     <result column="form_value" property="formValue" jdbcType="VARCHAR" />
@@ -70,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, gmt_create, gmt_modified, is_delete, template_id, form_name, form_value, form_owner
+    id, gmt_create, gmt_modified, is_delete, field_ids, template_id, form_name, form_value, 
+    form_owner
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="weixin.zoo.infrastructure.model.FormExample" >
     select
@@ -105,11 +107,13 @@
   </delete>
   <insert id="insert" parameterType="weixin.zoo.infrastructure.model.Form" >
     insert into form (id, gmt_create, gmt_modified, 
-      is_delete, template_id, form_name, 
-      form_value, form_owner)
+      is_delete, field_ids, template_id, 
+      form_name, form_value, form_owner
+      )
     values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
-      #{isDelete,jdbcType=VARCHAR}, #{templateId,jdbcType=BIGINT}, #{formName,jdbcType=VARCHAR}, 
-      #{formValue,jdbcType=VARCHAR}, #{formOwner,jdbcType=VARCHAR})
+      #{isDelete,jdbcType=VARCHAR}, #{fieldIds,jdbcType=VARCHAR}, #{templateId,jdbcType=BIGINT}, 
+      #{formName,jdbcType=VARCHAR}, #{formValue,jdbcType=VARCHAR}, #{formOwner,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="weixin.zoo.infrastructure.model.Form" >
     insert into form
@@ -125,6 +129,9 @@
       </if>
       <if test="isDelete != null" >
         is_delete,
+      </if>
+      <if test="fieldIds != null" >
+        field_ids,
       </if>
       <if test="templateId != null" >
         template_id,
@@ -151,6 +158,9 @@
       </if>
       <if test="isDelete != null" >
         #{isDelete,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldIds != null" >
+        #{fieldIds,jdbcType=VARCHAR},
       </if>
       <if test="templateId != null" >
         #{templateId,jdbcType=BIGINT},
@@ -187,6 +197,9 @@
       <if test="record.isDelete != null" >
         is_delete = #{record.isDelete,jdbcType=VARCHAR},
       </if>
+      <if test="record.fieldIds != null" >
+        field_ids = #{record.fieldIds,jdbcType=VARCHAR},
+      </if>
       <if test="record.templateId != null" >
         template_id = #{record.templateId,jdbcType=BIGINT},
       </if>
@@ -210,6 +223,7 @@
       gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
       is_delete = #{record.isDelete,jdbcType=VARCHAR},
+      field_ids = #{record.fieldIds,jdbcType=VARCHAR},
       template_id = #{record.templateId,jdbcType=BIGINT},
       form_name = #{record.formName,jdbcType=VARCHAR},
       form_value = #{record.formValue,jdbcType=VARCHAR},
@@ -229,6 +243,9 @@
       </if>
       <if test="isDelete != null" >
         is_delete = #{isDelete,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldIds != null" >
+        field_ids = #{fieldIds,jdbcType=VARCHAR},
       </if>
       <if test="templateId != null" >
         template_id = #{templateId,jdbcType=BIGINT},
@@ -250,6 +267,7 @@
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       is_delete = #{isDelete,jdbcType=VARCHAR},
+      field_ids = #{fieldIds,jdbcType=VARCHAR},
       template_id = #{templateId,jdbcType=BIGINT},
       form_name = #{formName,jdbcType=VARCHAR},
       form_value = #{formValue,jdbcType=VARCHAR},

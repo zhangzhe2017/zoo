@@ -11,6 +11,8 @@ public class Form {
 
     private String isDelete;
 
+    private String fieldIds;
+
     private Long templateId;
 
     private String formName;
@@ -49,6 +51,14 @@ public class Form {
 
     public void setIsDelete(String isDelete) {
         this.isDelete = isDelete == null ? null : isDelete.trim();
+    }
+
+    public String getFieldIds() {
+        return fieldIds;
+    }
+
+    public void setFieldIds(String fieldIds) {
+        this.fieldIds = fieldIds == null ? null : fieldIds.trim();
     }
 
     public Long getTemplateId() {

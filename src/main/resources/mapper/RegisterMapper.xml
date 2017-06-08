@@ -9,6 +9,7 @@
     <result column="status" property="status" jdbcType="VARCHAR" />
     <result column="attender" property="attender" jdbcType="VARCHAR" />
     <result column="form_id" property="formId" jdbcType="BIGINT" />
+    <result column="form_value" property="formValue" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, gmt_create, gmt_modified, is_delete, status, attender, form_id
+    id, gmt_create, gmt_modified, is_delete, status, attender, form_id, form_value
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="weixin.zoo.infrastructure.model.RegisterExample" >
     select
@@ -105,10 +106,10 @@
   <insert id="insert" parameterType="weixin.zoo.infrastructure.model.Register" >
     insert into register (id, gmt_create, gmt_modified, 
       is_delete, status, attender, 
-      form_id)
+      form_id, form_value)
     values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=DATE}, #{gmtModified,jdbcType=DATE}, 
       #{isDelete,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{attender,jdbcType=VARCHAR}, 
-      #{formId,jdbcType=BIGINT})
+      #{formId,jdbcType=BIGINT}, #{formValue,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="weixin.zoo.infrastructure.model.Register" >
     insert into register
@@ -134,6 +135,9 @@
       <if test="formId != null" >
         form_id,
       </if>
+      <if test="formValue != null" >
+        form_value,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -156,6 +160,9 @@
       </if>
       <if test="formId != null" >
         #{formId,jdbcType=BIGINT},
+      </if>
+      <if test="formValue != null" >
+        #{formValue,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -189,6 +196,9 @@
       <if test="record.formId != null" >
         form_id = #{record.formId,jdbcType=BIGINT},
       </if>
+      <if test="record.formValue != null" >
+        form_value = #{record.formValue,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -202,7 +212,8 @@
       is_delete = #{record.isDelete,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=VARCHAR},
       attender = #{record.attender,jdbcType=VARCHAR},
-      form_id = #{record.formId,jdbcType=BIGINT}
+      form_id = #{record.formId,jdbcType=BIGINT},
+      form_value = #{record.formValue,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -228,6 +239,9 @@
       <if test="formId != null" >
         form_id = #{formId,jdbcType=BIGINT},
       </if>
+      <if test="formValue != null" >
+        form_value = #{formValue,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -238,7 +252,8 @@
       is_delete = #{isDelete,jdbcType=VARCHAR},
       status = #{status,jdbcType=VARCHAR},
       attender = #{attender,jdbcType=VARCHAR},
-      form_id = #{formId,jdbcType=BIGINT}
+      form_id = #{formId,jdbcType=BIGINT},
+      form_value = #{formValue,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
