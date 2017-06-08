@@ -34,12 +34,12 @@ public class FormController {
         JSONObject jsonObject = JSON.parseObject(fieldValues);
 
         String formName = jsonObject.getString("title");
-        String fields = request.getParameter("fields");
+        String formFields = request.getParameter("formFields");
 
         //从session里取到wxid
         String wxid = (String)request.getSession().getAttribute("wxid");
 
-        long formId = formService.saveForm(id, fieldValues, wxid, formName,fields);
+        long formId = formService.saveForm(id, fieldValues, wxid, formName,formFields);
         JSONObject result = new JSONObject();
         result.put("id",formId);
 
