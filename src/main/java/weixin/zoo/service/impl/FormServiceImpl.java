@@ -102,7 +102,7 @@ public class FormServiceImpl implements FormService {
         JSONArray fieldIds = JSONArray.parseArray(template.getFiledIds());
         Iterator itr = fieldIds.iterator();
         while(itr.hasNext()){
-            long field = (long)itr.next();
+            Integer field = (Integer)itr.next();
             TemplateField templateField = templateFieldRepository.getTemplateField(Long.valueOf(field));
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("name",templateField.getFieldName());
@@ -140,7 +140,7 @@ public class FormServiceImpl implements FormService {
         JSONArray formFields = JSONArray.parseArray(form.getFieldIds());
         Iterator itrFormFields = formFields.iterator();
         while(itrFormFields.hasNext()){
-            long field = (long)itrFormFields.next();
+            Integer field = (Integer)itrFormFields.next();
             TemplateField templateField = templateFieldRepository.getTemplateField(Long.valueOf(field));
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("name",templateField.getFieldName());
@@ -249,8 +249,10 @@ public class FormServiceImpl implements FormService {
         Template template = templateRepository.getTemplateById(templateId);
 
         //根据fields获取详细数据
-        String[] fieldIds = template.getFiledIds().split(",");
-        for(String field: fieldIds){
+        JSONArray fieldIds = JSONArray.parseArray(template.getFiledIds());
+        Iterator itr = fieldIds.iterator();
+        while(itr.hasNext()){
+            Integer field = (Integer)itr.next();
             TemplateField templateField = templateFieldRepository.getTemplateField(Long.valueOf(field));
             if(templateField.getFieldType().equals("image")){
                 templateFields.add(templateField);

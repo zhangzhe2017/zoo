@@ -47,7 +47,7 @@ public class TemplateServiceImpl implements TemplateService {
         JSONArray jsonArray = new JSONArray();
         Iterator itr = fieldIds.iterator();
         while(itr.hasNext()){
-            long field = (long)itr.next();
+            Integer field = (Integer)itr.next();
             TemplateField templateField = templateFieldRepository.getTemplateField(Long.valueOf(field));
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("name",templateField.getFieldName());
