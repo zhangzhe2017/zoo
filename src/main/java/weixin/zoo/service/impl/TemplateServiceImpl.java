@@ -1,5 +1,6 @@
 package weixin.zoo.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,14 +38,16 @@ public class TemplateServiceImpl implements TemplateService {
         Template template = templateRepository.getTemplateById(id);
 
         //根据fields获取详细数据
-        String[] fieldIds = template.getFiledIds().split(",");
+        JSONArray fieldIds = JSONArray.parseArray(template.getFiledIds());
 
         JSONObject data = new JSONObject();
         data.put("type",template.getTemplateType());
         data.put("title",template.getTemplateName());
 
         JSONArray jsonArray = new JSONArray();
-        for(String field: fieldIds){
+        Iterator itr = fieldIds.iterator();
+        while(itr.hasNext()){
+            long field = (long)itr.next();
             TemplateField templateField = templateFieldRepository.getTemplateField(Long.valueOf(field));
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("name",templateField.getFieldName());
@@ -53,6 +56,7 @@ public class TemplateServiceImpl implements TemplateService {
             jsonObject.put("label",templateField.getFieldLabel());
             jsonArray.add(jsonObject);
         }
+
         data.put("fields" , jsonArray);
 
         return data;

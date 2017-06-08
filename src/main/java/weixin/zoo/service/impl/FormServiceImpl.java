@@ -98,17 +98,20 @@ public class FormServiceImpl implements FormService {
         long templateId =  form.getTemplateId();
         Template template = templateRepository.getTemplateById(templateId);
         //根据fields获取详细数据
-        String[] fieldIds = template.getFiledIds().split(",");
         JSONArray jsonArray = new JSONArray();
-        for(String field: fieldIds){
+        JSONArray fieldIds = JSONArray.parseArray(template.getFiledIds());
+        Iterator itr = fieldIds.iterator();
+        while(itr.hasNext()){
+            long field = (long)itr.next();
             TemplateField templateField = templateFieldRepository.getTemplateField(Long.valueOf(field));
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("name",templateField.getFieldName());
             jsonObject.put("type",templateField.getFieldType());
-            jsonObject.put("required",templateField.getIsEmpty().equals("true"));
+            jsonObject.put("required",templateField.getIsEmpty().equals("false"));
             jsonObject.put("label",templateField.getFieldLabel());
             jsonArray.add(jsonObject);
         }
+
         data.put("fields",jsonArray);
         data.put("type",template.getTemplateType());
 
@@ -133,18 +136,20 @@ public class FormServiceImpl implements FormService {
 
 
         //加一个formFields字段
-        String[] formFieldIds = form.getFieldIds().split(",");
-        JSONArray formJsonArray = new JSONArray();
-        for(String field: formFieldIds){
+        JSONArray jsonArrayFields = new JSONArray();
+        JSONArray formFields = JSONArray.parseArray(form.getFieldIds());
+        Iterator itrFormFields = formFields.iterator();
+        while(itrFormFields.hasNext()){
+            long field = (long)itrFormFields.next();
             TemplateField templateField = templateFieldRepository.getTemplateField(Long.valueOf(field));
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("name",templateField.getFieldName());
             jsonObject.put("type",templateField.getFieldType());
-            jsonObject.put("required",templateField.getIsEmpty().equals("true"));
+            jsonObject.put("required",templateField.getIsEmpty().equals("false"));
             jsonObject.put("label",templateField.getFieldLabel());
-            formJsonArray.add(jsonObject);
+            jsonArrayFields.add(jsonObject);
         }
-        data.put("formFields",formJsonArray);
+        data.put("formFields",jsonArrayFields);
 
         return data;
     }
