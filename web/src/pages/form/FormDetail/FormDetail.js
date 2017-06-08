@@ -73,7 +73,7 @@ class FormDetail extends Component {
         const items = [];
         _.forEach(fields, field => {
             const {name, label, type, extra} = field;
-            if (isActivity && (name === 'title' || name === 'qrCode')) {
+            if (isActivity && (name === 'title' || name === 'qrCode' && wxid !== creatorWxid && !registered)) {
                 return;
             }
             let content = null;
@@ -139,7 +139,7 @@ class FormDetail extends Component {
                                     (fieldValues['qrCode'] || [])[0] || ''
                                 )
                             }
-                            disabled={wxid === creatorWxid || isEnd || !registered && isComplete}
+                            disabled={isEnd || !registered && isComplete}
                             className="x-button"
                         >
                             {
