@@ -10,6 +10,7 @@ import org.springframework.web.context.support.HttpRequestHandlerServlet;
 import weixin.zoo.service.UserService;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -77,4 +78,24 @@ public class AppController {
             e.printStackTrace();
         }
     }
+
+
+    @RequestMapping("/uploadPic")
+    @ResponseBody
+    public String uploadPic(HttpServletRequest request){
+        try {
+            ServletInputStream sis = request.getInputStream();
+            String keyStr = String.valueOf(new Date().getTime() /1000).concat(".jpg");
+            boolean upload = OssUtils.uploadInputStream(sis, keyStr);
+            if(upload){
+                String url = OssUtils.getFileUrl(keyStr);
+                return ResultUtils.assembleResult(true, "true", url);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return ResultUtils.assembleResult(true, "true", "false");
+    }
+
 }

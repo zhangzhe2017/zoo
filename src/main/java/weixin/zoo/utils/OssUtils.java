@@ -1,6 +1,8 @@
 package weixin.zoo.utils;
 
 import com.aliyun.oss.OSSClient;
+
+import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URL;
@@ -50,5 +52,17 @@ public class OssUtils {
         }
 
         return null;
+    }
+
+    public static boolean uploadInputStream(InputStream fileStream, String key){
+        OSSClient client = init();
+        try {
+            client.putObject(bucketName, key, fileStream);
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
     }
 }
