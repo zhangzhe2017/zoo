@@ -2,11 +2,14 @@ package weixin.zoo.web;
 
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang.StringUtils;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.support.HttpRequestHandlerServlet;
+import org.springframework.web.multipart.MultipartFile;
 import weixin.zoo.service.UserService;
 
 import javax.servlet.RequestDispatcher;
@@ -14,8 +17,7 @@ import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.net.URLEncoder;
 import java.util.Date;
 import weixin.zoo.utils.*;
@@ -82,11 +84,10 @@ public class AppController {
 
     @RequestMapping("/uploadPic")
     @ResponseBody
-    public String uploadPic(HttpServletRequest request){
+    public String uploadPic(@RequestParam("file") MultipartFile file){
         try {
-            ServletInputStream sis = request.getInputStream();
             String keyStr = String.valueOf(new Date().getTime() /1000).concat(".jpg");
-            boolean upload = OssUtils.uploadInputStream(sis, keyStr);
+            boolean upload = OssUtils.uploadInputStream(file.getInputStream(), keyStr);
             if(upload){
                 String url = OssUtils.getFileUrl(keyStr);
                 return ResultUtils.assembleResult(true, "true", url);
