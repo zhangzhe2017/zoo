@@ -4,6 +4,8 @@ import {doAction} from '../../../redux/actions/Action';
 import ActionTypes from '../../../redux/actions/ActionTypes';
 import CommonMixin from '../../../mixins/CommonMixin';
 import EditForm, {EditForm as OriginEditForm} from './EditForm/EditForm';
+import {Routes} from '../../../components/Routes/Routes';
+import Util from '../../../utils/Util';
 
 const {React, Component, PropTypes, connect, reactMixin} = window._external;
 
@@ -21,11 +23,23 @@ class FormEdit extends Component {
 
     init() {
         const {dispatch, location} = this.props;
-        const {query} = location;
-        doAction(dispatch, ActionTypes.formEdit.getTemplate, {
-            id: query.templateId,
-            formEdit: this
-        });
+        const {pathname, query} = location;
+        const {templateId} = query;
+        if (_isQQBrowser() && templateId === '1') {
+            Util.later(() => {
+                Routes.goto({
+                    pathname,
+                    query: {
+                        templateId: 2
+                    }
+                });
+            }, 1);
+        } else {
+            doAction(dispatch, ActionTypes.formEdit.getTemplate, {
+                id: templateId,
+                formEdit: this
+            });
+        }
     }
 
     reset() {

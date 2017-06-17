@@ -6,10 +6,24 @@
     <title>组局官</title>
     <!--高清方案脚本-->
     <script src="https://os.alipayobjects.com/rmsportal/lvEQQbNgHsIxVfXLkmuX.js"></script>
+    <script>
+        var _isQQBrowser = function () {
+            var ua = navigator.userAgent;
+            return ua.indexOf('QQBrowser') > -1;
+        };
+        if (_isQQBrowser()) {
+            document.writeln('<link href="kindeditor/kindeditor.css" rel="stylesheet"/>');
+        }
+    </script>
 </head>
 <body>
     <div id="root"></div>
     <script>if(!window.Promise){document.writeln('<script src="https://as.alipayobjects.com/g/component/es6-promise/3.2.2/es6-promise.min.js"'+'>'+'<'+'/'+'script>');}</script>
     <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script>
+        if (_isQQBrowser()) {
+            document.writeln('<script src="kindeditor/kindeditor.js"></' + 'script>');
+        }
+    </script>
 </body>
 </html>

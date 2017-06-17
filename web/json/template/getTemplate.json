@@ -56,8 +56,8 @@
             {
                 "label": "详细介绍",
                 "name": "description",
-                "type": "textarea",
-                "required": false
+                "type": "richtext",
+                "required": true
             }
         ]
     }

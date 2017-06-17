@@ -403,18 +403,19 @@
         width: 100%;
         height: 100%;
         display: none;
-        z-index: 1;
+        z-index: 99999;
         background-color: #fff;
         word-break: break-all;
         overflow: auto;
-        border: 1px solid red;
+        border: 10px solid red;
         box-sizing: border-box;
     }
-    .x-debug-button {
+    .x-debug-linker {
         position: fixed;
         top: 0;
-        right: 0;
-        z-index: 2;
+        left: 0;
+        z-index: 100000;
+        font-size: 34px;
     }
     .am-icon-md {
         width: 120px;

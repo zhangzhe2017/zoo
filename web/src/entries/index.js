@@ -11,6 +11,12 @@ const {
     routerReducer, $
 } = window._external;
 
+if (!window._isQQBrowser) {
+    window._isQQBrowser = () => {
+        return false;
+    };
+}
+
 const reducers = combineReducers({
     ...Reducers,
     routing: routerReducer
@@ -28,8 +34,9 @@ FastClick.attach(document.body);
 if (Util.isDebug()) {
     $(() => {
         const debugMsgEl = Util.debugMsgEl = $('<div class="x-debug-msg"></div>').appendTo('body');
-        $('<input type="button" value="debug" class="x-debug-button"/>').on('click', () => {
+        $('<a class="x-debug-linker" href="javascript:;">debug</a>').on('click', () => {
             debugMsgEl.toggle();
         }).appendTo('body');
+        //Util.debug(`navigator.userAgent=${navigator.userAgent}`);
     });
 }
