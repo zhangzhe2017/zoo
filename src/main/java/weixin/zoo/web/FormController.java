@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import weixin.zoo.infrastructure.model.Form;
 import weixin.zoo.infrastructure.model.Register;
+import weixin.zoo.service.CommonService;
 import weixin.zoo.service.FormService;
 import weixin.zoo.utils.ActivityTypeEnum;
 import weixin.zoo.utils.ResultUtils;
@@ -25,6 +26,9 @@ public class FormController {
 
     @Autowired
     private FormService formService;
+
+    @Autowired
+    private CommonService commonService;
 
     @RequestMapping("/saveForm")
     @ResponseBody
@@ -55,6 +59,26 @@ public class FormController {
         Object form = formService.getForm(Long.valueOf(id),wxid);
 
         return ResultUtils.assembleResult(true, "true", form);
+    }
+
+    @RequestMapping("/updateForm")
+    @ResponseBody
+    public String updateForm(HttpServletRequest request){
+        String id = request.getParameter("templateId");
+        String fieldValues = request.getParameter("fieldValues");
+        JSONObject jsonObject = JSON.parseObject(fieldValues);
+
+        String formName = jsonObject.getString("title");
+        String formFields = request.getParameter("formFields");
+
+        //从session里取到wxid
+        String wxid = (String)request.getSession().getAttribute("wxid");
+
+        long formId = formService.saveForm(id, fieldValues, wxid, formName,formFields);
+        JSONObject result = new JSONObject();
+        result.put("id",formId);
+
+        return ResultUtils.assembleResult(true, "true", result);
     }
 
     @RequestMapping("/register")
@@ -121,4 +145,13 @@ public class FormController {
         return ResultUtils.assembleResult(true, "true", "true");
     }
 
+    @RequestMapping("/transferPic")
+    @ResponseBody
+    public String transferPic(HttpServletRequest request){
+        String picIds = request.getParameter("pic");
+        JSONArray jsonArray = JSONArray.parseArray(picIds);
+        JSONArray urls = commonService.transferPics(jsonArray);
+
+        return ResultUtils.assembleResult(true, "true", urls);
+    }
 }

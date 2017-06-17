@@ -207,10 +207,14 @@ public class FormServiceImpl implements FormService {
     }
 
     @Override
-    public Long updateForm(long id, String formValues, String name) {
+    public Long updateForm(long id, String formValues, String name, String fields) {
         //form表单中的字段全部保存，其中要特殊处理的是image类型的数据。图片类型，如果是oss的图片则不用替换，如果是微信服务器的图片则要转存一次
+        //从formId中找到templateid
+        Form form = formRepository.getFormById(id);
+        Long templateId = form.getTemplateId();
+        String wxid = form.getFormOwner();
 
-        List<TemplateField> templateFields = getImageFieldsFromTemplate(Long.valueOf(1l));
+        List<TemplateField> templateFields = getImageFieldsFromTemplate(templateId);
 
         JSONObject jsonObject = JSON.parseObject(formValues);
         for(String key : jsonObject.keySet()){
@@ -237,7 +241,19 @@ public class FormServiceImpl implements FormService {
             }
         }
 
-        return null;
+        JSONArray ids = new JSONArray();
+        if(!StringUtils.isEmpty(fields)){
+            //转换fields,逐条保存后获取id
+            JSONArray jsonArray = JSONArray.parseArray(fields);
+            Iterator itr = jsonArray.iterator();
+            while(itr.hasNext()){
+                JSONObject jsonObjectField = (JSONObject)itr.next();
+                Long fieldId = templateFieldRepository.saveTemplateField(jsonObjectField, wxid);
+                ids.add(fieldId);
+            }
+        }
+
+        return formRepository.updateForm(id,formValues,name,fields);
     }
 
     /*

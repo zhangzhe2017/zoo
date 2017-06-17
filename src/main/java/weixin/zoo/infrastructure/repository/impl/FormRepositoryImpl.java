@@ -53,6 +53,19 @@ public class FormRepositoryImpl implements FormRepository{
         return formMapper.selectByExample(formExample);
     }
 
+    @Override
+    public long updateForm(Long id, String formValue, String name, String fieldIds) {
+        FormExample formExample = new FormExample();
+        formExample.createCriteria().andIdEqualTo(id);
+
+        Form form = new Form();
+        form.setFieldIds(fieldIds);
+        form.setFormValue(formValue);
+        form.setFormName(name);
+
+        return formMapper.updateByExample(form,formExample);
+    }
+
     private Form transferForm(String templateId, String formValue, String wxid, String name, String fieldIds){
         Form form = new Form();
         form.setGmtCreate(new Date());

@@ -23,4 +23,9 @@ public interface FormRepository {
      * 获取用户发起的表单
      */
     public List<Form> getFormByUserId(String userId);
+
+    /*
+     *  修改form表单内容
+     */
+    public long updateForm(Long id , String formValue, String name, String fieldIds);
 }

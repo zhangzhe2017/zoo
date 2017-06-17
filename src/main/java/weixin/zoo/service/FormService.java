@@ -61,5 +61,5 @@ public interface FormService {
     /*
      * 修改form表单数据
      */
-    public Long updateForm(long id, String formValues, String name);
+    public Long updateForm(long id, String formValues, String name, String fields);
 }
