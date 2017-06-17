@@ -1,6 +1,9 @@
 'use strict';
 
 import {
+    Upload as AntdUpload, Button as AntdButton, Icon as AntdIcon
+} from 'antd';
+import {
     Toast, List, InputItem, TextareaItem, ImagePicker, Button, DatePicker, ActivityIndicator, Card, Result, Icon
 } from 'antd-mobile';
 import $ from 'jquery';
@@ -48,6 +51,8 @@ import thunk from 'redux-thunk';
 import reactMixin from 'react-mixin';
 
 window._external = {
+    //antd
+    AntdUpload, AntdButton, AntdIcon,
     //antd-mobile
     Toast, List, InputItem, TextareaItem, ImagePicker, Button, DatePicker, ActivityIndicator, Card, Result, Icon,
     //jquery
