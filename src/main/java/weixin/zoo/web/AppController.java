@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.support.HttpRequestHandlerServlet;
+import org.springframework.web.multipart.MultipartFile;
 import weixin.zoo.service.UserService;
 
 import javax.servlet.RequestDispatcher;
@@ -83,10 +84,10 @@ public class AppController {
 
     @RequestMapping("/uploadPic")
     @ResponseBody
-    public String uploadPic(@RequestParam("file") File file){
+    public String uploadPic(@RequestParam("file") MultipartFile file){
         try {
             String keyStr = String.valueOf(new Date().getTime() /1000).concat(".jpg");
-            boolean upload = OssUtils.uploadInputStream(new FileInputStream(file), keyStr);
+            boolean upload = OssUtils.uploadInputStream(file.getInputStream(), keyStr);
             if(upload){
                 String url = OssUtils.getFileUrl(keyStr);
                 return ResultUtils.assembleResult(true, "true", url);
