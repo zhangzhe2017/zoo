@@ -9,7 +9,8 @@ import Util from '../../../../utils/Util';
 import KindEditor from '../../../../components/KindEditor/KindEditor';
 
 const {
-    React, Component, connect, reactMixin, List, InputItem, TextareaItem, ImagePicker, _, Button, DatePicker, Toast
+    React, Component, connect, reactMixin, List, InputItem, TextareaItem, ImagePicker, _, Button, DatePicker, Toast,
+    AntdUpload, AntdButton, AntdIcon
 } = window._external;
 
 @reactMixin.decorate(CommonMixin)
@@ -97,6 +98,15 @@ class EditForm extends Component {
     handleImageChange(name, files, operationType, index) {
         const {dispatch, imageFilesMap} = this.props;
         imageFilesMap[name] = files;
+        doAction(dispatch, ActionTypes.feEditForm.changeState, {
+            imageFilesMap: {...imageFilesMap}
+        });
+    }
+
+    handleUploadChange(name, e) {
+        var {file, fileList} = e;
+        const {dispatch, imageFilesMap} = this.props;
+        imageFilesMap[name] = fileList;
         doAction(dispatch, ActionTypes.feEditForm.changeState, {
             imageFilesMap: {...imageFilesMap}
         });
@@ -293,7 +303,7 @@ class EditForm extends Component {
                         </List.Item>
                     </DatePicker>
                 );
-            } else if (type === 'image') {
+            } else if (!_isQQBrowser() && type === 'image') {
                 items.push(
                     <List.Item
                         key={name}
@@ -313,6 +323,26 @@ class EditForm extends Component {
                             onAddImageClick={this.handleImageAddClick.bind(this, name)}
                             onImageClick={this.handleImageClick}
                         />
+                    </List.Item>
+                );
+            } else if (_isQQBrowser() && type === 'image') {
+                items.push(
+                    <List.Item
+                        key={name}
+                    >
+                        <div className="x-label">{label} {requiredMark}</div>
+                        <AntdUpload
+                            action="/app/uploadPic"
+                            listType="picture"
+                            defaultFileList={[]}
+                            fileList={this.getImageFiles(name)}
+                            className="upload-list-inline"
+                            onChange={this.handleUploadChange.bind(this, name)}
+                        >
+                            <AntdButton>
+                                <AntdIcon type="upload"/> 上传图片
+                            </AntdButton>
+                        </AntdUpload>
                     </List.Item>
                 );
             } else if (_isQQBrowser() && type === 'richtext') {
