@@ -6,6 +6,7 @@ import CommonMixin from '../../../../mixins/CommonMixin';
 import {createForm} from 'rc-form';
 import {FormEdit} from '../FormEdit';
 import Util from '../../../../utils/Util';
+import KindEditor from '../../../../components/KindEditor/KindEditor';
 
 const {
     React, Component, connect, reactMixin, List, InputItem, TextareaItem, ImagePicker, _, Button, DatePicker, Toast
@@ -26,10 +27,11 @@ class EditForm extends Component {
                     serverId: '2'
                 }
             ]*/
-        }
+        },
+        _refresh: {}
     };
 
-    bindFns = ['handleSaveBtnClick'];
+    bindFns = ['handleSaveBtnClick', ['handleKindEditorChange', Util.buffer(this.handleKindEditorChange)]];
 
     reset() {
         const {dispatch, form} = this.props;
@@ -185,8 +187,21 @@ class EditForm extends Component {
         }
     }
 
+    handleKindEditorChange(field, editor) {
+        const {form} = this.props;
+        const value = editor.html();
+        form.setFieldsValue({
+            [field]: value
+        });
+        try {
+            form.validateFields([field]);
+        } catch (e) {
+            Util.debug(e.message);
+        }
+    }
+
     render() {
-        const {form, title, fields} = this.props;
+        const {form, title, fields, _refresh} = this.props;
         const {getFieldProps} = form;
         const formData = this.getFormData();
         const items = [];
@@ -299,6 +314,34 @@ class EditForm extends Component {
                             onImageClick={this.handleImageClick}
                         />
                     </List.Item>
+                );
+            } else if (_isQQBrowser() && type === 'richtext') {
+                items.push(
+                    <div key={name}>
+                        <TextareaItem
+                            {...getFieldProps(
+                                name,
+                                {
+                                    rules: [
+                                        {required, message: `${label}不能为空！`}
+                                    ]
+                                }
+                            )}
+                            id={name}
+                            title={<div>{label} {requiredMark}</div>}
+                            autoHeight={true}
+                            clear={true}
+                            rows={2}
+                            labelNumber={7}
+                            placeholder={label}
+                        />
+                        <KindEditor
+                            target={`#${name}`}
+                            //value={issueData.convertDescription}
+                            onChange={this.handleKindEditorChange.bind(this, name)}
+                            _refresh={_refresh}
+                        />
+                    </div>
                 );
             }
         });

@@ -7,7 +7,7 @@ class ListDetailItem extends Component {
     render() {
         const {type, label, content} = this.props;
         return (
-            type === 'textarea' || type === 'image' ?
+            type === 'textarea' || type === 'image' || type === 'richtext' ?
                 <div className="am-list-item am-list-item-middle">
                     <div className="am-list-line">
                         <div className="am-list-content">
@@ -17,6 +17,7 @@ class ListDetailItem extends Component {
                             <div>
                                 {type === 'textarea' ? <pre className="x-pre">{content}</pre> : ''}
                                 {type === 'image' ? content : ''}
+                                {type === 'richtext' ? <div dangerouslySetInnerHTML={{__html: content}}></div> : ''}
                             </div>
                         </div>
                     </div>
