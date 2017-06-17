@@ -32,7 +32,6 @@
     "webpack-dev-server": "2.4.2"
   },
   "dependencies": {
-    "antd": "2.1.0",
     "antd-mobile": "1.0.7",
     "fastclick": "1.0.6",
     "jquery": "3.2.1",
