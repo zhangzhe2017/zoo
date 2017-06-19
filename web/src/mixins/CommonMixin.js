@@ -1,6 +1,7 @@
 'use strict';
 
 import Util from '../utils/Util';
+import {Auth} from '../pages/Auth/Auth';
 
 const {_} = window._external;
 
@@ -13,6 +14,7 @@ export default {
 
     componentDidMount() {
         this.renderLog();
+        this.doAuth();
         const {location} = this.props;
         if (location) {
             //document.body.style.overflow = 'auto';
@@ -85,6 +87,24 @@ export default {
 
     renderLog() {
         Util.renderLog(this.name || this.constructor.name);
+    },
+
+    doAuth() {
+        const {dispatch} = this.props;
+        const {authed} = Auth;
+        if (!authed) {
+            let authResult = sessionStorage.getItem('authResult');
+            if (authResult) {
+                try {
+                    authResult = JSON.parse(authResult);
+                } catch (e) {
+                    authResult = null;
+                }
+                if (authResult) {
+                    Auth.doAuth(dispatch, authResult);
+                }
+            }
+        }
     }
 
 };
