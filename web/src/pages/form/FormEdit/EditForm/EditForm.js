@@ -107,13 +107,18 @@ class EditForm extends Component {
         if (_isQQBrowser()) {
             const formEl = $([
                 '<form enctype="multipart/form-data" style="display:none;">',
-                '<input name="file" type="file" accept="image/gif,image/jpeg,image/png"/>',
+                '<input name="file" type="file"/>',
                 '</form>'
             ].join('')).appendTo('body');
             const fileEl = formEl.find('input[name=file]');
             fileEl.on('change', () => {
                 const files = fileEl[0].files;
                 if (files && files.length) {
+                    if (!/^.+\.(gif|jpg|png|bmp)$/.test(files[0].name)) {
+                        Toast.fail('只允许上传【gif/jpg/png/bmp】格式的图片！');
+                        formEl.remove();
+                        return;
+                    }
                     Util.ajax({
                         url: '/app/uploadPic',
                         data: new FormData(formEl[0]),
