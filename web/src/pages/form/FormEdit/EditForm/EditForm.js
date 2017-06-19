@@ -105,7 +105,8 @@ class EditForm extends Component {
     handleImageAddClick(name, e) {
         e.preventDefault();
         wx.chooseImage({
-            //count: 1,
+            //todo 多个文件一起上传有问题
+            count: 1,
             sizeType: ['compressed'],
             sourceType: ['album', 'camera'],
             success: (result = {}) => {
@@ -293,7 +294,7 @@ class EditForm extends Component {
                         </List.Item>
                     </DatePicker>
                 );
-            } else if (!_isQQBrowser() && type === 'image') {
+            } else if (type === 'image') {
                 items.push(
                     <List.Item
                         key={name}
@@ -315,8 +316,6 @@ class EditForm extends Component {
                         />
                     </List.Item>
                 );
-            } else if (_isQQBrowser() && type === 'image') {
-                
             } else if (_isQQBrowser() && type === 'richtext') {
                 items.push(
                     <div key={name}>

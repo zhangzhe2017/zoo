@@ -135,11 +135,6 @@ module.exports = {
                             {style: 'css', libraryName: 'antd-mobile'}
 
                         ],
-                        [
-                            'import',
-                            {style: 'css', libraryName: 'antd'}
-
-                        ],
                         'transform-decorators-legacy',
                         'transform-object-assign'
                     ]
