@@ -21,6 +21,7 @@ export default {
             type: 'post',
             dataType: 'json',
             traditional: true,
+            cache: false,
             ...config,
             success(result = {}, textStatus, jqXHR) {
                 if (result.success) {

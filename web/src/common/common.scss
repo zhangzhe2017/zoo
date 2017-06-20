@@ -413,7 +413,7 @@
     .x-debug-linker {
         position: fixed;
         top: 0;
-        left: 0;
+        right: 0;
         z-index: 100000;
         font-size: 34px;
     }
@@ -475,16 +475,5 @@
     }
     .x-placeholder::-webkit-input-placeholder {
         color: #bbb;
-    }
-    .upload-list-inline .ant-upload-list-item {
-        float: left;
-        width: 200px;
-        margin-right: 8px;
-    }
-    .upload-list-inline .ant-upload-animate-enter {
-        animation-name: uploadAnimateInlineIn;
-    }
-    .upload-list-inline .ant-upload-animate-leave {
-        animation-name: uploadAnimateInlineOut;
     }
 }

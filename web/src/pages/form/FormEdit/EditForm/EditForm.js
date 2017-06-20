@@ -9,8 +9,7 @@ import Util from '../../../../utils/Util';
 import KindEditor from '../../../../components/KindEditor/KindEditor';
 
 const {
-    React, Component, connect, reactMixin, List, InputItem, TextareaItem, ImagePicker, _, Button, DatePicker, Toast,
-    AntdUpload, AntdButton, AntdIcon
+    React, Component, connect, reactMixin, List, InputItem, TextareaItem, ImagePicker, _, Button, DatePicker, Toast, $
 } = window._external;
 
 @reactMixin.decorate(CommonMixin)
@@ -103,67 +102,100 @@ class EditForm extends Component {
         });
     }
 
-    handleUploadChange(name, e) {
-        var {file, fileList} = e;
-        const {dispatch, imageFilesMap} = this.props;
-        imageFilesMap[name] = fileList;
-        doAction(dispatch, ActionTypes.feEditForm.changeState, {
-            imageFilesMap: {...imageFilesMap}
-        });
-    }
-
     handleImageAddClick(name, e) {
         e.preventDefault();
-        wx.chooseImage({
-            //count: 1,
-            sizeType: ['compressed'],
-            sourceType: ['album', 'camera'],
-            success: (result = {}) => {
-                const {localIds = []} = result;
-                Util.debug(`localIds=${JSON.stringify(localIds)}`);
-                _.forEach(localIds, (localId, index) => {
-                    Util.debug(`uploadImage, index=${index}, localId=${localId}`);
-                    wx.uploadImage({
-                        localId,
-                        isShowProgressTips: 1,
+        if (_isQQBrowser()) {
+            const formEl = $([
+                '<form enctype="multipart/form-data" style="display:none;">',
+                '<input name="file" type="file"/>',
+                '</form>'
+            ].join('')).appendTo('body');
+            const fileEl = formEl.find('input[name=file]');
+            fileEl.on('change', () => {
+                const files = fileEl[0].files;
+                if (files && files.length) {
+                    if (!/^.+\.(gif|jpg|png|bmp)$/.test(files[0].name)) {
+                        Toast.fail('只允许上传【gif/jpg/png/bmp】格式的图片！');
+                        formEl.remove();
+                        return;
+                    }
+                    Util.ajax({
+                        url: '/app/uploadPic',
+                        data: new FormData(formEl[0]),
+                        processData: false,
+                        contentType: false,
                         success: (result = {}) => {
-                            const {serverId} = result;
+                            const {data: url} = result;
                             const {dispatch, imageFilesMap} = this.props;
                             const imageFiles = imageFilesMap[name];
-                            let url = null;
-                            if (window.__wxjs_is_wkwebview) {
-                                url = Util.blankImageData;
-                            } else {
-                                url = localId;
-                            }
                             const imageFile = {
-                                serverId,
+                                serverId: url,
                                 url
                             };
                             imageFiles.push(imageFile);
-                            Util.debug(`uploadImage success, index=${index}, serverId=${serverId}, name=${name}, imageFiles.length=${imageFiles.length}`);
                             doAction(dispatch, ActionTypes.feEditForm.changeState, {
                                 imageFilesMap: {...imageFilesMap}
                             });
-                            if (window.__wxjs_is_wkwebview) {
-                                wx.getLocalImgData({
-                                    localId,
-                                    success: (result = {}) => {
-                                        const {localData} = result;
-                                        const {dispatch, imageFilesMap} = this.props;
-                                        imageFile.url = localData;
-                                        Util.debug(`getLocalImgData success, index=${index}, serverId=${serverId}, name=${name}, imageFilesMap[name].length=${imageFilesMap[name].length}`);
-                                        doAction(dispatch, ActionTypes.feEditForm.changeState, {
-                                            imageFilesMap: {...imageFilesMap}
-                                        });
-                                    }
-                                });
-                            }
+                        },
+                        complete: () => {
+                            formEl.remove();
                         }
                     });
-                });
-            }
-        });
+                }
+            }).click();
+        } else {
+            wx.chooseImage({
+                //todo 多个文件一起上传有问题
+                count: 1,
+                sizeType: ['compressed'],
+                sourceType: ['album', 'camera'],
+                success: (result = {}) => {
+                    const {localIds = []} = result;
+                    Util.debug(`localIds=${JSON.stringify(localIds)}`);
+                    _.forEach(localIds, (localId, index) => {
+                        Util.debug(`uploadImage, index=${index}, localId=${localId}`);
+                        wx.uploadImage({
+                            localId,
+                            isShowProgressTips: 1,
+                            success: (result = {}) => {
+                                const {serverId} = result;
+                                const {dispatch, imageFilesMap} = this.props;
+                                const imageFiles = imageFilesMap[name];
+                                let url = null;
+                                if (window.__wxjs_is_wkwebview) {
+                                    url = Util.blankImageData;
+                                } else {
+                                    url = localId;
+                                }
+                                const imageFile = {
+                                    serverId,
+                                    url
+                                };
+                                imageFiles.push(imageFile);
+                                Util.debug(`uploadImage success, index=${index}, serverId=${serverId}, name=${name}, imageFiles.length=${imageFiles.length}`);
+                                doAction(dispatch, ActionTypes.feEditForm.changeState, {
+                                    imageFilesMap: {...imageFilesMap}
+                                });
+                                if (window.__wxjs_is_wkwebview) {
+                                    wx.getLocalImgData({
+                                        localId,
+                                        success: (result = {}) => {
+                                            const {localData} = result;
+                                            const {dispatch, imageFilesMap} = this.props;
+                                            imageFile.url = localData;
+                                            Util.debug(`getLocalImgData success, index=${index}, serverId=${serverId}, name=${name}, imageFilesMap[name].length=${imageFilesMap[name].length}`);
+                                            doAction(dispatch, ActionTypes.feEditForm.changeState, {
+                                                imageFilesMap: {...imageFilesMap}
+                                            });
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    });
+                }
+            });
+        }
     }
 
     getImageFiles(name) {
@@ -303,7 +335,7 @@ class EditForm extends Component {
                         </List.Item>
                     </DatePicker>
                 );
-            } else if (!_isQQBrowser() && type === 'image') {
+            } else if (type === 'image') {
                 items.push(
                     <List.Item
                         key={name}
@@ -323,26 +355,6 @@ class EditForm extends Component {
                             onAddImageClick={this.handleImageAddClick.bind(this, name)}
                             onImageClick={this.handleImageClick}
                         />
-                    </List.Item>
-                );
-            } else if (_isQQBrowser() && type === 'image') {
-                items.push(
-                    <List.Item
-                        key={name}
-                    >
-                        <div className="x-label">{label} {requiredMark}</div>
-                        <AntdUpload
-                            action="/app/uploadPic"
-                            listType="picture"
-                            defaultFileList={[]}
-                            fileList={this.getImageFiles(name)}
-                            className="upload-list-inline"
-                            onChange={this.handleUploadChange.bind(this, name)}
-                        >
-                            <AntdButton>
-                                <AntdIcon type="upload"/> 上传图片
-                            </AntdButton>
-                        </AntdUpload>
                     </List.Item>
                 );
             } else if (_isQQBrowser() && type === 'richtext') {
