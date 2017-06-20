@@ -56,6 +56,11 @@ public class FormServiceImpl implements FormService {
                     Iterator itr = jsonArray.iterator();
                     while(itr.hasNext()){
                         String value = (String)itr.next();
+                        //
+                        if(value.startsWith("http:")){
+                            result.add(value);
+                            continue;
+                        }
                         String mediaLocalPath = WxServiceCenter.downLoadMediaSource(value);
                         //图片上传
                         String keyStr = String.valueOf(new Date().getTime() /1000).concat(".jpg");
@@ -227,6 +232,10 @@ public class FormServiceImpl implements FormService {
                     Iterator itr = jsonArray.iterator();
                     while(itr.hasNext()){
                         String value = (String)itr.next();
+                        if(value.startsWith("http:")){
+                            result.add(value);
+                            continue;
+                        }
                         String mediaLocalPath = WxServiceCenter.downLoadMediaSource(value);
                         //图片上传
                         String keyStr = String.valueOf(new Date().getTime() /1000).concat(".jpg");
