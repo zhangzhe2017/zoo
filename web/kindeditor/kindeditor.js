@@ -3176,13 +3176,13 @@ _extend(KCmd, {
 		border = _undef(border, 0);
 		var html = '<img src="' + _escape(url) + '" data-ke-src="' + _escape(url) + '" style="';
 		if (width) {
-			if (width.indexOf('%') === -1) {
+			if (!isNaN(Number(width))) {
 				width += 'px';
 			}
 			html += 'width:' + _escape(width) + ';';
 		}
 		if (height) {
-			if (height.indexOf('%') === -1) {
+			if (!isNaN(Number(height))) {
 				height += 'px';
 			}
 			html += 'height:' + _escape(height) + ';';
