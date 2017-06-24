@@ -3174,13 +3174,20 @@ _extend(KCmd, {
 	insertimage : function(url, title, width, height, border, align) {
 		title = _undef(title, '');
 		border = _undef(border, 0);
-		var html = '<img src="' + _escape(url) + '" data-ke-src="' + _escape(url) + '" ';
+		var html = '<img src="' + _escape(url) + '" data-ke-src="' + _escape(url) + '" style="';
 		if (width) {
-			html += 'width="' + _escape(width) + '" ';
+			if (width.indexOf('%') === -1) {
+				width += 'px';
+			}
+			html += 'width:' + _escape(width) + ';';
 		}
 		if (height) {
-			html += 'height="' + _escape(height) + '" ';
+			if (height.indexOf('%') === -1) {
+				height += 'px';
+			}
+			html += 'height:' + _escape(height) + ';';
 		}
+		html += '" ';
 		if (title) {
 			html += 'title="' + _escape(title) + '" ';
 		}
@@ -6890,8 +6897,8 @@ KindEditor.plugin('image', function(K) {
 			//size
 			'<div class="ke-dialog-row">',
 			'<label for="remoteWidth" style="width:60px;">' + lang.size + '</label>',
-			lang.width + ' <input type="text" id="remoteWidth" class="ke-input-text ke-input-number" name="width" value="" maxlength="4" /> ',
-			lang.height + ' <input type="text" class="ke-input-text ke-input-number" name="height" value="" maxlength="4" /> ',
+			lang.width + ' <input type="text" id="remoteWidth" class="ke-input-text ke-input-number" name="width" value=""/> ',
+			lang.height + ' <input type="text" class="ke-input-text ke-input-number" name="height" value=""/> ',
 			'<img class="ke-refresh-btn" src="' + imgPath + 'refresh.png" width="16" height="16" alt="" style="cursor:pointer;" title="' + lang.resetSize + '" />',
 			'</div>',
 			//align
@@ -6967,7 +6974,7 @@ KindEditor.plugin('image', function(K) {
 						urlBox[0].focus();
 						return;
 					}
-					if (!/^\d*$/.test(width)) {
+					/*if (!/^\d*$/.test(width)) {
 						alert(self.lang('invalidWidth'));
 						widthBox[0].focus();
 						return;
@@ -6976,7 +6983,7 @@ KindEditor.plugin('image', function(K) {
 						alert(self.lang('invalidHeight'));
 						heightBox[0].focus();
 						return;
-					}
+					}*/
 					clickFn.call(self, url, title, width, height, 0, align);
 				}
 			},
@@ -7109,12 +7116,32 @@ KindEditor.plugin('image', function(K) {
 		});
 		widthBox.change(function(e) {
 			if (originalWidth > 0) {
-				heightBox.val(Math.round(originalHeight / originalWidth * parseInt(this.value, 10)));
+				var __height = '';
+				var __value = this.value;
+				var __result = Number(__value);
+				if (isNaN(__result)) {
+					if (__value.indexOf('%') > -1) {
+						__height = 'auto';
+					}
+				} else {
+					__height = Math.round(originalHeight / originalWidth * parseInt(this.value, 10));
+				}
+				heightBox.val(__height);
 			}
 		});
 		heightBox.change(function(e) {
 			if (originalHeight > 0) {
-				widthBox.val(Math.round(originalWidth / originalHeight * parseInt(this.value, 10)));
+				var __width = '';
+				var __value = this.value;
+				var __result = Number(__value);
+				if (isNaN(__result)) {
+					if (__value.indexOf('%') > -1) {
+						__width = 'auto';
+					}
+				} else {
+					__width = Math.round(originalWidth / originalHeight * parseInt(this.value, 10));
+				}
+				widthBox.val(__width);
 			}
 		});
 		urlBox.val(options.imageUrl);
