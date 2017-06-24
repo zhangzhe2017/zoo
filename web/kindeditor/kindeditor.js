@@ -6882,6 +6882,7 @@ KindEditor.plugin('image', function(K) {
 			'<div class="ke-dialog-row">',
 			'<label for="remoteUrl" style="width:60px;">' + lang.remoteUrl + '</label>',
 			'<input type="text" id="remoteUrl" class="ke-input-text" name="url" value="" style="width:200px;" /> &nbsp;',
+			'<input type="button" id="kindEditorUploadBtn" value="上传图片"/>',
 			'<span class="ke-button-common ke-button-outer">',
 			'<input type="button" class="ke-button-common ke-button" name="viewServer" value="' + lang.viewServer + '" />',
 			'</span>',
@@ -6987,6 +6988,18 @@ KindEditor.plugin('image', function(K) {
 			}
 		}),
 		div = dialog.div;
+
+		if (window._external) {
+			var $ = _external.$;
+			if ($) {
+				var kindEditorUploadBtnClickEvent = window.KindEditor.kindEditorUploadBtnClickEvent;
+				if (kindEditorUploadBtnClickEvent) {
+					$('#kindEditorUploadBtn').on('click', function () {
+						kindEditorUploadBtnClickEvent();
+					});
+				}
+			}
+		}
 
 		var urlBox = K('[name="url"]', div),
 			localUrlBox = K('[name="localUrl"]', div),

@@ -11,7 +11,17 @@ const {
     routerReducer, $
 } = window._external;
 
-if (!window._isQQBrowser) {
+if (window._isQQBrowser) {
+    var KindEditor = window.KindEditor;
+    if (KindEditor) {
+        KindEditor.kindEditorUploadBtnClickEvent = () => {
+            Util.upload((result = {}) => {
+                const {data} = result;
+                $('#remoteUrl').val(data);
+            })
+        };
+    }
+} else {
     window._isQQBrowser = () => {
         return false;
     };

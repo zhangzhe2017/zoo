@@ -105,44 +105,19 @@ class EditForm extends Component {
     handleImageAddClick(name, e) {
         e.preventDefault();
         if (_isQQBrowser()) {
-            const formEl = $([
-                '<form enctype="multipart/form-data" style="display:none;">',
-                '<input name="file" type="file"/>',
-                '</form>'
-            ].join('')).appendTo('body');
-            const fileEl = formEl.find('input[name=file]');
-            fileEl.on('change', () => {
-                const files = fileEl[0].files;
-                if (files && files.length) {
-                    if (!/^.+\.(gif|jpg|png|bmp)$/.test(files[0].name)) {
-                        Toast.fail('只允许上传【gif/jpg/png/bmp】格式的图片！');
-                        formEl.remove();
-                        return;
-                    }
-                    Util.ajax({
-                        url: '/app/uploadPic',
-                        data: new FormData(formEl[0]),
-                        processData: false,
-                        contentType: false,
-                        success: (result = {}) => {
-                            const {data: url} = result;
-                            const {dispatch, imageFilesMap} = this.props;
-                            const imageFiles = imageFilesMap[name];
-                            const imageFile = {
-                                serverId: url,
-                                url
-                            };
-                            imageFiles.push(imageFile);
-                            doAction(dispatch, ActionTypes.feEditForm.changeState, {
-                                imageFilesMap: {...imageFilesMap}
-                            });
-                        },
-                        complete: () => {
-                            formEl.remove();
-                        }
-                    });
-                }
-            }).click();
+            Util.upload((result = {}) => {
+                const {data: url} = result;
+                const {dispatch, imageFilesMap} = this.props;
+                const imageFiles = imageFilesMap[name];
+                const imageFile = {
+                    serverId: url,
+                    url
+                };
+                imageFiles.push(imageFile);
+                doAction(dispatch, ActionTypes.feEditForm.changeState, {
+                    imageFilesMap: {...imageFilesMap}
+                });
+            });
         } else {
             wx.chooseImage({
                 //todo 多个文件一起上传有问题

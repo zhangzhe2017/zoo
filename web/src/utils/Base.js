@@ -1,6 +1,6 @@
 'use strict';
 
-const {_, Toast} = window._external;
+const {_, Toast, $} = window._external;
 
 export default {
 
@@ -162,6 +162,35 @@ export default {
         if (this.loadingCount <= 0) {
             Toast.hide();
         }
+    },
+
+    upload(success) {
+        const formEl = $([
+            '<form enctype="multipart/form-data" style="display:none;">',
+            /**/'<input name="file" type="file"/>',
+            '</form>'
+        ].join('')).appendTo('body');
+        const fileEl = formEl.find('input[name=file]');
+        fileEl.on('change', () => {
+            const files = fileEl[0].files;
+            if (files && files.length) {
+                if (!/^.+\.(gif|jpg|png|bmp)$/.test(files[0].name)) {
+                    Toast.fail('只允许上传【gif/jpg/png/bmp】格式的图片！');
+                    formEl.remove();
+                    return;
+                }
+                this.ajax({
+                    url: '/app/uploadPic',
+                    data: new FormData(formEl[0]),
+                    processData: false,
+                    contentType: false,
+                    success: success,
+                    complete: () => {
+                        formEl.remove();
+                    }
+                });
+            }
+        }).click();
     }
 
 };
