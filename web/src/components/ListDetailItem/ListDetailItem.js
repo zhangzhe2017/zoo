@@ -17,7 +17,14 @@ class ListDetailItem extends Component {
                             <div>
                                 {type === 'textarea' ? <pre className="x-pre">{content}</pre> : ''}
                                 {type === 'image' ? content : ''}
-                                {type === 'richtext' ? <div dangerouslySetInnerHTML={{__html: content}}></div> : ''}
+                                {
+                                    type === 'richtext' ?
+                                        <div
+                                            dangerouslySetInnerHTML={{__html: content}}
+                                            className="x-marginTop-20"
+                                            style={{wordBreak: 'break-all'}}
+                                        ></div> : ''
+                                }
                             </div>
                         </div>
                     </div>

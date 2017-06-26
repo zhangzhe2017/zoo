@@ -6,7 +6,7 @@
     }
     .am-list .am-list-item.am-textarea-item:after {
         left: 30px;
-        border-bottom: 1px solid #ddd;
+        //border-bottom: 1px solid #ddd;
     }
     .am-list .am-list-item.am-textarea-item.am-textarea-item-single-line .am-textarea-control textarea {
         line-height: 51px;
@@ -70,10 +70,10 @@
         font-size: 28px;
     }
     .am-list-body:after {
-        border-bottom: 1px solid #ddd;
+        //border-bottom: 1px solid #ddd;
     }
     .am-list-body div:not(:last-child) .am-list-line:after {
-        border-bottom: 1px solid #ddd;
+        //border-bottom: 1px solid #ddd;
     }
     .am-list-item {
         padding-left: 30px;
@@ -83,8 +83,10 @@
         margin-top: 4px;
     }
     .am-list-item img {
-        width: 44px;
-        height: 44px;
+        /*width: 44px;
+        height: 44px;*/
+        width: 100%;
+        height: auto;
     }
     .am-list-item .am-list-thumb:first-child {
         margin-right: 30px;
@@ -129,16 +131,16 @@
         border-top-right-radius: 10px;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
-        border: 1px solid #ddd;
+        //border: 1px solid #ddd;
     }
     .am-button-primary {
-        border: 1px solid #108ee9;
+        //border: 1px solid #108ee9;
     }
     .am-button-ghost {
-        border: 1px solid #108ee9;
+        //border: 1px solid #108ee9;
     }
     .am-button-ghost.am-button-active {
-        border: 1px solid #108ee9;
+        //border: 1px solid #108ee9;
     }
     .am-button-inline {
         padding: 0 30px;
@@ -160,7 +162,7 @@
     }
     .am-list-item.am-input-item:after {
         left: 30px;
-        border-bottom: 1px solid #ddd;
+        //border-bottom: 1px solid #ddd;
     }
     .am-list-item .am-input-label {
         font-size: 34px;
@@ -211,7 +213,7 @@
         background-size: 100% 1px;
     }
     .am-picker-popup-header:after {
-        border-bottom: 1px solid #ddd;
+        //border-bottom: 1px solid #ddd;
     }
     .am-picker-popup-item {
         font-size: 34px;
@@ -237,8 +239,8 @@
     .am-picker-col-indicator {
         height: 68px;
         top: 204px;
-        border-top: 1px solid #ddd;
-        border-bottom: 1px solid #ddd;
+        //border-top: 1px solid #ddd;
+        //border-bottom: 1px solid #ddd;
     }
     .am-toast {
         font-size: 28px;
@@ -259,7 +261,7 @@
         padding-bottom: 42px;
     }
     .am-result:after {
-        border-bottom: 1px solid #ddd;
+        //border-bottom: 1px solid #ddd;
     }
     .am-result .am-result-pic {
         width: 120px;
@@ -286,7 +288,7 @@
     }
     .am-card {
         border-radius: 10px;
-        border: 1px solid #ddd;
+        //border: 1px solid #ddd;
         padding-bottom: 12px;
     }
     .am-card-header {
@@ -300,7 +302,7 @@
         font-size: 34px;
     }
     .am-card-body {
-        border-top: 1px solid #ddd;
+        //border-top: 1px solid #ddd;
         padding: 30px 30px 12px;
         font-size: 30px;
     }

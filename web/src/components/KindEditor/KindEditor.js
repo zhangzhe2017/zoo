@@ -73,6 +73,7 @@ class KindEditor extends Component {
                 'insertunorderedlist', '|', 'image', 'link'
             ],
             afterChange: this.handleChange,
+            width: '100%',
             height: 500
         });
         this.setValue(value);
