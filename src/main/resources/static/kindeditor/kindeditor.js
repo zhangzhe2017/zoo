@@ -269,7 +269,7 @@ K.options = {
 		['#337FE5', '#003399', '#4C33E5', '#9933E5', '#CC33E5', '#EE33EE'],
 		['#FFFFFF', '#CCCCCC', '#999999', '#666666', '#333333', '#000000']
 	],
-	fontSizeTable : ['34px'],
+	fontSizeTable : ['0.34rem'],
 	htmlTags : {
 		font : ['id', 'class', 'color', 'size', 'face', '.background-color'],
 		span : [
