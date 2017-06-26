@@ -21,8 +21,7 @@ class ListDetailItem extends Component {
                                     type === 'richtext' ?
                                         <div
                                             dangerouslySetInnerHTML={{__html: content}}
-                                            className="x-marginTop-20"
-                                            style={{wordBreak: 'break-all'}}
+                                            className="x-richtext"
                                         ></div> : ''
                                 }
                             </div>

@@ -481,4 +481,13 @@
     .am-toast {
         z-index: 811214;
     }
+    .x-richtext {
+        white-space: normal;
+        word-break: break-all;
+        margin-top: 20px;
+        p {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+    }
 }
