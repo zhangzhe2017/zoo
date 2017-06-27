@@ -15,7 +15,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var autoprefixer = require('autoprefixer');
 var pxtorem = require('postcss-pxtorem');
 
-var vendorExtractor = new ExtractTextPlugin('css/vendor.css');
+var externalExtractor = new ExtractTextPlugin('css/external.css');
 var indexExtractor = new ExtractTextPlugin('css/index.css');
 
 var getPath = function (aPath) {
@@ -23,7 +23,7 @@ var getPath = function (aPath) {
 };
 
 var entry = {
-    vendor: getPath('src/entries/vendor.js'),
+    external: getPath('src/entries/external.js'),
     index: getPath('src/entries/index.js')
 };
 
@@ -82,7 +82,7 @@ module.exports = {
             {
                 test: /\.css$/,
                 include: [nodeModulesPath],
-                loader: vendorExtractor.extract({
+                loader: externalExtractor.extract({
                     fallback: 'style-loader',
                     use: [
                         {
@@ -165,7 +165,7 @@ module.exports = {
             filename: 'index-debug.html'
         }),
         new OpenBrowserPlugin({url: `${host}/index-debug.html?code=123&redirectUrl=%2Flist%2FformList%3FpageType%3DmyFormList`}),
-        vendorExtractor,
+        externalExtractor,
         indexExtractor,
         new webpack.LoaderOptionsPlugin({
             test: /\.scss$/,
