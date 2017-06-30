@@ -50,3 +50,20 @@ if (Util.isDebug()) {
         //Util.debug(`navigator.userAgent=${navigator.userAgent}`);
     });
 }
+
+$(() => {
+    $('body').on('click', '.x-richtext img', (e) => {
+        const currentTargetEl = $(e.currentTarget);
+        const richtextEl = currentTargetEl.closest('.x-richtext');
+        const imageEls = richtextEl.find('img');
+        const url = currentTargetEl.attr('src');
+        const urls = [];
+        imageEls.each((index, dom) => {
+            urls.push($(dom).attr('src'));
+        });
+        wx.previewImage({
+            current: url,
+            urls
+        });
+    });
+});

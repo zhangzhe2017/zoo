@@ -13,7 +13,8 @@
     }
     .am-textarea-label {
         min-height: 90px;
-        font-size: 34px;
+        //font-size: 34px;
+        font-size: 30px;
         line-height: 90px;
         margin-right: 10px;
     }
@@ -40,7 +41,8 @@
         padding-bottom: 21px;
     }
     .am-textarea-control textarea {
-        font-size: 34px;
+        //font-size: 34px;
+        font-size: 30px;
         line-height: 51px;
     }
     .am-textarea-clear {
@@ -99,7 +101,8 @@
         min-height: 90px;
     }
     .am-list-item .am-list-line .am-list-content {
-        font-size: 34px;
+        //font-size: 34px;
+        font-size: 30px;
         padding-top: 14px;
         padding-bottom: 14px;
     }
@@ -121,7 +124,8 @@
         padding: 25px 30px 25px 0;
     }
     .am-list-item select {
-        font-size: 34px;
+        //font-size: 34px;
+        font-size: 30px;
     }
     .am-button {
         font-size: 36px;
@@ -165,7 +169,8 @@
         //border-bottom: 1px solid #ddd;
     }
     .am-list-item .am-input-label {
-        font-size: 34px;
+        //font-size: 34px;
+        font-size: 30px;
         margin-right: 10px;
     }
     .am-list-item .am-input-label.am-input-label-2 {
@@ -187,10 +192,12 @@
         width: 238px;
     }
     .am-list-item .am-input-control {
-        font-size: 34px;
+        //font-size: 34px;
+        font-size: 30px;
     }
     .am-list-item .am-input-control input {
-        font-size: 34px;
+        //font-size: 34px;
+        font-size: 30px;
     }
     .am-list-item .am-input-clear {
         width: 42px;
@@ -216,7 +223,8 @@
         //border-bottom: 1px solid #ddd;
     }
     .am-picker-popup-item {
-        font-size: 34px;
+        //font-size: 34px;
+        font-size: 30px;
         padding: 18px 30px;
     }
     .am-picker-col {
@@ -231,7 +239,8 @@
         line-height: 68px;
     }
     .am-picker-col-item-selected {
-        font-size: 34px;
+        //font-size: 34px;
+        font-size: 30px;
     }
     .am-picker-col-mask {
         background-size: 100% 204px;
@@ -292,14 +301,16 @@
         padding-bottom: 12px;
     }
     .am-card-header {
-        font-size: 34px;
+        //font-size: 34px;
+        font-size: 30px;
         padding: 18px 30px;
     }
     .am-card-header-content img {
         margin-right: 10px;
     }
     .am-card-header-extra {
-        font-size: 34px;
+        //font-size: 34px;
+        font-size: 30px;
     }
     .am-card-body {
         //border-top: 1px solid #ddd;
@@ -350,7 +361,8 @@
         margin-bottom: 0;
     }
     .x-detail-list .x-detail-item {
-        font-size: 34px;
+        //font-size: 34px;
+        font-size: 30px;
         word-break: break-all;
         //color: #999;
     }
@@ -417,7 +429,8 @@
         top: 0;
         right: 0;
         z-index: 100000;
-        font-size: 34px;
+        //font-size: 34px;
+        font-size: 30px;
     }
     .am-icon-md {
         width: 120px;
@@ -459,14 +472,15 @@
         background-color: #eee;
         padding: 20px;
         margin: 0;
-        font-size: 48px;
+        font-size: 40px;
     }
     .x-placeholder {
         position: absolute;
         top: 23px;
         left: 248px;
         color: #000;
-        font-size: 34px;
+        //font-size: 34px;
+        font-size: 30px;
         appearance: none;
         width: 100%;
         padding: 0;
