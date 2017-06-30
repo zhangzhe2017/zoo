@@ -269,7 +269,11 @@ K.options = {
 		['#337FE5', '#003399', '#4C33E5', '#9933E5', '#CC33E5', '#EE33EE'],
 		['#FFFFFF', '#CCCCCC', '#999999', '#666666', '#333333', '#000000']
 	],
-	fontSizeTable : ['0.34rem'],
+	fontSizeTable : [
+		'0.26rem', '0.28rem',
+		'0.30rem', '0.32rem', '0.34rem', '0.36rem', '0.38rem',
+		'0.40rem'
+	],
 	htmlTags : {
 		font : ['id', 'class', 'color', 'size', 'face', '.background-color'],
 		span : [
@@ -3511,10 +3515,11 @@ function _getInitHtml(themesPath, bodyClass, cssPath, cssData) {
 	var arr = [
 		(_direction === '' ? '<html>' : '<html dir="' + _direction + '">'),
 		'<head><meta charset="utf-8" /><title></title>',
+		'<script src="https://os.alipayobjects.com/rmsportal/lvEQQbNgHsIxVfXLkmuX.js"></script>',
 		'<style>',
 		'html {margin:0;padding:0;}',
 		'body {margin:0;padding:5px;}',
-		'body, td {font:12px/1.5 "sans serif",tahoma,verdana,helvetica;}',
+		'body, td {font:0.30rem/1.5 "sans serif",tahoma,verdana,helvetica;}',
 		'body, p, div {word-wrap: break-word;}',
 		'p {margin:5px 0;}',
 		'table {border-collapse:collapse;}',
@@ -3974,7 +3979,8 @@ _extend(KMenu, KWidget, {
 		var itemDiv = K('<div class="ke-menu-item" unselectable="on"></div>'),
 			leftDiv = K('<div class="ke-inline-block ke-menu-item-left"></div>'),
 			rightDiv = K('<div class="ke-inline-block ke-menu-item-right"></div>'),
-			height = _addUnit(item.height),
+			//height = _addUnit(item.height),
+			height = item.height,
 			iconClass = _undef(item.iconClass, '');
 		self.div.append(itemDiv);
 		if (height) {
@@ -5585,7 +5591,8 @@ _plugin('core', function(K) {
 		_each(self.fontSizeTable, function(i, val) {
 			menu.addItem({
 				title : '<span style="font-size:' + val + ';" unselectable="on">' + val + '</span>',
-				height : _removeUnit(val) + 12,
+				//height : _removeUnit(val) + 12,
+				height : val,
 				checked : curVal === val,
 				click : function() {
 					self.exec('fontsize', val).hideMenu();
