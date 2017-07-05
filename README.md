@@ -1,8 +1,8 @@
 # 后端
 - 本应用使用springboot快速构建
-- 部署流程如下：
-    - `ssh 47.92.67.9`
-    - `cd /root/zoo && git pull && mvn clean install && cd target && mv Connection-1.0-SNAPSHOT-bin.zip /root && cd && rm -rf Connection-1.0-SNAPSHOT && unzip Connection-1.0-SNAPSHOT-bin.zip && cd Connection-1.0-SNAPSHOT/bin && sh server.sh restart`
+- 部署流程
+    - `ssh 47.92.67.9`
+    - `cd /root/zoo && git pull && mvn clean install && cd target && mv Connection-1.0-SNAPSHOT-bin.zip /root && cd && rm -rf Connection-1.0-SNAPSHOT && unzip Connection-1.0-SNAPSHOT-bin.zip && cd Connection-1.0-SNAPSHOT/bin && sh server.sh restart`
 # 前端
 - 安装nodejs(只需安装一次)
 - 安装cnpm(只需安装一次)
