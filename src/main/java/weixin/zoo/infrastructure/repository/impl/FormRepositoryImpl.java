@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import weixin.zoo.infrastructure.mapper.FormMapper;
 import weixin.zoo.infrastructure.model.Form;
 import weixin.zoo.infrastructure.model.FormExample;
+import weixin.zoo.infrastructure.model.PageDto;
 import weixin.zoo.infrastructure.repository.FormRepository;
 import java.util.Date;
 import java.util.List;
@@ -46,9 +47,12 @@ public class FormRepositoryImpl implements FormRepository{
     }
 
     @Override
-    public List<Form> getFormByUserId(String userId) {
+    public List<Form> getFormByUserId(String userId, PageDto pageDto) {
         FormExample formExample = new FormExample();
         formExample.createCriteria().andFormOwnerEqualTo(userId).andIsDeleteEqualTo("n");
+        formExample.setLimit(pageDto.getLimit());
+        formExample.setOffset(pageDto.getOffset());
+
         return formMapper.selectByExample(formExample);
     }
 

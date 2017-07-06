@@ -4,6 +4,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import weixin.zoo.infrastructure.mapper.RegisterMapper;
+import weixin.zoo.infrastructure.model.PageDto;
 import weixin.zoo.infrastructure.model.Register;
 import weixin.zoo.infrastructure.model.RegisterExample;
 import weixin.zoo.infrastructure.repository.RegisterRepository;
@@ -67,9 +68,12 @@ public class RegisterRepositoryImpl implements RegisterRepository {
     }
 
     @Override
-    public List<Register> getAttendListByUserId(String userId) {
+    public List<Register> getAttendListByUserId(String userId, PageDto pageDto) {
         RegisterExample registerExample = new RegisterExample();
         registerExample.createCriteria().andIsDeleteEqualTo("n").andStatusEqualTo(ActivityStatusEnum.ATTEND.getName()).andAttenderEqualTo(userId);
+
+        registerExample.setLimit(pageDto.getLimit());
+        registerExample.setOffset(pageDto.getOffset());
 
         return registerMapper.selectByExample(registerExample);
     }
