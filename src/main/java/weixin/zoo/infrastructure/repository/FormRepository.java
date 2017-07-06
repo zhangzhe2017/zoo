@@ -1,6 +1,7 @@
 package weixin.zoo.infrastructure.repository;
 
 import weixin.zoo.infrastructure.model.Form;
+import weixin.zoo.infrastructure.model.PageDto;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public interface FormRepository {
     /*
      * 获取用户发起的表单
      */
-    public List<Form> getFormByUserId(String userId);
+    public List<Form> getFormByUserId(String userId, PageDto pageDto);
 
     /*
      *  修改form表单内容

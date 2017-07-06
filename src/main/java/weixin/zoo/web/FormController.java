@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import weixin.zoo.infrastructure.model.Form;
+import weixin.zoo.infrastructure.model.PageDto;
 import weixin.zoo.infrastructure.model.Register;
 import weixin.zoo.service.CommonService;
 import weixin.zoo.service.FormService;
@@ -98,8 +99,12 @@ public class FormController {
     @ResponseBody
     public String getMyFormList(HttpServletRequest request){
         String wxid = (String)request.getSession().getAttribute("wxid");
+        Integer currentPage = (Integer)request.getSession().getAttribute("currentPage");
+        Integer pageSize = (Integer)request.getSession().getAttribute("pageSize");
 
-        List<Form> forms = formService.getFormsByUserId(wxid, "activity");
+        PageDto pageDto = new PageDto(currentPage*(pageSize-1)+1, pageSize);
+
+        List<Form> forms = formService.getFormsByUserId(wxid, "activity", pageDto);
 
         JSONArray jsonArray = new JSONArray();
         for(Form form : forms){
@@ -118,8 +123,12 @@ public class FormController {
     @ResponseBody
     public String getAttendedActivityList(HttpServletRequest request){
         String wxid = (String)request.getSession().getAttribute("wxid");
+        Integer currentPage = (Integer)request.getSession().getAttribute("currentPage");
+        Integer pageSize = (Integer)request.getSession().getAttribute("pageSize");
 
-        List<Register> registers = formService.getAttendListByUserId(wxid);
+        PageDto pageDto = new PageDto(currentPage*(pageSize-1)+1, pageSize);
+
+        List<Register> registers = formService.getAttendListByUserId(wxid, pageDto);
 
         JSONArray jsonArray = new JSONArray();
         for(Register register : registers){

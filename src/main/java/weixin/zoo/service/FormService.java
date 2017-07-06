@@ -3,6 +3,7 @@ package weixin.zoo.service;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import weixin.zoo.infrastructure.model.Form;
+import weixin.zoo.infrastructure.model.PageDto;
 import weixin.zoo.infrastructure.model.Register;
 import java.util.List;
 
@@ -41,12 +42,12 @@ public interface FormService {
      * 通过type来区分表单类型，当前只有activity(活动)，后续会新增投票问卷类型
      *
      */
-    public List<Form> getFormsByUserId(String userId, String type);
+    public List<Form> getFormsByUserId(String userId, String type, PageDto pageDto);
 
     /*
      * 获取用户已报名的活动列表，仅面向activity类型form
      */
-    public List<Register> getAttendListByUserId(String userId);
+    public List<Register> getAttendListByUserId(String userId, PageDto pageDto);
 
     /*
      * 获取支付信息

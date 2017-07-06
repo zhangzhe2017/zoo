@@ -172,8 +172,8 @@ public class FormServiceImpl implements FormService {
     }
 
     @Override
-    public List<Form> getFormsByUserId(String userId, String type) {
-        List<Form> forms = formRepository.getFormByUserId(userId);
+    public List<Form> getFormsByUserId(String userId, String type, PageDto pageDto) {
+        List<Form> forms = formRepository.getFormByUserId(userId, pageDto);
         //判断form 集成的template类型，如果为activity 则为活动
         List<Form> result = new ArrayList<Form>();
         for(Form form: forms){
@@ -187,8 +187,8 @@ public class FormServiceImpl implements FormService {
     }
 
     @Override
-    public List<Register> getAttendListByUserId(String userId) {
-        List<Register> registers = registerRepository.getAttendListByUserId(userId);
+    public List<Register> getAttendListByUserId(String userId, PageDto pageDto) {
+        List<Register> registers = registerRepository.getAttendListByUserId(userId, pageDto);
         return registers;
     }
 

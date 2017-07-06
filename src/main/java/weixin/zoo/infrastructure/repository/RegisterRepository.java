@@ -1,5 +1,6 @@
 package weixin.zoo.infrastructure.repository;
 
+import weixin.zoo.infrastructure.model.PageDto;
 import weixin.zoo.infrastructure.model.Register;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public interface RegisterRepository {
     /*
      * 查询用户参加的活动
      */
-    public List<Register> getAttendListByUserId(String userId);
+    public List<Register> getAttendListByUserId(String userId, PageDto pageDto);
 
     /*
      * 更新报名数据为已支付
