@@ -84,7 +84,7 @@
       <include refid="Example_Where_Clause" />
     </if>
     <if test="orderByClause != null">
-      order by ${orderByClause}
+      order by ${orderByClause} desc
     </if>
     <if test="limit != null">
       <if test="offset != null">

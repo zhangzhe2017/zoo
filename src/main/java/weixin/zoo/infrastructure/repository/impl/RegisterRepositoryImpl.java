@@ -74,6 +74,7 @@ public class RegisterRepositoryImpl implements RegisterRepository {
 
         registerExample.setLimit(pageDto.getLimit());
         registerExample.setOffset(pageDto.getOffset());
+        registerExample.setOrderByClause("gmt_create");
 
         return registerMapper.selectByExample(registerExample);
     }

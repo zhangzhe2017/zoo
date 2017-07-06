@@ -52,6 +52,7 @@ public class FormRepositoryImpl implements FormRepository{
         formExample.createCriteria().andFormOwnerEqualTo(userId).andIsDeleteEqualTo("n");
         formExample.setLimit(pageDto.getLimit());
         formExample.setOffset(pageDto.getOffset());
+        formExample.setOrderByClause("gmt_create");
 
         return formMapper.selectByExample(formExample);
     }
