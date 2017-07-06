@@ -6,7 +6,7 @@ import weixin.zoo.infrastructure.model.Register;
 import weixin.zoo.infrastructure.model.RegisterExample;
 
 public interface RegisterMapper {
-    int countByExample(RegisterExample example);
+    long countByExample(RegisterExample example);
 
     int deleteByExample(RegisterExample example);
 

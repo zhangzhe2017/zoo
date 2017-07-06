@@ -6,7 +6,7 @@ import weixin.zoo.infrastructure.model.Form;
 import weixin.zoo.infrastructure.model.FormExample;
 
 public interface FormMapper {
-    int countByExample(FormExample example);
+    long countByExample(FormExample example);
 
     int deleteByExample(FormExample example);
 
@@ -16,15 +16,21 @@ public interface FormMapper {
 
     int insertSelective(Form record);
 
+    List<Form> selectByExampleWithBLOBs(FormExample example);
+
     List<Form> selectByExample(FormExample example);
 
     Form selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") Form record, @Param("example") FormExample example);
 
+    int updateByExampleWithBLOBs(@Param("record") Form record, @Param("example") FormExample example);
+
     int updateByExample(@Param("record") Form record, @Param("example") FormExample example);
 
     int updateByPrimaryKeySelective(Form record);
+
+    int updateByPrimaryKeyWithBLOBs(Form record);
 
     int updateByPrimaryKey(Form record);
 }

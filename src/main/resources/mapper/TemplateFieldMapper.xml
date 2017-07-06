@@ -1,37 +1,37 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="weixin.zoo.infrastructure.mapper.TemplateFieldMapper" >
-  <resultMap id="BaseResultMap" type="weixin.zoo.infrastructure.model.TemplateField" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
-    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
-    <result column="creator" property="creator" jdbcType="VARCHAR" />
-    <result column="is_delete" property="isDelete" jdbcType="VARCHAR" />
-    <result column="field_name" property="fieldName" jdbcType="VARCHAR" />
-    <result column="field_option" property="fieldOption" jdbcType="VARCHAR" />
-    <result column="field_type" property="fieldType" jdbcType="VARCHAR" />
-    <result column="field_label" property="fieldLabel" jdbcType="VARCHAR" />
-    <result column="is_empty" property="isEmpty" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="weixin.zoo.infrastructure.mapper.TemplateFieldMapper">
+  <resultMap id="BaseResultMap" type="weixin.zoo.infrastructure.model.TemplateField">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="is_delete" jdbcType="VARCHAR" property="isDelete" />
+    <result column="field_name" jdbcType="VARCHAR" property="fieldName" />
+    <result column="field_option" jdbcType="VARCHAR" property="fieldOption" />
+    <result column="field_type" jdbcType="VARCHAR" property="fieldType" />
+    <result column="field_label" jdbcType="VARCHAR" property="fieldLabel" />
+    <result column="is_empty" jdbcType="VARCHAR" property="isEmpty" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -42,25 +42,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -71,42 +71,50 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     id, gmt_create, gmt_modified, creator, is_delete, field_name, field_option, field_type, 
     field_label, is_empty
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="weixin.zoo.infrastructure.model.TemplateFieldExample" >
+  <select id="selectByExample" parameterType="weixin.zoo.infrastructure.model.TemplateFieldExample" resultMap="BaseResultMap">
     select
-    <if test="distinct" >
+    <if test="distinct">
       distinct
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
     from template_field
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null" >
+    <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from template_field
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from template_field
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="weixin.zoo.infrastructure.model.TemplateFieldExample" >
+  <delete id="deleteByExample" parameterType="weixin.zoo.infrastructure.model.TemplateFieldExample">
     delete from template_field
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="weixin.zoo.infrastructure.model.TemplateField" >
+  <insert id="insert" parameterType="weixin.zoo.infrastructure.model.TemplateField">
     insert into template_field (id, gmt_create, gmt_modified, 
       creator, is_delete, field_name, 
       field_option, field_type, field_label, 
@@ -116,118 +124,118 @@
       #{fieldOption,jdbcType=VARCHAR}, #{fieldType,jdbcType=VARCHAR}, #{fieldLabel,jdbcType=VARCHAR}, 
       #{isEmpty,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="weixin.zoo.infrastructure.model.TemplateField" >
+  <insert id="insertSelective" parameterType="weixin.zoo.infrastructure.model.TemplateField">
     insert into template_field
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="gmtCreate != null" >
+      <if test="gmtCreate != null">
         gmt_create,
       </if>
-      <if test="gmtModified != null" >
+      <if test="gmtModified != null">
         gmt_modified,
       </if>
-      <if test="creator != null" >
+      <if test="creator != null">
         creator,
       </if>
-      <if test="isDelete != null" >
+      <if test="isDelete != null">
         is_delete,
       </if>
-      <if test="fieldName != null" >
+      <if test="fieldName != null">
         field_name,
       </if>
-      <if test="fieldOption != null" >
+      <if test="fieldOption != null">
         field_option,
       </if>
-      <if test="fieldType != null" >
+      <if test="fieldType != null">
         field_type,
       </if>
-      <if test="fieldLabel != null" >
+      <if test="fieldLabel != null">
         field_label,
       </if>
-      <if test="isEmpty != null" >
+      <if test="isEmpty != null">
         is_empty,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="gmtCreate != null" >
+      <if test="gmtCreate != null">
         #{gmtCreate,jdbcType=TIMESTAMP},
       </if>
-      <if test="gmtModified != null" >
+      <if test="gmtModified != null">
         #{gmtModified,jdbcType=TIMESTAMP},
       </if>
-      <if test="creator != null" >
+      <if test="creator != null">
         #{creator,jdbcType=VARCHAR},
       </if>
-      <if test="isDelete != null" >
+      <if test="isDelete != null">
         #{isDelete,jdbcType=VARCHAR},
       </if>
-      <if test="fieldName != null" >
+      <if test="fieldName != null">
         #{fieldName,jdbcType=VARCHAR},
       </if>
-      <if test="fieldOption != null" >
+      <if test="fieldOption != null">
         #{fieldOption,jdbcType=VARCHAR},
       </if>
-      <if test="fieldType != null" >
+      <if test="fieldType != null">
         #{fieldType,jdbcType=VARCHAR},
       </if>
-      <if test="fieldLabel != null" >
+      <if test="fieldLabel != null">
         #{fieldLabel,jdbcType=VARCHAR},
       </if>
-      <if test="isEmpty != null" >
+      <if test="isEmpty != null">
         #{isEmpty,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="weixin.zoo.infrastructure.model.TemplateFieldExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="weixin.zoo.infrastructure.model.TemplateFieldExample" resultType="java.lang.Long">
     select count(*) from template_field
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+  <update id="updateByExampleSelective" parameterType="map">
     update template_field
-    <set >
-      <if test="record.id != null" >
+    <set>
+      <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.gmtCreate != null" >
+      <if test="record.gmtCreate != null">
         gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.gmtModified != null" >
+      <if test="record.gmtModified != null">
         gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.creator != null" >
+      <if test="record.creator != null">
         creator = #{record.creator,jdbcType=VARCHAR},
       </if>
-      <if test="record.isDelete != null" >
+      <if test="record.isDelete != null">
         is_delete = #{record.isDelete,jdbcType=VARCHAR},
       </if>
-      <if test="record.fieldName != null" >
+      <if test="record.fieldName != null">
         field_name = #{record.fieldName,jdbcType=VARCHAR},
       </if>
-      <if test="record.fieldOption != null" >
+      <if test="record.fieldOption != null">
         field_option = #{record.fieldOption,jdbcType=VARCHAR},
       </if>
-      <if test="record.fieldType != null" >
+      <if test="record.fieldType != null">
         field_type = #{record.fieldType,jdbcType=VARCHAR},
       </if>
-      <if test="record.fieldLabel != null" >
+      <if test="record.fieldLabel != null">
         field_label = #{record.fieldLabel,jdbcType=VARCHAR},
       </if>
-      <if test="record.isEmpty != null" >
+      <if test="record.isEmpty != null">
         is_empty = #{record.isEmpty,jdbcType=VARCHAR},
       </if>
     </set>
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map" >
+  <update id="updateByExample" parameterType="map">
     update template_field
     set id = #{record.id,jdbcType=BIGINT},
       gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
@@ -239,44 +247,44 @@
       field_type = #{record.fieldType,jdbcType=VARCHAR},
       field_label = #{record.fieldLabel,jdbcType=VARCHAR},
       is_empty = #{record.isEmpty,jdbcType=VARCHAR}
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="weixin.zoo.infrastructure.model.TemplateField" >
+  <update id="updateByPrimaryKeySelective" parameterType="weixin.zoo.infrastructure.model.TemplateField">
     update template_field
-    <set >
-      <if test="gmtCreate != null" >
+    <set>
+      <if test="gmtCreate != null">
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       </if>
-      <if test="gmtModified != null" >
+      <if test="gmtModified != null">
         gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       </if>
-      <if test="creator != null" >
+      <if test="creator != null">
         creator = #{creator,jdbcType=VARCHAR},
       </if>
-      <if test="isDelete != null" >
+      <if test="isDelete != null">
         is_delete = #{isDelete,jdbcType=VARCHAR},
       </if>
-      <if test="fieldName != null" >
+      <if test="fieldName != null">
         field_name = #{fieldName,jdbcType=VARCHAR},
       </if>
-      <if test="fieldOption != null" >
+      <if test="fieldOption != null">
         field_option = #{fieldOption,jdbcType=VARCHAR},
       </if>
-      <if test="fieldType != null" >
+      <if test="fieldType != null">
         field_type = #{fieldType,jdbcType=VARCHAR},
       </if>
-      <if test="fieldLabel != null" >
+      <if test="fieldLabel != null">
         field_label = #{fieldLabel,jdbcType=VARCHAR},
       </if>
-      <if test="isEmpty != null" >
+      <if test="isEmpty != null">
         is_empty = #{isEmpty,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="weixin.zoo.infrastructure.model.TemplateField" >
+  <update id="updateByPrimaryKey" parameterType="weixin.zoo.infrastructure.model.TemplateField">
     update template_field
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},

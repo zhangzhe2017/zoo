@@ -6,7 +6,7 @@ import weixin.zoo.infrastructure.model.User;
 import weixin.zoo.infrastructure.model.UserExample;
 
 public interface UserMapper {
-    int countByExample(UserExample example);
+    long countByExample(UserExample example);
 
     int deleteByExample(UserExample example);
 

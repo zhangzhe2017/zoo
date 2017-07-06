@@ -17,9 +17,9 @@ public class Form {
 
     private String formName;
 
-    private String formValue;
-
     private String formOwner;
+
+    private String formValue;
 
     public Long getId() {
         return id;
@@ -77,19 +77,19 @@ public class Form {
         this.formName = formName == null ? null : formName.trim();
     }
 
-    public String getFormValue() {
-        return formValue;
-    }
-
-    public void setFormValue(String formValue) {
-        this.formValue = formValue == null ? null : formValue.trim();
-    }
-
     public String getFormOwner() {
         return formOwner;
     }
 
     public void setFormOwner(String formOwner) {
         this.formOwner = formOwner == null ? null : formOwner.trim();
+    }
+
+    public String getFormValue() {
+        return formValue;
+    }
+
+    public void setFormValue(String formValue) {
+        this.formValue = formValue == null ? null : formValue.trim();
     }
 }

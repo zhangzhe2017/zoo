@@ -29,7 +29,6 @@ public class FormRepositoryImpl implements FormRepository{
             formExample.createCriteria().andIsDeleteEqualTo("n").andTemplateIdEqualTo(Long.valueOf(templateId))
                     .andFormNameEqualTo(name)
                     .andFormOwnerEqualTo(wxid)
-                    .andFormValueEqualTo(formValue)
                     .andFieldIdsEqualTo(fieldIds);
             List<Form> forms = formMapper.selectByExample(formExample);
             Form formAdd = forms.get(0);

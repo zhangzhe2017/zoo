@@ -1,35 +1,35 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="weixin.zoo.infrastructure.mapper.RegisterMapper" >
-  <resultMap id="BaseResultMap" type="weixin.zoo.infrastructure.model.Register" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="gmt_create" property="gmtCreate" jdbcType="DATE" />
-    <result column="gmt_modified" property="gmtModified" jdbcType="DATE" />
-    <result column="is_delete" property="isDelete" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="VARCHAR" />
-    <result column="attender" property="attender" jdbcType="VARCHAR" />
-    <result column="form_id" property="formId" jdbcType="BIGINT" />
-    <result column="form_value" property="formValue" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="weixin.zoo.infrastructure.mapper.RegisterMapper">
+  <resultMap id="BaseResultMap" type="weixin.zoo.infrastructure.model.Register">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="gmt_create" jdbcType="DATE" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="DATE" property="gmtModified" />
+    <result column="is_delete" jdbcType="VARCHAR" property="isDelete" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="attender" jdbcType="VARCHAR" property="attender" />
+    <result column="form_id" jdbcType="BIGINT" property="formId" />
+    <result column="form_value" jdbcType="VARCHAR" property="formValue" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -40,25 +40,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -69,41 +69,49 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     id, gmt_create, gmt_modified, is_delete, status, attender, form_id, form_value
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="weixin.zoo.infrastructure.model.RegisterExample" >
+  <select id="selectByExample" parameterType="weixin.zoo.infrastructure.model.RegisterExample" resultMap="BaseResultMap">
     select
-    <if test="distinct" >
+    <if test="distinct">
       distinct
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
     from register
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null" >
+    <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from register
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from register
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="weixin.zoo.infrastructure.model.RegisterExample" >
+  <delete id="deleteByExample" parameterType="weixin.zoo.infrastructure.model.RegisterExample">
     delete from register
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="weixin.zoo.infrastructure.model.Register" >
+  <insert id="insert" parameterType="weixin.zoo.infrastructure.model.Register">
     insert into register (id, gmt_create, gmt_modified, 
       is_delete, status, attender, 
       form_id, form_value)
@@ -111,100 +119,100 @@
       #{isDelete,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{attender,jdbcType=VARCHAR}, 
       #{formId,jdbcType=BIGINT}, #{formValue,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="weixin.zoo.infrastructure.model.Register" >
+  <insert id="insertSelective" parameterType="weixin.zoo.infrastructure.model.Register">
     insert into register
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="gmtCreate != null" >
+      <if test="gmtCreate != null">
         gmt_create,
       </if>
-      <if test="gmtModified != null" >
+      <if test="gmtModified != null">
         gmt_modified,
       </if>
-      <if test="isDelete != null" >
+      <if test="isDelete != null">
         is_delete,
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         status,
       </if>
-      <if test="attender != null" >
+      <if test="attender != null">
         attender,
       </if>
-      <if test="formId != null" >
+      <if test="formId != null">
         form_id,
       </if>
-      <if test="formValue != null" >
+      <if test="formValue != null">
         form_value,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="gmtCreate != null" >
+      <if test="gmtCreate != null">
         #{gmtCreate,jdbcType=DATE},
       </if>
-      <if test="gmtModified != null" >
+      <if test="gmtModified != null">
         #{gmtModified,jdbcType=DATE},
       </if>
-      <if test="isDelete != null" >
+      <if test="isDelete != null">
         #{isDelete,jdbcType=VARCHAR},
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         #{status,jdbcType=VARCHAR},
       </if>
-      <if test="attender != null" >
+      <if test="attender != null">
         #{attender,jdbcType=VARCHAR},
       </if>
-      <if test="formId != null" >
+      <if test="formId != null">
         #{formId,jdbcType=BIGINT},
       </if>
-      <if test="formValue != null" >
+      <if test="formValue != null">
         #{formValue,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="weixin.zoo.infrastructure.model.RegisterExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="weixin.zoo.infrastructure.model.RegisterExample" resultType="java.lang.Long">
     select count(*) from register
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+  <update id="updateByExampleSelective" parameterType="map">
     update register
-    <set >
-      <if test="record.id != null" >
+    <set>
+      <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.gmtCreate != null" >
+      <if test="record.gmtCreate != null">
         gmt_create = #{record.gmtCreate,jdbcType=DATE},
       </if>
-      <if test="record.gmtModified != null" >
+      <if test="record.gmtModified != null">
         gmt_modified = #{record.gmtModified,jdbcType=DATE},
       </if>
-      <if test="record.isDelete != null" >
+      <if test="record.isDelete != null">
         is_delete = #{record.isDelete,jdbcType=VARCHAR},
       </if>
-      <if test="record.status != null" >
+      <if test="record.status != null">
         status = #{record.status,jdbcType=VARCHAR},
       </if>
-      <if test="record.attender != null" >
+      <if test="record.attender != null">
         attender = #{record.attender,jdbcType=VARCHAR},
       </if>
-      <if test="record.formId != null" >
+      <if test="record.formId != null">
         form_id = #{record.formId,jdbcType=BIGINT},
       </if>
-      <if test="record.formValue != null" >
+      <if test="record.formValue != null">
         form_value = #{record.formValue,jdbcType=VARCHAR},
       </if>
     </set>
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map" >
+  <update id="updateByExample" parameterType="map">
     update register
     set id = #{record.id,jdbcType=BIGINT},
       gmt_create = #{record.gmtCreate,jdbcType=DATE},
@@ -214,38 +222,38 @@
       attender = #{record.attender,jdbcType=VARCHAR},
       form_id = #{record.formId,jdbcType=BIGINT},
       form_value = #{record.formValue,jdbcType=VARCHAR}
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="weixin.zoo.infrastructure.model.Register" >
+  <update id="updateByPrimaryKeySelective" parameterType="weixin.zoo.infrastructure.model.Register">
     update register
-    <set >
-      <if test="gmtCreate != null" >
+    <set>
+      <if test="gmtCreate != null">
         gmt_create = #{gmtCreate,jdbcType=DATE},
       </if>
-      <if test="gmtModified != null" >
+      <if test="gmtModified != null">
         gmt_modified = #{gmtModified,jdbcType=DATE},
       </if>
-      <if test="isDelete != null" >
+      <if test="isDelete != null">
         is_delete = #{isDelete,jdbcType=VARCHAR},
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         status = #{status,jdbcType=VARCHAR},
       </if>
-      <if test="attender != null" >
+      <if test="attender != null">
         attender = #{attender,jdbcType=VARCHAR},
       </if>
-      <if test="formId != null" >
+      <if test="formId != null">
         form_id = #{formId,jdbcType=BIGINT},
       </if>
-      <if test="formValue != null" >
+      <if test="formValue != null">
         form_value = #{formValue,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="weixin.zoo.infrastructure.model.Register" >
+  <update id="updateByPrimaryKey" parameterType="weixin.zoo.infrastructure.model.Register">
     update register
     set gmt_create = #{gmtCreate,jdbcType=DATE},
       gmt_modified = #{gmtModified,jdbcType=DATE},

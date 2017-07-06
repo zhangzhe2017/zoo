@@ -6,7 +6,7 @@ import weixin.zoo.infrastructure.model.TemplateField;
 import weixin.zoo.infrastructure.model.TemplateFieldExample;
 
 public interface TemplateFieldMapper {
-    int countByExample(TemplateFieldExample example);
+    long countByExample(TemplateFieldExample example);
 
     int deleteByExample(TemplateFieldExample example);
 

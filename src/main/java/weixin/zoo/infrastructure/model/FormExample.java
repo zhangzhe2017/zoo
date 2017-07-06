@@ -11,6 +11,10 @@ public class FormExample {
 
     protected List<Criteria> oredCriteria;
 
+    private Integer limit;
+
+    private Integer offset;
+
     public FormExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
@@ -62,6 +66,22 @@ public class FormExample {
         oredCriteria.clear();
         orderByClause = null;
         distinct = false;
+    }
+
+    public void setLimit(Integer limit) {
+        this.limit = limit;
+    }
+
+    public Integer getLimit() {
+        return limit;
+    }
+
+    public void setOffset(Integer offset) {
+        this.offset = offset;
+    }
+
+    public Integer getOffset() {
+        return offset;
     }
 
     protected abstract static class GeneratedCriteria {
@@ -552,76 +572,6 @@ public class FormExample {
 
         public Criteria andFormNameNotBetween(String value1, String value2) {
             addCriterion("form_name not between", value1, value2, "formName");
-            return (Criteria) this;
-        }
-
-        public Criteria andFormValueIsNull() {
-            addCriterion("form_value is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFormValueIsNotNull() {
-            addCriterion("form_value is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFormValueEqualTo(String value) {
-            addCriterion("form_value =", value, "formValue");
-            return (Criteria) this;
-        }
-
-        public Criteria andFormValueNotEqualTo(String value) {
-            addCriterion("form_value <>", value, "formValue");
-            return (Criteria) this;
-        }
-
-        public Criteria andFormValueGreaterThan(String value) {
-            addCriterion("form_value >", value, "formValue");
-            return (Criteria) this;
-        }
-
-        public Criteria andFormValueGreaterThanOrEqualTo(String value) {
-            addCriterion("form_value >=", value, "formValue");
-            return (Criteria) this;
-        }
-
-        public Criteria andFormValueLessThan(String value) {
-            addCriterion("form_value <", value, "formValue");
-            return (Criteria) this;
-        }
-
-        public Criteria andFormValueLessThanOrEqualTo(String value) {
-            addCriterion("form_value <=", value, "formValue");
-            return (Criteria) this;
-        }
-
-        public Criteria andFormValueLike(String value) {
-            addCriterion("form_value like", value, "formValue");
-            return (Criteria) this;
-        }
-
-        public Criteria andFormValueNotLike(String value) {
-            addCriterion("form_value not like", value, "formValue");
-            return (Criteria) this;
-        }
-
-        public Criteria andFormValueIn(List<String> values) {
-            addCriterion("form_value in", values, "formValue");
-            return (Criteria) this;
-        }
-
-        public Criteria andFormValueNotIn(List<String> values) {
-            addCriterion("form_value not in", values, "formValue");
-            return (Criteria) this;
-        }
-
-        public Criteria andFormValueBetween(String value1, String value2) {
-            addCriterion("form_value between", value1, value2, "formValue");
-            return (Criteria) this;
-        }
-
-        public Criteria andFormValueNotBetween(String value1, String value2) {
-            addCriterion("form_value not between", value1, value2, "formValue");
             return (Criteria) this;
         }
 

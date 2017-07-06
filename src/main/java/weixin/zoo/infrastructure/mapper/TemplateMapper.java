@@ -6,7 +6,7 @@ import weixin.zoo.infrastructure.model.Template;
 import weixin.zoo.infrastructure.model.TemplateExample;
 
 public interface TemplateMapper {
-    int countByExample(TemplateExample example);
+    long countByExample(TemplateExample example);
 
     int deleteByExample(TemplateExample example);
 
