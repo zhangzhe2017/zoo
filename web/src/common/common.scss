@@ -268,9 +268,11 @@
     .am-result {
         padding-top: 42px;
         padding-bottom: 42px;
+        background-color: transparent;
     }
     .am-result:after {
         //border-bottom: 1px solid #ddd;
+        border-bottom: 0;
     }
     .am-result .am-result-pic {
         width: 120px;
@@ -466,6 +468,9 @@
     }
     .x-icon-success {
         fill: #1F90E6;
+    }
+    .x-icon-error {
+        fill: #F13642;
     }
     .x-title {
         text-align: center;

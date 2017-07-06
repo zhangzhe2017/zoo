@@ -6,9 +6,7 @@ import CommonMixin from '../../mixins/CommonMixin';
 import Util from '../../utils/Util';
 import {Routes} from '../../components/Routes/Routes';
 
-const {
-    React, Component, PropTypes, connect, reactMixin//, Toast
-} = window._external;
+const {React, Component, PropTypes, connect, reactMixin} = window._external;
 
 @reactMixin.decorate(CommonMixin)
 class Auth extends Component {
@@ -53,20 +51,20 @@ class Auth extends Component {
                 redirectUrl && Routes.replace(redirectUrl);
             }
         };
-        /*if (!attention) {
-            Util.later(function () {
-                //Toast.info('请关注公众号[组局官]！页面即将跳转...', 0);
+        if (attention) {
+            redirectTo();
+        } else {
+            /*Util.later(function () {
                 Toast.info('请关注公众号[组局官]！页面即将跳转...', 0);
                 Util.later(function () {
                     Toast.hide();
                     //location.href = 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzIxMzc5MjcyNQ==&scene=124#wechat_redirect';
                     redirectTo();
                 }, 1000);
-            }, 1);
-        } else {
-            redirectTo();
-        }*/
-        redirectTo();
+            }, 1);*/
+            Routes.replace('/result/attention');
+        }
+        //redirectTo();
     }
 
     init() {

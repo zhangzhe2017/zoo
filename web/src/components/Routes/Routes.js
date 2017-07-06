@@ -8,6 +8,7 @@ import FormEdit from '../../pages/form/FormEdit/FormEdit';
 import FormDetail from '../../pages/form/FormDetail/FormDetail';
 import FormList from '../../pages/list/FormList/FormList';
 import RegisterSuccess from '../../pages/result/RegisterSuccess/RegisterSuccess';
+import Attention from '../../pages/result/Attention/Attention';
 
 const {React, Component, PropTypes, Router, Route, IndexRedirect, connect, reactMixin} = window._external;
 
@@ -51,6 +52,7 @@ class Routes extends Component {
                     <Route path="form/view" component={FormDetail}/>
                     <Route path="list/formList" component={FormList}/>
                     <Route path="result/registerSuccess" component={RegisterSuccess}/>
+                    <Route path="result/attention" component={Attention}/>
                     <Route path="*" component={NotFound}/>
                 </Route>
             </Router>
