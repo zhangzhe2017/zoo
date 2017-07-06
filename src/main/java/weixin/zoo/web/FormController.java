@@ -99,8 +99,8 @@ public class FormController {
     @ResponseBody
     public String getMyFormList(HttpServletRequest request){
         String wxid = (String)request.getSession().getAttribute("wxid");
-        Integer currentPage = (Integer)request.getSession().getAttribute("currentPage");
-        Integer pageSize = (Integer)request.getSession().getAttribute("pageSize");
+        Integer currentPage = Integer.parseInt(request.getParameter("currentPage"));
+        Integer pageSize = Integer.parseInt(request.getParameter("pageSize"));
 
         PageDto pageDto = new PageDto(currentPage*(pageSize-1)+1, pageSize);
 
