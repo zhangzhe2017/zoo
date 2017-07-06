@@ -102,7 +102,7 @@ public class FormController {
         Integer currentPage = Integer.parseInt(request.getParameter("currentPage"));
         Integer pageSize = Integer.parseInt(request.getParameter("pageSize"));
 
-        PageDto pageDto = new PageDto(currentPage*(pageSize-1)+1, pageSize);
+        PageDto pageDto = new PageDto(pageSize*(currentPage-1)+1, pageSize);
 
         List<Form> forms = formService.getFormsByUserId(wxid, "activity", pageDto);
 
@@ -126,7 +126,7 @@ public class FormController {
         Integer currentPage = Integer.parseInt(request.getParameter("currentPage"));
         Integer pageSize = Integer.parseInt(request.getParameter("pageSize"));
 
-        PageDto pageDto = new PageDto(currentPage*(pageSize-1)+1, pageSize);
+        PageDto pageDto = new PageDto(pageSize*(currentPage-1)+1, pageSize);
 
         List<Register> registers = formService.getAttendListByUserId(wxid, pageDto);
 
