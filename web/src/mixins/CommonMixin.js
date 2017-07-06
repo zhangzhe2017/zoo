@@ -3,7 +3,7 @@
 import Util from '../utils/Util';
 import {Auth} from '../pages/Auth/Auth';
 
-const {_} = window._external;
+const {_, $} = window._external;
 
 export default {
 
@@ -21,6 +21,9 @@ export default {
             this.doInit();
         } else {
             this.init && this.init();
+        }
+        if (this.isPage()) {
+            $(window).scrollTop(0);
         }
     },
 
@@ -74,7 +77,7 @@ export default {
             if (pathname !== currentPathname || search !== currentSearch) {
                 this.reset && this.reset();
                 this.init && this.init();
-                if (!this.isApp && !this.isAuth) {
+                if (this.isPage()) {
                     this.initShare();
                 }
                 _.assign(this.constructor, {
@@ -105,6 +108,10 @@ export default {
                 }
             }
         }
+    },
+
+    isPage() {
+        return !this.isRoutes && !this.isApp && !this.isDefaultLayout && !this.isAuth;
     }
 
 };

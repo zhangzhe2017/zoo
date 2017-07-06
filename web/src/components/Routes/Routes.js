@@ -32,6 +32,8 @@ class Routes extends Component {
         history && history.push(config);
     }
 
+    isRoutes = true;
+
     init() {
         const {history} = this.props;
         Routes.history = history;

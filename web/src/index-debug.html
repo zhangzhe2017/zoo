@@ -8,9 +8,8 @@
     <script src="https://os.alipayobjects.com/rmsportal/lvEQQbNgHsIxVfXLkmuX.js"></script>
     <script>
         var _isQQBrowser = function () {
-            /*var ua = navigator.userAgent;
-            return ua.indexOf('QQBrowser') > -1;*/
-            return true;
+            var ua = navigator.userAgent;
+            return ua.indexOf('QQBrowser') > -1;
         };
         if (_isQQBrowser()) {
             document.writeln('<link href="http://localhost:8081/kindeditor/kindeditor.css" rel="stylesheet"/>');
