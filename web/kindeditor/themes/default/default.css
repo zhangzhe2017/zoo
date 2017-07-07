@@ -421,6 +421,7 @@
 	overflow: hidden;
 	margin: 0;
 	padding: 0;
+	margin-bottom: 14px;
 }
 /* toolbar */
 .ke-toolbar {

@@ -334,8 +334,10 @@ class EditForm extends Component {
                 );
             } else if (_isQQBrowser() && type === 'richtext') {
                 items.push(
-                    <div key={name}>
-                        <TextareaItem
+                    <List.Item
+                        key={name}
+                    >
+                        {/*<TextareaItem
                             {...getFieldProps(
                                 name,
                                 {
@@ -351,6 +353,20 @@ class EditForm extends Component {
                             rows={2}
                             labelNumber={7}
                             placeholder={label}
+                        />*/}
+                        <div className="x-label">{label} {requiredMark}</div>
+                        <textarea
+                            {...getFieldProps(
+                                name,
+                                {
+                                    rules: [
+                                        {required, message: `${label}不能为空！`}
+                                    ]
+                                }
+                            )}
+                            id={name}
+                            placeholder={label}
+                            style={{display: 'none'}}
                         />
                         <KindEditor
                             target={`#${name}`}
@@ -358,7 +374,7 @@ class EditForm extends Component {
                             onChange={this.handleKindEditorChange.bind(this, name)}
                             _refresh={_refresh}
                         />
-                    </div>
+                    </List.Item>
                 );
             }
         });

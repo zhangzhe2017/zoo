@@ -82,7 +82,7 @@ class FormDetail extends Component {
                 const urls = fieldValues[name];
                 _.forEach(urls, (url, index) => {
                     content.push(
-                        <div key={index} className="x-marginTop-20">
+                        <div key={index} className="x-image-wrapper">
                             <img
                                 className="x-image"
                                 src={url}

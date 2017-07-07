@@ -1,6 +1,6 @@
 :global {
     .am-list .am-list-item.am-textarea-item {
-        min-height: 90px;
+        min-height: 80px;
         padding-left: 30px;
         padding-right: 30px;
     }
@@ -12,10 +12,10 @@
         line-height: 51px;
     }
     .am-textarea-label {
-        min-height: 90px;
+        min-height: 80px;
         //font-size: 34px;
         font-size: 30px;
-        line-height: 90px;
+        line-height: 80px;
         margin-right: 10px;
     }
     .am-textarea-label.am-textarea-label-2 {
@@ -79,7 +79,7 @@
     }
     .am-list-item {
         padding-left: 30px;
-        min-height: 90px;
+        min-height: 80px;
     }
     .am-list-item.am-list-item-top .am-list-line .am-list-arrow {
         margin-top: 4px;
@@ -98,13 +98,15 @@
     }
     .am-list-item .am-list-line {
         padding-right: 30px;
-        min-height: 90px;
+        min-height: 80px;
     }
     .am-list-item .am-list-line .am-list-content {
         //font-size: 34px;
         font-size: 30px;
-        padding-top: 14px;
-        padding-bottom: 14px;
+        //padding-top: 14px;
+        //padding-bottom: 14px;
+        padding-top: 0;
+        padding-bottom: 0;
     }
     .am-list-item .am-list-line .am-list-extra {
         font-size: 32px;
@@ -162,7 +164,8 @@
         padding: 0 30px;
     }
     .am-list-item.am-input-item {
-        height: 90px;
+        //height: 90px;
+        height: auto;
         padding-left: 30px;
         padding-right: 30px;
     }
@@ -346,6 +349,39 @@
         width: 64px;
         height: 64px;
     }
+    .am-image-picker .am-image-picker-list {
+        padding-top: 18px;
+        margin-bottom: 30px;
+    }
+    .am-image-picker .am-image-picker-list .am-image-picker-item {
+        //margin-right: 10px;
+        //margin-bottom: 12px;
+        margin-right: 30px;
+        margin-bottom: 30px;
+    }
+    .am-image-picker .am-image-picker-list .am-image-picker-item .am-image-picker-item-remove {
+        width: 30px;
+        height: 30px;
+        right: 12px;
+        top: 12px;
+        background-size: 30px auto;
+    }
+    .am-image-picker .am-image-picker-list .am-image-picker-item .am-image-picker-item-content {
+        border-radius: 10px;
+    }
+    .am-image-picker .am-image-picker-list .am-image-picker-upload-btn {
+        border-radius: 10px;
+        border: 1px solid #ddd;
+    }
+    .am-image-picker .am-image-picker-list .am-image-picker-upload-btn:before,
+    .am-image-picker .am-image-picker-list .am-image-picker-upload-btn:after {
+        width: 2px;
+        height: 50px;
+    }
+    .am-image-picker .am-image-picker-list .am-image-picker-upload-btn:after {
+        width: 50px;
+        height: 2px;
+    }
     /******************************************************************************************************************/
     body {
         user-select: text;
@@ -354,15 +390,12 @@
     .am-toast-notice-content {
         top: -100px;
     }
-    .am-list-item .am-list-line .am-list-content {
-        padding-top: 18px;
-        padding-bottom: 18px;
-    }
     .am-textarea-control {
-        padding-top: 20px;
-        padding-bottom: 20px;
+        padding-top: 16px;
+        padding-bottom: 16px;
     }
     .am-image-picker .am-image-picker-list {
+        padding-top: 0;
         margin-bottom: 0;
     }
     .x-detail-list .x-detail-item {
@@ -372,8 +405,8 @@
         //color: #999;
     }
     .x-detail-list .am-textarea-control {
-        padding-top: 26px;
-        padding-bottom: 26px;
+        padding-top: 24px;
+        padding-bottom: 20px;
     }
     .am-list-item .am-input-label,
     .am-textarea-label {
@@ -460,6 +493,13 @@
     }
     .x-label {
         font-weight: bold;
+        line-height: 80px;
+    }
+    .x-image-wrapper {
+        margin-top: 20px;
+        &:first-child {
+            margin-top: 0;
+        }
     }
     .am-list-item .x-image, .x-image {
         width: 100%;
@@ -484,7 +524,7 @@
     }
     .x-placeholder {
         position: absolute;
-        top: 23px;
+        top: 20px;
         left: 248px;
         color: #000;
         //font-size: 34px;
@@ -506,10 +546,16 @@
     .x-richtext {
         white-space: normal;
         word-break: break-all;
-        margin-top: 20px;
+        //margin-top: 20px;
+        margin-top: 0;
         p {
-            margin-top: 20px;
-            margin-bottom: 20px;
+            //margin-top: 20px;
+            //margin-bottom: 20px;
+            margin-top: 0;
+            margin-bottom: 0;
         }
+    }
+    .ke-container {
+        box-sizing: border-box;
     }
 }
