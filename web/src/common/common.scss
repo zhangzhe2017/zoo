@@ -203,6 +203,7 @@
     .am-list-item .am-input-control input {
         //font-size: 34px;
         font-size: 30px;
+        line-height: normal;
     }
     .am-list-item .am-input-clear {
         width: 42px;
@@ -478,8 +479,8 @@
         text-indent: 2em;
         white-space: pre-wrap;
         word-break: break-all;
-        margin-top: 10px;
-        margin-bottom: 0;
+        margin-top: 0;
+        margin-bottom: 30px;
         font-family: sans-serif;
     }
     .x-marginTop-10 {
@@ -499,6 +500,9 @@
         margin-top: 20px;
         &:first-child {
             margin-top: 0;
+        }
+        &:last-child {
+            margin-bottom: 30px;
         }
     }
     .am-list-item .x-image, .x-image {
@@ -548,6 +552,7 @@
         word-break: break-all;
         //margin-top: 20px;
         margin-top: 0;
+        margin-bottom: 30px;
         p {
             //margin-top: 20px;
             //margin-bottom: 20px;
