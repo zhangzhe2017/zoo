@@ -44,7 +44,52 @@ const ActionTypes = {
                     doAction(dispatch, ActionTypes.formList.changeState, {
                         finished: /*data.length < pageSize || */resultListDataLen === listDataLen,
                         listData: [...resultListData],
-                        currentPage
+                        currentPage,
+                        pageType
+                    });
+                    Util.later(() => {
+                        const formList = FormList.instance;
+                        formList && formList.renderList();
+                    }, 1);
+                },
+                complete: () => {
+                    doAction(dispatch, ActionTypes.formList.changeState, {loading: false});
+                }
+            });
+        },
+
+        changeList(dispatch, getState) {
+            const {pageType, currentPage, pageSize} = this || {};
+            const params = {
+                currentPage,
+                pageSize
+            };
+            doAction(dispatch, ActionTypes.formList.changeState, {loading: true});
+            FormService[pageType === 'myFormList' ? 'getMyFormList' : 'getAttendedActivityList']({
+                ...(() => {
+                    if (Util.isProxy()) {
+                        if (pageType === 'myFormList') {
+                            return {
+                                url: `/form/getMyFormList${currentPage}.json`
+                            };
+                        } else {
+                            return {
+                                url: `/form/getAttendedActivityList${currentPage}.json`
+                            };
+                        }
+                    } else {
+                        return {};
+                    }
+                })(),
+                data: params,
+                success: (result = {}) => {
+                    const {data = []} = result;
+                    const {listData} = getState().formList;
+                    const resultListData = _.uniqBy(data, 'id');
+                    doAction(dispatch, ActionTypes.formList.changeState, {
+                        listData: [...resultListData],
+                        currentPage,
+                        pageType
                     });
                     Util.later(() => {
                         const formList = FormList.instance;

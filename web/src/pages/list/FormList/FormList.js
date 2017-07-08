@@ -17,7 +17,8 @@ class FormList extends Component {
         loading: false,
         finished: false,
         listData: [],
-        currentPage: 0
+        currentPage: 0,
+        pageType: 'myFormList'
     };
 
     pageTitle = '表单列表';
@@ -37,15 +38,13 @@ class FormList extends Component {
     }
 
     renderList() {
-        const {dispatch, location, loading, finished, currentPage} = this.props;
+        const {dispatch, loading, finished, currentPage, pageType} = this.props;
         if (loading || finished) {
             return;
         }
         const top = $('#loadingDiv').offset().top;
         const scrollTop = $(document).scrollTop();
         if (top - scrollTop < this.getViewportHeight()) {
-            const {query} = location;
-            const {pageType} = query;
             doAction(dispatch, ActionTypes.formList.getFormList, {
                 pageType,
                 currentPage: currentPage + 1,
@@ -55,14 +54,11 @@ class FormList extends Component {
     }
 
     init() {
-        const {location} = this.props;
-        const {query} = location;
-        const {pageType} = query;
+        const {pageType} = this.props;
         Util.later(() => {
             this.renderList();
         }, 1);
         $(window).on('scroll.FormList', Util.buffer(this.renderList).bind(this));
-        this.pageTitle = (pageType === 'myFormList' ? '我发起的活动' : '我参加的活动');
     }
 
     reset() {
@@ -71,38 +67,57 @@ class FormList extends Component {
         $(window).off('scroll.FormList');
     }
 
-    render() {
-        const {location, finished, listData} = this.props;
-        const {query} = location;
-        const {pageType} = query;
-        const items = [];
-        _.forEach(listData, row => {
-            const {id, title, createTime} = row;
-            items.push(
-                <Link
-                    key={id}
-                    to={{
-                        pathname: '/form/view',
-                        query: {formId: id}
-                    }}
-                >
-                    <Card className="x-card">
-                        <Card.Body>
-                            <div>标题：{title}</div>
-                        </Card.Body>
-                    </Card>
-                </Link>
-            );
+    changeTab = (type) => {
+        const {dispatch, loading, finished} = this.props;
+        if (loading || finished) {
+            return;
+        }
+        doAction(dispatch, ActionTypes.formList.changeList, {
+            pageType: type,
+            currentPage: 1,
+            pageSize: this.pageSize
         });
+    }
+
+    render() {
+        const {location, finished, listData, pageType} = this.props;
+
+        const items = listData.map(row => {
+            const {id, title, createTime} = row;
+
+            return <Link
+                key={id}
+                to={{
+                    pathname: '/form/view',
+                    query: {formId: id}
+                }}
+            >
+                <Card className="x-card">
+                    <Card.Body>
+                        <div>标题：{title}</div>
+                    </Card.Body>
+                </Card>
+            </Link>
+        })
+
         return (
             <div className="x-page">
-                <h2 className="x-title">{pageType === 'myFormList' ? '我发起的活动' : '我参加的活动'}</h2>
-                {items}
-                <div id="loadingDiv" className="x-margin-20-0">
-                    {
-                        finished ? <div className="x-noMore">没有更多了</div> :
-                            <ActivityIndicator size="large" className="x-activity-indicator"/>
-                    }
+                <div className="x-header">
+                    <div className={'x-tab' + (pageType == 'myFormList' && ' x-tab-cur')} onClick={this.changeTab.bind(this, 'myFormList')}>
+                        我发起的
+                    </div>
+                    <div className={'x-tab' + (pageType == 'getAttendedActivityList' && ' x-tab-cur')} onClick={this.changeTab.bind(this, 'getAttendedActivityList')}>
+                        我参加的
+                    </div>
+                </div>
+                <div className="x-list">
+                    {items}
+                    <div id="loadingDiv" className="x-margin-20-0">
+                        {
+                            finished ? <div className="x-noMore">没有更多了</div> :
+                                <ActivityIndicator size="large" className="x-activity-indicator"/>
+                        }
+                    </div>
                 </div>
             </div>
         );

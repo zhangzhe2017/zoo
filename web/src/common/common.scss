@@ -431,6 +431,7 @@
         margin: 0 auto;
     }
     .x-card {
+        height: 100px;
         margin: 20px;
         min-height: 0;
         .am-card-body {
@@ -557,5 +558,31 @@
     }
     .ke-container {
         box-sizing: border-box;
+    }
+    .x-page {
+        padding-top: 100px;
+    }
+    .x-list {
+
+    }
+    .x-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 750px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        background: #fff;
+        z-index: 10;
+    }
+    .x-tab {
+        line-height: 80px;
+        height: 80px;
+    }
+    .x-tab-cur {
+        color: #ff5000;
+        border-bottom: 2px solid #ff5000;
     }
 }
