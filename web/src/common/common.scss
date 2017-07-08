@@ -203,7 +203,7 @@
     .am-list-item .am-input-control input {
         //font-size: 34px;
         font-size: 30px;
-        line-height: normal;
+        line-height: 1.5em;
     }
     .am-list-item .am-input-clear {
         width: 42px;
@@ -368,10 +368,10 @@
         background-size: 30px auto;
     }
     .am-image-picker .am-image-picker-list .am-image-picker-item .am-image-picker-item-content {
-        border-radius: 10px;
+        border-radius: 4px;
     }
     .am-image-picker .am-image-picker-list .am-image-picker-upload-btn {
-        border-radius: 10px;
+        border-radius: 4px;
         border: 1px solid #ddd;
     }
     .am-image-picker .am-image-picker-list .am-image-picker-upload-btn:before,
