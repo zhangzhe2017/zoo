@@ -65,5 +65,8 @@ $(() => {
             current: url,
             urls
         });
+    }).on('click', '.am-input-item,.am-textarea-item', (e) => {
+        const currentTargetEl = $(e.currentTarget);
+        currentTargetEl.find('.am-input-control input,.am-textarea-control textarea').focus();
     });
 });
