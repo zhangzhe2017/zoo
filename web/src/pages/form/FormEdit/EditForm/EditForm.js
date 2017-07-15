@@ -113,6 +113,9 @@ class EditForm extends Component {
                     serverId: url,
                     url
                 };
+                if (name === 'cover') {
+                    imageFiles.splice(0);
+                }
                 imageFiles.push(imageFile);
                 doAction(dispatch, ActionTypes.feEditForm.changeState, {
                     imageFilesMap: {...imageFilesMap}
@@ -146,6 +149,9 @@ class EditForm extends Component {
                                     serverId,
                                     url
                                 };
+                                if (name === 'cover') {
+                                    imageFiles.splice(0);
+                                }
                                 imageFiles.push(imageFile);
                                 Util.debug(`uploadImage success, index=${index}, serverId=${serverId}, name=${name}, imageFiles.length=${imageFiles.length}`);
                                 doAction(dispatch, ActionTypes.feEditForm.changeState, {
@@ -311,27 +317,62 @@ class EditForm extends Component {
                     </DatePicker>
                 );
             } else if (type === 'image') {
-                items.push(
-                    <List.Item
-                        key={name}
-                    >
-                        <div className="x-label">{label} {requiredMark}</div>
-                        <ImagePicker
-                            {...getFieldProps(
-                                name,
-                                {
-                                    rules: [
-                                        {validator: this.validateImages.bind(this, label, name, required)}
-                                    ]
-                                }
-                            )}
-                            files={this.getImageFiles(name)}
-                            onChange={this.handleImageChange.bind(this, name)}
-                            onAddImageClick={this.handleImageAddClick.bind(this, name)}
-                            onImageClick={this.handleImageClick}
-                        />
-                    </List.Item>
-                );
+                if (name === 'cover') {
+                    const imageFiles = this.getImageFiles(name);
+                    items.push(
+                        <div
+                            key={name}
+                            className="x-cover"
+                            onClick={this.handleImageAddClick.bind(this, name)}
+                        >
+                            {
+                                imageFiles.length ? (
+                                    <img src={imageFiles[0].url} className="x-cover-image"/>
+                                ) : (
+                                    <table className="x-cover-table">
+                                        <tbody>
+                                        <tr>
+                                            <td rowSpan="2">
+                                                <span className="x-iconfont x-icon-ai-camera"/>
+                                            </td>
+                                            <td className="x-cover-title">
+                                                上传封面图
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="x-cover-description">
+                                                建议上传横屏拍摄的图片
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                )
+                            }
+                        </div>
+                    );
+                } else {
+                    items.push(
+                        <List.Item
+                            key={name}
+                        >
+                            <div className="x-label">{label} {requiredMark}</div>
+                            <ImagePicker
+                                {...getFieldProps(
+                                    name,
+                                    {
+                                        rules: [
+                                            {validator: this.validateImages.bind(this, label, name, required)}
+                                        ]
+                                    }
+                                )}
+                                files={this.getImageFiles(name)}
+                                onChange={this.handleImageChange.bind(this, name)}
+                                onAddImageClick={this.handleImageAddClick.bind(this, name)}
+                                onImageClick={this.handleImageClick}
+                            />
+                        </List.Item>
+                    );
+                }
             } else if (_isQQBrowser() && type === 'richtext') {
                 items.push(
                     <List.Item
@@ -387,13 +428,15 @@ class EditForm extends Component {
                 <List>{items}</List>
                 {
                     items.length ?
-                        <Button
-                            type="primary"
-                            onClick={this.handleSaveBtnClick}
-                            className="x-button"
-                        >
-                            保存
-                        </Button> : ''
+                        <div className="x-button-wrapper">
+                            <Button
+                                type="primary"
+                                onClick={this.handleSaveBtnClick}
+                                className="x-button"
+                            >
+                                保存
+                            </Button>
+                        </div> : ''
                 }
             </form>
         );

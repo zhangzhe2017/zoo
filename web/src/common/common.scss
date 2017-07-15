@@ -1,4 +1,29 @@
+//iconfont
+@font-face {
+    font-family: "x-iconfont";
+    src: url('//at.alicdn.com/t/font_0pnu84f9jlonipb9.eot?t=1500087569207'); /* IE9*/
+    src: url('//at.alicdn.com/t/font_0pnu84f9jlonipb9.eot?t=1500087569207#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('//at.alicdn.com/t/font_0pnu84f9jlonipb9.woff?t=1500087569207') format('woff'), /* chrome, firefox */
+    url('//at.alicdn.com/t/font_0pnu84f9jlonipb9.ttf?t=1500087569207') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+    url('//at.alicdn.com/t/font_0pnu84f9jlonipb9.svg?t=1500087569207#x-iconfont') format('svg'); /* iOS 4.1- */
+}
+
 :global {
+    .x-iconfont {
+        font-family: "x-iconfont" !important;
+        font-size: 16px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    .x-icon-ai-camera:before {
+        content: "\e66c";
+    }
+
+    td {
+        font-size: 30px;
+    }
+
     .am-list .am-list-item.am-textarea-item {
         min-height: 80px;
         padding-left: 30px;
@@ -6,7 +31,6 @@
     }
     .am-list .am-list-item.am-textarea-item:after {
         left: 30px;
-        //border-bottom: 1px solid #ddd;
     }
     .am-list .am-list-item.am-textarea-item.am-textarea-item-single-line .am-textarea-control textarea {
         line-height: 51px;
@@ -71,12 +95,6 @@
         padding: 18px 30px 30px 30px;
         font-size: 28px;
     }
-    .am-list-body:after {
-        //border-bottom: 1px solid #ddd;
-    }
-    .am-list-body div:not(:last-child) .am-list-line:after {
-        //border-bottom: 1px solid #ddd;
-    }
     .am-list-item {
         padding-left: 30px;
         min-height: 80px;
@@ -109,7 +127,7 @@
         padding-bottom: 0;
     }
     .am-list-item .am-list-line .am-list-extra {
-        font-size: 32px;
+        font-size: 30px;
         padding-top: 14px;
         padding-bottom: 14px;
     }
@@ -137,16 +155,8 @@
         border-top-right-radius: 10px;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
-        //border: 1px solid #ddd;
-    }
-    .am-button-primary {
-        //border: 1px solid #108ee9;
-    }
-    .am-button-ghost {
-        //border: 1px solid #108ee9;
     }
     .am-button-ghost.am-button-active {
-        //border: 1px solid #108ee9;
         color: #108ee9;
         background-color: #eee;
     }
@@ -171,7 +181,6 @@
     }
     .am-list-item.am-input-item:after {
         left: 30px;
-        //border-bottom: 1px solid #ddd;
     }
     .am-list-item .am-input-label {
         //font-size: 34px;
@@ -224,9 +233,6 @@
     .am-picker-popup-header {
         background-size: 100% 1px;
     }
-    .am-picker-popup-header:after {
-        //border-bottom: 1px solid #ddd;
-    }
     .am-picker-popup-item {
         //font-size: 34px;
         font-size: 30px;
@@ -253,8 +259,6 @@
     .am-picker-col-indicator {
         height: 68px;
         top: 204px;
-        //border-top: 1px solid #ddd;
-        //border-bottom: 1px solid #ddd;
     }
     .am-toast {
         font-size: 28px;
@@ -276,7 +280,6 @@
         background-color: transparent;
     }
     .am-result:after {
-        //border-bottom: 1px solid #ddd;
         border-bottom: 0;
     }
     .am-result .am-result-pic {
@@ -304,7 +307,6 @@
     }
     .am-card {
         border-radius: 10px;
-        //border: 1px solid #ddd;
         padding-bottom: 12px;
     }
     .am-card-header {
@@ -320,7 +322,6 @@
         font-size: 30px;
     }
     .am-card-body {
-        //border-top: 1px solid #ddd;
         padding: 30px 30px 12px;
         font-size: 30px;
     }
@@ -410,13 +411,15 @@
     }
     .am-list-item .am-input-label,
     .am-textarea-label {
-        font-weight: bold;
+        //font-weight: bold;
+        color: #999;
     }
     .x-list-item.am-list-item .am-list-line .am-list-content {
         width: 238px;
-        font-weight: bold;
+        //font-weight: bold;
         flex: initial;
         margin-right: 10px;
+        color: #999;
     }
     .x-list-item.am-list-item .am-list-line .am-list-extra {
         flex-basis: initial;
@@ -424,7 +427,7 @@
     }
     .x-required {
         color: red;
-        font-weight: normal;
+        //font-weight: normal;
         vertical-align: middle;
     }
     .x-activity-indicator .am-activity-indicator-spinner {
@@ -438,12 +441,11 @@
             border-top: 0;
         }
     }
+    .x-button-wrapper {
+        background-color: #f5f5f9;
+        padding: 50px;
+    }
     .x-button {
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-        width: 100%;
     }
     .am-button-ghost {
         background-color: #fff;
@@ -459,7 +461,7 @@
         background-color: #fff;
         word-break: break-all;
         overflow: auto;
-        border: 10px solid red;
+        border: 2px solid red;
         box-sizing: border-box;
     }
     .x-debug-linker {
@@ -475,7 +477,7 @@
         height: 120px;
     }
     .x-pre {
-        text-indent: 2em;
+        //text-indent: 2em;
         white-space: pre-wrap;
         word-break: break-all;
         margin-top: 0;
@@ -492,8 +494,9 @@
         margin: 20px 0;
     }
     .x-label {
-        font-weight: bold;
+        //font-weight: bold;
         line-height: 80px;
+        color: #999;
     }
     .x-image-wrapper {
         margin-top: 20px;
@@ -520,10 +523,11 @@
     }
     .x-title {
         text-align: center;
-        background-color: #eee;
+        //background-color: #eee;
         padding: 20px;
         margin: 0;
-        font-size: 40px;
+        font-size: 38px;
+        font-weight: normal;
     }
     .x-placeholder {
         position: absolute;
@@ -561,5 +565,34 @@
     }
     .ke-container {
         box-sizing: border-box;
+    }
+    .x-cover {
+        background-color: rgba(239, 239, 239, 0.5);
+        border-bottom: 1px solid #ddd;
+    }
+    .x-cover-image {
+        width: 100%;
+        height: auto;
+        vertical-align: middle;
+    }
+    .x-cover-table {
+        margin: 0 auto;
+        height: 200px;
+        .x-icon-ai-camera {
+            font-size: 100px;
+            color: #ddd;
+        }
+    }
+    .x-cover-title {
+        vertical-align: bottom;
+        //font-weight: bold;
+        font-size: 34px;
+        padding-left: 20px;
+    }
+    .x-cover-description {
+        vertical-align: top;
+        font-size: 28px;
+        color: #ddd;
+        padding-left: 20px;
     }
 }

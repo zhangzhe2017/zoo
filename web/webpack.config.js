@@ -175,7 +175,9 @@ module.exports = {
                     pxtorem({
                         rootValue: 100,
                         unitPrecision: 5,
-                        propList: ['*'],
+                        propList: [
+                            '*', '!border', '!border-top', '!border-right', '!border-bottom', '!border-left'
+                        ],
                         selectorBlackList: [],
                         replace: true,
                         mediaQuery: false,
