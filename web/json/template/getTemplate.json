@@ -29,12 +29,6 @@
                 "required": false
             },
             {
-                "label": "报名截止时间",
-                "name": "registerEndTime",
-                "type": "datetime",
-                "required": false
-            },
-            {
                 "label": "地点",
                 "name": "address",
                 "type": "input",
