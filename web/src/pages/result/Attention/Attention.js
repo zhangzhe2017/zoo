@@ -2,6 +2,7 @@
 
 import CommonMixin from '../../../mixins/CommonMixin';
 import Util from '../../../utils/Util';
+import infoIcon from './info.svg';
 
 const {React, Component, PropTypes, connect, reactMixin, Result, Icon} = window._external;
 
@@ -20,7 +21,7 @@ class Attention extends Component {
         return (
             <div className="x-page">
                 <Result
-                    img={<Icon type="cross-circle-o" className="icon x-icon-error"/>}
+                    img={<Icon type={infoIcon} className="icon x-icon-info"/>}
                     title="请先关注【组局官】公众号"
                     message={
                         <div>
