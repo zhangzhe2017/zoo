@@ -41,14 +41,14 @@ class FormDetail extends Component {
         doAction(dispatch, ActionTypes.formDetail.replaceState, FormDetail.defaultState);
     }
 
-    handleRegisterBtnClick(qrCodeUrl) {
+    handleRegisterBtnClick(qrCodeUrls) {
         const {dispatch, location, registered} = this.props;
         const {query} = location;
         doAction(dispatch, ActionTypes.formDetail.register, {
             id: query.formId,
             register: !registered,
             formDetail: this,
-            qrCodeUrl
+            qrCodeUrls
         });
     }
 
@@ -70,6 +70,7 @@ class FormDetail extends Component {
         } else {
             realTitle = title;
         }
+        let coverItem = null;
         const items = [];
         _.forEach(fields, field => {
             const {name, label, type, extra} = field;
@@ -78,8 +79,23 @@ class FormDetail extends Component {
             }
             let content = null;
             if (type === 'image') {
+                const urls = fieldValues[name] || [];
+                if (name === 'cover') {
+                    const coverImageUrl = urls[0] || Util.logoUrl;
+                    coverItem = (
+                        <div
+                            className="x-cover"
+                        >
+                            <img
+                                className="x-cover-image"
+                                src={coverImageUrl}
+                                onClick={this.handleImageClick.bind(this, coverImageUrl, [coverImageUrl])}
+                            />
+                        </div>
+                    );
+                    return;
+                }
                 content = [];
-                const urls = fieldValues[name];
                 _.forEach(urls, (url, index) => {
                     content.push(
                         <div key={index} className="x-image-wrapper">
@@ -120,6 +136,7 @@ class FormDetail extends Component {
                 {
                     items.length ?
                         <List className="x-detail-list">
+                            {coverItem ? coverItem : ''}
                             <ListDetailItem label="发起人" content={creatorNickName}/>
                             {items}
                             <ListDetailItem
@@ -131,25 +148,27 @@ class FormDetail extends Component {
                 }
                 {
                     isActivity ?
-                        <Button
-                            type={registered ? 'ghost' : 'primary'}
-                            onClick={
-                                this.handleRegisterBtnClick.bind(
-                                    this,
-                                    (fieldValues['qrCode'] || [])[0] || ''
-                                )
-                            }
-                            disabled={isEnd || !registered && isComplete}
-                            className="x-button"
-                        >
-                            {
-                                isEnd ? '报名已截止' : (
-                                    registered ? '取消报名' : (
-                                        isComplete ? '报名人数已满' : '我要报名'
+                        <div className="x-button-wrapper">
+                            <Button
+                                type={registered ? 'ghost' : 'primary'}
+                                onClick={
+                                    this.handleRegisterBtnClick.bind(
+                                        this,
+                                        fieldValues['qrCode'] || []
                                     )
-                                )
-                            }
-                        </Button> : ''
+                                }
+                                disabled={isEnd || !registered && isComplete}
+                                className="x-button"
+                            >
+                                {
+                                    isEnd ? '报名已截止' : (
+                                        registered ? '取消报名' : (
+                                            isComplete ? '报名人数已满' : '我要报名'
+                                        )
+                                    )
+                                }
+                            </Button>
+                        </div> : ''
                 }
             </div>
         );

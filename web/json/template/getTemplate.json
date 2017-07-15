@@ -5,6 +5,12 @@
         "title": "发起活动",
         "fields": [
             {
+                "label": "封面",
+                "name": "cover",
+                "type": "image",
+                "required": false
+            },
+            {
                 "label": "标题",
                 "name": "title",
                 "type": "input",
@@ -56,7 +62,7 @@
             {
                 "label": "详细介绍",
                 "name": "description",
-                "type": "richtext",
+                "type": "textarea",
                 "required": true
             }
         ]

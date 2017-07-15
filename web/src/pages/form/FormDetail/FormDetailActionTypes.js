@@ -43,7 +43,18 @@ const ActionTypes = {
                     if (realTitle) {
                         formDetail.pageTitle = realTitle;
                         if (isActivity) {
-                            formDetail.pageDesc = fieldValuesObject.description;
+                            const {
+                                startTime: startTimeField = {},
+                                endTime: endTimeField = {},
+                                address: addressField = {}
+                            } = fields;
+                            const {startTime = '', endTime = '', address = '', cover = []} = fieldValuesObject;
+                            formDetail.pageDesc = [
+                                startTimeField.label || '', '：', startTime, '\n',
+                                endTimeField.label || '', '：', endTime, '\n',
+                                addressField.label || '', '：', address
+                            ].join('');
+                            formDetail.pageImage = cover[0];
                         } else {
                             formDetail.pageDesc = '';
                         }
@@ -57,13 +68,13 @@ const ActionTypes = {
         },
 
         register(dispatch) {
-            const {id, register, formDetail, qrCodeUrl} = this || {};
+            const {id, register, formDetail, qrCodeUrls} = this || {};
             doAction(dispatch, ActionTypes.formDetail.changeState, {loading: true});
             FormService.register({
                 data: {id, register},
                 success: () => {
                     if (register) {
-                        doAction(dispatch, AllActionTypes.registerSuccess.changeState, {qrCodeUrl});
+                        doAction(dispatch, AllActionTypes.registerSuccess.changeState, {qrCodeUrls});
                         Routes.goto('/result/registerSuccess');
                     } else {
                         Util.later(function () {

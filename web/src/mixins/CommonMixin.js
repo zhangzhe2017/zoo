@@ -57,7 +57,7 @@ export default {
             const shareConfig = {
                 title: this.pageTitle,
                 desc: this.pageDesc,
-                imgUrl: this.pageImage || 'http://zujuguan.oss-cn-shanghai.aliyuncs.com/1637566405.jpg',
+                imgUrl: this.pageImage || Util.logoUrl,
                 link: `http://www.zujuguan.com/app/redirectShareUrl?redirectUrl=${encodeURIComponent(redirectUrl)}`,
                 success: () => {
                 },
