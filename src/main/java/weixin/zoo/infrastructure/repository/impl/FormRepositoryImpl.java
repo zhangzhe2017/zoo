@@ -32,7 +32,8 @@ public class FormRepositoryImpl implements FormRepository{
                     .andFormOwnerEqualTo(wxid)
                     .andFieldIdsEqualTo(fieldIds);
             List<Form> forms = formMapper.selectByExample(formExample);
-            Form formAdd = forms.get(0);
+
+            Form formAdd = forms.get(forms.size()-1);
 
             return formAdd.getId();
         }
