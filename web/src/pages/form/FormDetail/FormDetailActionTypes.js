@@ -6,7 +6,7 @@ import FormService from '../../../services/FormService';
 import Util from '../../../utils/Util';
 import {Routes} from '../../../components/Routes/Routes';
 
-const {Toast} = window._external;
+const {Toast, _} = window._external;
 
 const ActionTypes = {
 
@@ -43,11 +43,15 @@ const ActionTypes = {
                     if (realTitle) {
                         formDetail.pageTitle = realTitle;
                         if (isActivity) {
+                            const fieldsMap = {};
+                            _.forEach(fields, field => {
+                                fieldsMap[field.name] = field;
+                            });
                             const {
                                 startTime: startTimeField = {},
                                 endTime: endTimeField = {},
                                 address: addressField = {}
-                            } = fields;
+                            } = fieldsMap;
                             const {startTime = '', endTime = '', address = '', cover = []} = fieldValuesObject;
                             formDetail.pageDesc = [
                                 startTimeField.label || '', '：', startTime, '\n',

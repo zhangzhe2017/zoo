@@ -2,7 +2,7 @@
 
 import CommonMixin from '../../../mixins/CommonMixin';
 
-const {React, Component, PropTypes, connect, reactMixin, Result, Icon} = window._external;
+const {React, Component, PropTypes, connect, reactMixin, Result, Icon, _} = window._external;
 
 @reactMixin.decorate(CommonMixin)
 class RegisterSuccess extends Component {
