@@ -104,7 +104,7 @@ public class FormController {
 
         PageDto pageDto = new PageDto(pageSize*(currentPage-1), pageSize);
 
-        List<Form> forms = formService.getFormsByUserId(wxid, "activity", pageDto);
+        List<Form> forms = formService.getFormsByUserId(wxid, ActivityTypeEnum.ACTIVITY.getName(), pageDto);
 
         JSONArray jsonArray = new JSONArray();
         for(Form form : forms){
