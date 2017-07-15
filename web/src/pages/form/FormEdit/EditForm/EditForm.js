@@ -7,9 +7,11 @@ import {createForm} from 'rc-form';
 import {FormEdit} from '../FormEdit';
 import Util from '../../../../utils/Util';
 import KindEditor from '../../../../components/KindEditor/KindEditor';
+import cameraIcon from './camera.svg';
 
 const {
-    React, Component, connect, reactMixin, List, InputItem, TextareaItem, ImagePicker, _, Button, DatePicker, Toast, $
+    React, Component, connect, reactMixin, List, InputItem, TextareaItem, ImagePicker, _, Button, DatePicker, Toast, $,
+    Icon
 } = window._external;
 
 @reactMixin.decorate(CommonMixin)
@@ -333,7 +335,7 @@ class EditForm extends Component {
                                         <tbody>
                                         <tr>
                                             <td rowSpan="2">
-                                                <span className="x-iconfont x-icon-ai-camera"/>
+                                                <Icon type={cameraIcon}/>
                                             </td>
                                             <td className="x-cover-title">
                                                 上传封面图

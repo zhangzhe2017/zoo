@@ -1,24 +1,4 @@
-//iconfont
-@font-face {
-    font-family: "x-iconfont";
-    src: url('//at.alicdn.com/t/font_0pnu84f9jlonipb9.eot?t=1500087569207'); /* IE9*/
-    src: url('//at.alicdn.com/t/font_0pnu84f9jlonipb9.eot?t=1500087569207#iefix') format('embedded-opentype'), /* IE6-IE8 */
-    url('//at.alicdn.com/t/font_0pnu84f9jlonipb9.woff?t=1500087569207') format('woff'), /* chrome, firefox */
-    url('//at.alicdn.com/t/font_0pnu84f9jlonipb9.ttf?t=1500087569207') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-    url('//at.alicdn.com/t/font_0pnu84f9jlonipb9.svg?t=1500087569207#x-iconfont') format('svg'); /* iOS 4.1- */
-}
-
 :global {
-    .x-iconfont {
-        font-family: "x-iconfont" !important;
-        font-size: 16px;
-        font-style: normal;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
-    .x-icon-ai-camera:before {
-        content: "\e66c";
-    }
 
     td {
         font-size: 30px;
@@ -578,9 +558,13 @@
     .x-cover-table {
         margin: 0 auto;
         height: 200px;
-        .x-icon-ai-camera {
-            font-size: 100px;
-            color: #ddd;
+        .am-icon-camera {
+            fill: #ddd;
+            width: 100px;
+            height: 100px;
+        }
+        td {
+            border: 1px solid red;
         }
     }
     .x-cover-title {
