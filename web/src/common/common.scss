@@ -443,7 +443,7 @@
     }
     .x-button-wrapper {
         background-color: #f5f5f9;
-        padding: 50px 100px;
+        padding: 50px;
     }
     .x-button {
     }
@@ -577,6 +577,7 @@
     }
     .x-cover-table {
         margin: 0 auto;
+        height: 200px;
         .x-icon-ai-camera {
             font-size: 100px;
             color: #ddd;
@@ -586,10 +587,12 @@
         vertical-align: bottom;
         //font-weight: bold;
         font-size: 34px;
+        padding-left: 20px;
     }
     .x-cover-description {
         vertical-align: top;
         font-size: 28px;
         color: #ddd;
+        padding-left: 20px;
     }
 }
