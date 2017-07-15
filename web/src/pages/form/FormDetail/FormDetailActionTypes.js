@@ -53,7 +53,7 @@ const ActionTypes = {
                                 address: addressField = {}
                             } = fieldsMap;
                             const {startTime = '', endTime = '', address = '', cover = []} = fieldValuesObject;
-                            const {dateTimeFormat} = Util.Const;
+                            const dateTimeFormat = 'MM-DD HH:mm';
                             formDetail.pageDesc = [
                                 startTimeField.label || '', '：', startTime ? moment(startTime).format(dateTimeFormat) : '', '\n',
                                 endTimeField.label || '', '：', endTime ? moment(endTime).format(dateTimeFormat) : '', '\n',
