@@ -6,7 +6,7 @@ import FormService from '../../../services/FormService';
 import Util from '../../../utils/Util';
 import {Routes} from '../../../components/Routes/Routes';
 
-const {Toast, _} = window._external;
+const {Toast, _, moment} = window._external;
 
 const ActionTypes = {
 
@@ -53,9 +53,10 @@ const ActionTypes = {
                                 address: addressField = {}
                             } = fieldsMap;
                             const {startTime = '', endTime = '', address = '', cover = []} = fieldValuesObject;
+                            const {dateTimeFormat} = Util.Const;
                             formDetail.pageDesc = [
-                                startTimeField.label || '', '：', startTime, '\n',
-                                endTimeField.label || '', '：', endTime, '\n',
+                                startTimeField.label || '', '：', startTime ? moment(startTime).format(dateTimeFormat) : '', '\n',
+                                endTimeField.label || '', '：', endTime ? moment(endTime).format(dateTimeFormat) : '', '\n',
                                 addressField.label || '', '：', address
                             ].join('');
                             formDetail.pageImage = cover[0];
