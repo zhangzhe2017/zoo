@@ -68,5 +68,12 @@ $(() => {
     }).on('click', '.am-input-item,.am-textarea-item', (e) => {
         const currentTargetEl = $(e.currentTarget);
         currentTargetEl.find('.am-input-control input,.am-textarea-control textarea').focus();
+    }).on('focus', '.am-input-item .am-input-control input,.am-textarea-item .am-textarea-control textarea', (e) => {
+        if (_isQQBrowser()) {
+            return;
+        }
+        const currentTargetEl = $(e.currentTarget);
+        const listItem = currentTargetEl.closest('.am-list-item');
+        listItem.length && $(window).scrollTop(listItem.offset().top);
     });
 });

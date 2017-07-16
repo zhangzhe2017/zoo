@@ -56,7 +56,7 @@
             {
                 "label": "详细介绍",
                 "name": "description",
-                "type": "richtext",
+                "type": "textarea",
                 "required": true
             }
         ],
