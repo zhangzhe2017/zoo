@@ -12,6 +12,8 @@ import weixin.zoo.infrastructure.repository.*;
 import weixin.zoo.service.FormService;
 import weixin.zoo.utils.OssUtils;
 import weixin.zoo.wxapi.WxServiceCenter;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -68,6 +70,16 @@ public class FormServiceImpl implements FormService {
                         if(upload){
                             String url = OssUtils.getFileUrl(keyStr);
                             result.add(url);
+                        }
+
+                        try{
+                            //完成后删除文件
+                            File file = new File(mediaLocalPath);
+                            if(file.exists()){
+                                file.delete();
+                            }
+                        }catch (Exception e){
+                            e.printStackTrace();
                         }
                     }
                     jsonObject.put(key, result);
