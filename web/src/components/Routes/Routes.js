@@ -51,6 +51,7 @@ class Routes extends Component {
                     <IndexRedirect to="auth"/>
                     <Route path="auth" component={Auth}/>
                     <Route path="form/add" component={FormEdit}/>
+                    <Route path="form/edit" component={FormEdit}/>
                     <Route path="form/view" component={FormDetail}/>
                     <Route path="list/formList" component={FormList}/>
                     <Route path="result/registerSuccess" component={RegisterSuccess}/>

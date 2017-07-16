@@ -441,6 +441,10 @@
         padding: 50px;
     }
     .x-button {
+        margin-top: 50px;
+        &:first-child {
+            margin-top: 0;
+        }
     }
     .am-button-ghost {
         background-color: #fff;

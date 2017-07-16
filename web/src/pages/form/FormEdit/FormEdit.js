@@ -24,8 +24,10 @@ class FormEdit extends Component {
     init() {
         const {dispatch, location} = this.props;
         const {pathname, query} = location;
-        const {templateId} = query;
-        if (_isQQBrowser() && templateId === '1') {
+        const {templateId, formId} = query;
+        const isAdd = pathname === '/form/add';
+        const isEdit = pathname === '/form/edit';
+        if (_isQQBrowser() && isAdd && templateId === '1') {
             Util.later(() => {
                 Routes.goto({
                     pathname,
@@ -35,10 +37,17 @@ class FormEdit extends Component {
                 });
             }, 1);
         } else {
-            doAction(dispatch, ActionTypes.formEdit.getTemplate, {
-                id: templateId,
-                formEdit: this
-            });
+            if (isAdd) {
+                doAction(dispatch, ActionTypes.formEdit.getTemplate, {
+                    id: templateId,
+                    formEdit: this
+                });
+            } else if (isEdit) {
+                doAction(dispatch, ActionTypes.formEdit.getForm, {
+                    id: formId,
+                    formEdit: this
+                });
+            }
         }
     }
 
