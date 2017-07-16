@@ -69,11 +69,10 @@ class FormList extends Component {
     }
 
     changeTab = (type) => {
-        const {dispatch, loading, finished} = this.props;
-        if (loading || finished) {
+        const {dispatch, loading} = this.props;
+        if (loading) {
             return;
         }
-
         window.scrollTo(0, 0);
         doAction(dispatch, ActionTypes.formList.changeList, {
             pageType: type,
