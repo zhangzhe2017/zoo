@@ -287,7 +287,6 @@
     }
     .am-card {
         border-radius: 10px;
-        padding-bottom: 12px;
     }
     .am-card-header {
         //font-size: 34px;
@@ -302,7 +301,7 @@
         font-size: 30px;
     }
     .am-card-body {
-        padding: 30px 30px 12px;
+        padding: 20px 30px;
         font-size: 30px;
     }
     .am-card-footer {
@@ -416,9 +415,25 @@
     .x-card {
         margin: 20px;
         min-height: 0;
+        box-shadow: 0 2px 2px #ccc;
         .am-card-body {
             min-height: 0;
             border-top: 0;
+        }
+    }
+    .flex-row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    .info-wrap {
+        color: #888;
+        margin-left: 30px;
+        div {
+            margin: 8px auto;
+        }
+        .title {
+            color: #444;
         }
     }
     .x-button-wrapper {
@@ -576,5 +591,32 @@
         font-size: 28px;
         color: #ddd;
         padding-left: 20px;
+    }
+    .x-page-FormList {
+        padding-top: 100px;
+        background: #efefef;
+    }
+    .x-list {
+    }
+    .x-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 750px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        background: #fff;
+        z-index: 10;
+        box-shadow: 0px 2px 2px #ccc;
+    }
+    .x-tab {
+        line-height: 80px;
+        height: 80px;
+    }
+    .x-tab-cur {
+        color: #ff5000;
+        border-bottom: 2px solid #ff5000;
     }
 }
