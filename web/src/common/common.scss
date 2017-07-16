@@ -305,7 +305,6 @@
     .am-card {
         border-radius: 10px;
         //border: 1px solid #ddd;
-        padding-bottom: 12px;
     }
     .am-card-header {
         //font-size: 34px;
@@ -321,7 +320,7 @@
     }
     .am-card-body {
         //border-top: 1px solid #ddd;
-        padding: 30px 30px 12px;
+        padding: 20px 30px;
         font-size: 30px;
     }
     .am-card-footer {
@@ -412,6 +411,9 @@
     .am-textarea-label {
         font-weight: bold;
     }
+    .x-layout-pageContent {
+        background: #efefef;
+    }
     .x-list-item.am-list-item .am-list-line .am-list-content {
         width: 238px;
         font-weight: bold;
@@ -431,14 +433,31 @@
         margin: 0 auto;
     }
     .x-card {
-        height: 100px;
+        // height: 100px;
         margin: 20px;
         min-height: 0;
+        box-shadow: 0px 2px 2px #ccc;
         .am-card-body {
             min-height: 0;
             border-top: 0;
         }
     }
+    .flex-row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    .info-wrap {
+        color: #888;
+        margin-left: 30px;
+        div {
+            margin: 8px auto;
+        }
+        .title {
+            color: #444;
+        }
+    }
+
     .x-button {
         border-top-left-radius: 0;
         border-top-right-radius: 0;
@@ -576,6 +595,7 @@
         justify-content: space-around;
         background: #fff;
         z-index: 10;
+        box-shadow: 0px 2px 2px #ccc;
     }
     .x-tab {
         line-height: 80px;
