@@ -21,7 +21,8 @@ class FormList extends Component {
         pageType: 'myFormList'
     };
 
-    pageTitle = '表单列表';
+    //pageTitle = '表单列表';
+    pageTitle = '活动列表';
 
     getViewportHeight() {
         var prop = 'clientHeight',
@@ -97,7 +98,7 @@ class FormList extends Component {
                 <Card className="x-card">
                     <Card.Body>
                         <div className="flex-row">
-                            <img src={pic} width="150" height="150" />
+                            <img src={pic} width="150" height="150"/>
                             <div className="info-wrap">
                                 <div className="title"> 标题：{title} </div>
                                 <div> 时间：2017-01-01</div>
@@ -113,16 +114,18 @@ class FormList extends Component {
         return (
             <div className="x-page x-page-FormList">
                 <div className="x-header">
-                    <div className={'x-tab' + (pageType == 'myFormList' && ' x-tab-cur')} onClick={this.changeTab.bind(this, 'myFormList')}>
+                    <div className={'x-tab' + (pageType == 'myFormList' && ' x-tab-cur')}
+                         onClick={this.changeTab.bind(this, 'myFormList')}>
                         我发起的
                     </div>
-                    <div className={'x-tab' + (pageType == 'getAttendedActivityList' && ' x-tab-cur')} onClick={this.changeTab.bind(this, 'getAttendedActivityList')}>
+                    <div className={'x-tab' + (pageType == 'getAttendedActivityList' && ' x-tab-cur')}
+                         onClick={this.changeTab.bind(this, 'getAttendedActivityList')}>
                         我参加的
                     </div>
                 </div>
                 <div className="x-list">
                     {items}
-                    <div id="loadingDiv" className="x-margin-20-0">
+                    <div id="loadingDiv" className="x-padding-bottom-20">
                         {
                             finished ? <div className="x-noMore">没有更多了</div> :
                                 <ActivityIndicator size="large" className="x-activity-indicator"/>
