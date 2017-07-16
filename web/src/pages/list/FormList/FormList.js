@@ -74,8 +74,8 @@ class FormList extends Component {
             return;
         }
         window.scrollTo(0, 0);
-        doAction(dispatch, ActionTypes.formList.changeList, {
-            finished: false,
+        doAction(dispatch, ActionTypes.formList.changeState, {listData: []});
+        doAction(dispatch, ActionTypes.formList.getFormList, {
             pageType: type,
             currentPage: 1,
             pageSize: FormList.pageSize
