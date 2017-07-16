@@ -78,7 +78,7 @@ class FormList extends Component {
         doAction(dispatch, ActionTypes.formList.changeList, {
             pageType: type,
             currentPage: 1,
-            pageSize: this.pageSize
+            pageSize: FormList.pageSize
         });
     }
 
