@@ -124,8 +124,8 @@ class FormDetail extends Component {
                 />
             );
         });
-        const {registerEndTime, totalCount} = fieldValues;
-        const isEnd = registerEndTime && timestamp > registerEndTime;
+        const {endTime, totalCount} = fieldValues;
+        const isEnd = endTime && timestamp > endTime;
         const isComplete = totalCount && attenderList.length >= totalCount;
         return (
             <div className="x-page">
@@ -161,7 +161,7 @@ class FormDetail extends Component {
                                 className="x-button"
                             >
                                 {
-                                    isEnd ? '报名已截止' : (
+                                    isEnd ? '活动已结束' : (
                                         registered ? '取消报名' : (
                                             isComplete ? '报名人数已满' : '我要报名'
                                         )

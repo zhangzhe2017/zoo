@@ -35,12 +35,12 @@ class RegisterSuccess extends Component {
                 />
             );
         });
-        const message = (
+        const message = items.length ? (
             <div>
                 长按识别二维码<br/>
                 {items}
             </div>
-        );
+        ) : '';
         return (
             <div className="x-page">
                 <Result

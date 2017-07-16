@@ -17,20 +17,14 @@
                 "required": true
             },
             {
-                "label": "活动开始时间",
+                "label": "开始时间",
                 "name": "startTime",
                 "type": "datetime",
                 "required": true
             },
             {
-                "label": "活动结束时间",
+                "label": "结束时间",
                 "name": "endTime",
-                "type": "datetime",
-                "required": true
-            },
-            {
-                "label": "报名截止时间",
-                "name": "registerEndTime",
                 "type": "datetime",
                 "required": true
             },

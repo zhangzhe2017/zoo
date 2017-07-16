@@ -142,7 +142,7 @@ module.exports = {
             },
             {
                 test: /\.svg$/,
-                include: [nodeModulesPath],
+                include: [nodeModulesPath, srcPath],
                 loader: 'svg-sprite-loader'
             }
         ]
