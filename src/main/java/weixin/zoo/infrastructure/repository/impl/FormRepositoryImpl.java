@@ -60,11 +60,11 @@ public class FormRepositoryImpl implements FormRepository{
 
     @Override
     public long updateForm(Long id, String formValue, String name, String fieldIds) {
-        Form form = new Form();
+        //先根据id取到form
+        Form form = formMapper.selectByPrimaryKey(id);
         form.setFieldIds(fieldIds);
         form.setFormValue(formValue);
         form.setFormName(name);
-        form.setId(id);
 
         return formMapper.updateByPrimaryKeyWithBLOBs(form);
     }
