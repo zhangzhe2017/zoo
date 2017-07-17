@@ -60,15 +60,13 @@ public class FormRepositoryImpl implements FormRepository{
 
     @Override
     public long updateForm(Long id, String formValue, String name, String fieldIds) {
-        FormExample formExample = new FormExample();
-        formExample.createCriteria().andIdEqualTo(id);
-
         Form form = new Form();
         form.setFieldIds(fieldIds);
         form.setFormValue(formValue);
         form.setFormName(name);
+        form.setId(id);
 
-        return formMapper.updateByExample(form,formExample);
+        return formMapper.updateByPrimaryKeyWithBLOBs(form);
     }
 
     private Form transferForm(String templateId, String formValue, String wxid, String name, String fieldIds){
