@@ -94,6 +94,14 @@
     <if test="orderByClause != null">
       order by ${orderByClause} desc
     </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
   </select>
   <select id="selectByExample" parameterType="weixin.zoo.infrastructure.model.FormExample" resultMap="BaseResultMap">
     select
