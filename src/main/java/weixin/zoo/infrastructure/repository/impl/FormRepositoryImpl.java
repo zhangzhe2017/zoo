@@ -66,7 +66,9 @@ public class FormRepositoryImpl implements FormRepository{
         form.setFormValue(formValue);
         form.setFormName(name);
 
-        return formMapper.updateByPrimaryKeyWithBLOBs(form);
+        formMapper.updateByPrimaryKeyWithBLOBs(form);
+
+        return id;
     }
 
     private Form transferForm(String templateId, String formValue, String wxid, String name, String fieldIds){
