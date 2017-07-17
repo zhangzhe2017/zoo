@@ -69,26 +69,6 @@ public class FormController {
         return ResultUtils.assembleResult(true, "true", form);
     }
 
-    @RequestMapping("/updateForm")
-    @ResponseBody
-    public String updateForm(HttpServletRequest request){
-        String id = request.getParameter("templateId");
-        String fieldValues = request.getParameter("fieldValues");
-        JSONObject jsonObject = JSON.parseObject(fieldValues);
-
-        String formName = jsonObject.getString("title");
-        String formFields = request.getParameter("formFields");
-
-        //从session里取到wxid
-        String wxid = (String)request.getSession().getAttribute("wxid");
-
-        long formId = formService.saveForm(id, fieldValues, wxid, formName,formFields);
-        JSONObject result = new JSONObject();
-        result.put("id",formId);
-
-        return ResultUtils.assembleResult(true, "true", result);
-    }
-
     @RequestMapping("/register")
     @ResponseBody
     public String register(HttpServletRequest request){
