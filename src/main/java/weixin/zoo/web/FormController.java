@@ -3,6 +3,7 @@ package weixin.zoo.web;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +35,8 @@ public class FormController {
     @RequestMapping("/saveForm")
     @ResponseBody
     public String saveForm(HttpServletRequest request) {
-        String id = request.getParameter("templateId");
+        String templateId = request.getParameter("templateId");
+        String formId = request.getParameter("formId");
         String fieldValues = request.getParameter("fieldValues");
         JSONObject jsonObject = JSON.parseObject(fieldValues);
 
@@ -44,9 +46,14 @@ public class FormController {
         //从session里取到wxid
         String wxid = (String)request.getSession().getAttribute("wxid");
 
-        long formId = formService.saveForm(id, fieldValues, wxid, formName,formFields);
         JSONObject result = new JSONObject();
-        result.put("id",formId);
+        if(StringUtils.isNotEmpty(templateId)){
+            long id = formService.saveForm(templateId, fieldValues, wxid, formName,formFields);
+            result.put("id",id);
+        }else{
+            long id = formService.updateForm(Long.valueOf(formId), fieldValues, formName, formFields);
+            result.put("id",id);
+        }
 
         return ResultUtils.assembleResult(true, "true", result);
     }
@@ -110,9 +117,16 @@ public class FormController {
         for(Form form : forms){
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("id",form.getId());
-            jsonObject.put("title",form.getFormName());
+            jsonObject.put("title", form.getFormName());
             jsonObject.put("type", ActivityTypeEnum.ACTIVITY.getName());
-            jsonObject.put("formOwner",form.getFormOwner());
+            jsonObject.put("formOwner", form.getFormOwner());
+
+            //从详情中拿到cover
+            JSONObject json = (JSONObject)JSONObject.parse(form.getFormValue());
+            String pic = json.getString("cover");
+            String startTime = json.getString("startTime");
+            jsonObject.put("pic", pic);
+            jsonObject.put("startTime",startTime);
             jsonArray.add(jsonObject);
         }
 
@@ -139,6 +153,14 @@ public class FormController {
             Form form = formService.getFormById(register.getFormId());
             jsonObject.put("formOwner",form.getFormOwner());
             jsonObject.put("title",form.getFormName());
+
+            //从详情中拿到cover
+            JSONObject json = (JSONObject)JSONObject.parse(form.getFormValue());
+            String pic = json.getString("cover");
+            String startTime = json.getString("startTime");
+            jsonObject.put("pic", pic);
+            jsonObject.put("startTime",startTime);
+
             jsonArray.add(jsonObject);
         }
 
