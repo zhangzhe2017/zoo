@@ -5,6 +5,7 @@ import ActionTypes from '../../../redux/actions/ActionTypes';
 import CommonMixin from '../../../mixins/CommonMixin';
 import ListDetailItem from '../../../components/ListDetailItem/ListDetailItem';
 import Util from '../../../utils/Util';
+import {Routes} from '../../../components/Routes/Routes';
 
 const {React, Component, PropTypes, connect, reactMixin, List, _, Button, moment} = window._external;
 
@@ -24,7 +25,7 @@ class FormDetail extends Component {
         timestamp: 0
     };
 
-    bindFns = [];
+    bindFns = ['handleEditBtnClick'];
     pageTitle = '表单查看';
 
     init() {
@@ -56,6 +57,15 @@ class FormDetail extends Component {
         wx.previewImage({
             current: url,
             urls
+        });
+    }
+
+    handleEditBtnClick() {
+        const {location} = this.props;
+        const {query} = location;
+        Routes.goto({
+            pathname: '/form/edit',
+            query: {formId: query.formId}
         });
     }
 
@@ -168,6 +178,16 @@ class FormDetail extends Component {
                                     )
                                 }
                             </Button>
+                            {
+                                wxid === creatorWxid ?
+                                    <Button
+                                        type="ghost"
+                                        className="x-button"
+                                        onClick={this.handleEditBtnClick}
+                                    >
+                                        修改活动
+                                    </Button> : ''
+                            }
                         </div> : ''
                 }
             </div>

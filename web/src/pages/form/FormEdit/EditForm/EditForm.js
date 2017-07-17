@@ -30,6 +30,7 @@ class EditForm extends Component {
                 }
             ]*/
         },
+        richtextMap: {},
         _refresh: {}
     };
 
@@ -66,13 +67,12 @@ class EditForm extends Component {
         return formData;
     }
 
-    /*setFormData(data) {
+    setFormData(data) {
         const {form} = this.props;
         const formData = {...data};
         form.setFieldsValue(formData);
-        //todo 加载图片数据
         return formData;
-    }*/
+    }
 
     handleSaveBtnClick() {
         const {dispatch, form, fields} = this.props;
@@ -83,11 +83,19 @@ class EditForm extends Component {
                 const formData = this.getFormData();
                 const formEdit = FormEdit.instance;
                 let templateId = null;
+                let formId = null;
                 if (formEdit) {
-                    templateId = formEdit.props.location.query.templateId;
+                    const {location} = formEdit.props;
+                    const {pathname, query} = location;
+                    if (pathname === '/form/add') {
+                        templateId = query.templateId;
+                    } else {
+                        formId = query.formId;
+                    }
                 }
                 doAction(dispatch, ActionTypes.feEditForm.saveForm, {
                     templateId,
+                    formId,
                     title: formData.title,
                     fields: JSON.stringify(fields),
                     fieldValues: JSON.stringify(formData)
@@ -226,7 +234,7 @@ class EditForm extends Component {
     }
 
     render() {
-        const {form, title, fields, _refresh} = this.props;
+        const {form, title, fields, richtextMap, _refresh} = this.props;
         const {getFieldProps} = form;
         const formData = this.getFormData();
         const items = [];
@@ -413,7 +421,7 @@ class EditForm extends Component {
                         />
                         <KindEditor
                             target={`#${name}`}
-                            //value={issueData.convertDescription}
+                            value={richtextMap[name]}
                             onChange={this.handleKindEditorChange.bind(this, name)}
                             _refresh={_refresh}
                         />

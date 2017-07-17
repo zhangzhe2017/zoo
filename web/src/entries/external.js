@@ -22,9 +22,9 @@ import isFunction from 'lodash/isFunction';
 import isPlainObject from 'lodash/isPlainObject';
 import isString from 'lodash/isString';
 import isUndefined from 'lodash/isUndefined';
-/*import keys from 'lodash/keys';
+//import keys from 'lodash/keys';
 import map from 'lodash/map';
-import noop from 'lodash/noop';
+/*import noop from 'lodash/noop';
 import reduce from 'lodash/reduce';
 import remove from 'lodash/remove';
 import size from 'lodash/size';
@@ -54,8 +54,8 @@ window._external = {
     $,
     //lodash
     _: {
-        assign, concat, escape, forEach, indexOf, isArray, isFunction, isPlainObject, isString, isUndefined, toArray,
-        uniqBy, values
+        assign, concat, escape, forEach, indexOf, isArray, isFunction, isPlainObject, isString, isUndefined, map,
+        toArray, uniqBy, values
     },
     //moment
     moment,

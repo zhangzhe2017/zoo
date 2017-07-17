@@ -26,9 +26,10 @@ class RegisterSuccess extends Component {
     render() {
         const {qrCodeUrls} = this.props;
         const items = [];
-        _.forEach(qrCodeUrls, qrCodeUrl => {
+        _.forEach(qrCodeUrls, (qrCodeUrl, index) => {
             items.push(
                 <img
+                    key={`qrCode_${index}`}
                     className="x-marginTop-10 x-image"
                     src={qrCodeUrl}
                     onClick={this.handleImageClick.bind(this, qrCodeUrl, qrCodeUrls)}

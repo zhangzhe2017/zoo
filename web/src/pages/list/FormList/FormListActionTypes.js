@@ -44,7 +44,8 @@ const ActionTypes = {
                     doAction(dispatch, ActionTypes.formList.changeState, {
                         finished: /*data.length < pageSize || */resultListDataLen === listDataLen,
                         listData: [...resultListData],
-                        currentPage
+                        currentPage,
+                        pageType
                     });
                     Util.later(() => {
                         const formList = FormList.instance;

@@ -164,7 +164,7 @@ module.exports = {
             template: getPath('src/index-debug.html'),
             filename: 'index-debug.html'
         }),
-        new OpenBrowserPlugin({url: `${host}/index-debug.html?code=123&redirectUrl=%2Flist%2FformList%3FpageType%3DmyFormList`}),
+        new OpenBrowserPlugin({url: `${host}/index-debug.html?code=123&redirectUrl=%2Flist%2FformList`}),//%3FpageType%3DmyFormList
         externalExtractor,
         indexExtractor,
         new webpack.LoaderOptionsPlugin({
