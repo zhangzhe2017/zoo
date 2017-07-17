@@ -55,7 +55,7 @@ public class FormRepositoryImpl implements FormRepository{
         formExample.setOffset(pageDto.getOffset());
         formExample.setOrderByClause("gmt_create");
 
-        return formMapper.selectByExample(formExample);
+        return formMapper.selectByExampleWithBLOBs(formExample);
     }
 
     @Override
