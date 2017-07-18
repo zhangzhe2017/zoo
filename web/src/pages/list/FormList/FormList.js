@@ -86,7 +86,7 @@ class FormList extends Component {
         const {location, finished, listData, pageType} = this.props;
 
         const items = listData.map(row => {
-            const {id, title, createTime, pic, position, count, totalCount, status} = row;
+            const {id, title, startTime, pic, type, status} = row;
 
             return <Link
                 key={id}
@@ -101,9 +101,9 @@ class FormList extends Component {
                             <img src={pic} width="150" height="150"/>
                             <div className="info-wrap">
                                 <div className="title"> 标题：{title} </div>
-                                <div> 时间：2017-01-01</div>
-                                <div> 地点：{position}</div>
-                                <div> 人数：{count}/{totalCount}</div>
+                                <div> 时间：{startTime}</div>
+                                <div> 类型：{ type == 'activity' ? '活动' : '问卷'}</div>
+                                <div> 状态：{ status == '0' ? '进行中' : '已完成'}</div>
                             </div>
                         </div>
                     </Card.Body>
