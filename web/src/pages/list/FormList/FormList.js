@@ -6,7 +6,7 @@ import CommonMixin from '../../../mixins/CommonMixin';
 import Util from '../../../utils/Util';
 
 const {
-    React, Component, PropTypes, connect, reactMixin, ActivityIndicator, Card, _, $, Link
+    React, Component, PropTypes, connect, reactMixin, ActivityIndicator, Card, _, $, Link, moment
 } = window._external;
 
 @reactMixin.decorate(CommonMixin)
@@ -98,12 +98,12 @@ class FormList extends Component {
                 <Card className="x-card">
                     <Card.Body>
                         <div className="flex-row">
-                            <img src={pic} width="150" height="150"/>
+                            <img className="formlist-pic" src={pic[0]}/>
                             <div className="info-wrap">
                                 <div className="title"> 标题：{title} </div>
-                                <div> 时间：{startTime}</div>
+                                <div> 时间：{moment(startTime).format('YYYY-MM-DD HH:mm')}</div>
                                 <div> 类型：{ type == 'activity' ? '活动' : '问卷'}</div>
-                                <div> 状态：{ status == '0' ? '进行中' : '已完成'}</div>
+                                <div> 状态：{ status }</div>
                             </div>
                         </div>
                     </Card.Body>
