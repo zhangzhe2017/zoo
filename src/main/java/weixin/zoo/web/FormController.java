@@ -108,9 +108,9 @@ public class FormController {
             String startTime = json.getString("startTime");
             String endTime = json.getString("endTime");
             Long endTimeDate = Long.parseLong(endTime);
-            String status = new String("è¿›è¡Œä¸­".getBytes("utf-8"),"utf-8");
+            String status = new String("½øÐÐÖÐ".getBytes("utf-8"),"utf-8");
             if(System.currentTimeMillis() - endTimeDate > 0){
-                status = new String("å·²æˆªæ­¢".getBytes("utf-8"),"UTF-8");
+                status = new String("ÒÑ½ØÖ¹".getBytes("utf-8"),"UTF-8");
             }
 
             jsonObject.put("status",status);
@@ -150,9 +150,9 @@ public class FormController {
             String startTime = json.getString("startTime");
             String endTime = json.getString("endTime");
             Long endTimeDate = Long.parseLong(endTime);
-            String status = new String("è¿›è¡Œä¸­".getBytes("utf-8"),"UTF-8");
+            String status = new String("½øÐÐÖÐ".getBytes("utf-8"),"UTF-8");
             if(System.currentTimeMillis() - endTimeDate > 0){
-                status = new String("å·²æˆªæ­¢".getBytes("utf-8"),"UTF-8");
+                status = new String("ÒÑ½ØÖ¹".getBytes("utf-8"),"UTF-8");
             }
 
             jsonObject.put("status",status);
