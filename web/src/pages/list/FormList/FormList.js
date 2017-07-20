@@ -98,7 +98,7 @@ class FormList extends Component {
                 <Card className="x-card">
                     <Card.Body>
                         <div className="flex-row">
-                            <img className="formlist-pic" src={pic[0]}/>
+                            <img className="formlist-pic" src={pic}/>
                             <div className="info-wrap">
                                 <div className="title"> 标题：{title} </div>
                                 <div> 时间：{moment(startTime).format('YYYY-MM-DD HH:mm')}</div>
