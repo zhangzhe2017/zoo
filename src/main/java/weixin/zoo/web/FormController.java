@@ -103,7 +103,7 @@ public class FormController {
 
             //从详情中拿到cover
             JSONObject json = (JSONObject)JSONObject.parse(form.getFormValue());
-            String pic = json.getString("cover");
+            String pic = JSONArray.parseArray(json.getString("cover")).getString(0);
             String startTime = json.getString("startTime");
             jsonObject.put("pic", pic);
             jsonObject.put("startTime",startTime);
@@ -136,7 +136,7 @@ public class FormController {
 
             //从详情中拿到cover
             JSONObject json = (JSONObject)JSONObject.parse(form.getFormValue());
-            String pic = json.getString("cover");
+            String pic = JSONArray.parseArray(json.getString("cover")).getString(0);
             String startTime = json.getString("startTime");
             jsonObject.put("pic", pic);
             jsonObject.put("startTime",startTime);
