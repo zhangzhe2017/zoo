@@ -105,8 +105,17 @@ public class FormController {
             JSONObject json = (JSONObject)JSONObject.parse(form.getFormValue());
             String pic = JSONObject.parseArray(json.getString("cover")).getString(0);
             String startTime = json.getString("startTime");
+            String endTime = json.getString("endTime");
+            Long endTimeDate = Long.parseLong(endTime);
+            Long status = 0l;
+            if(System.currentTimeMillis() - endTimeDate > 0){
+                status = 1l;
+            }
+
+            jsonObject.put("status",status);
             jsonObject.put("pic", pic);
-            jsonObject.put("startTime",startTime);
+            jsonObject.put("startTime",Long.parseLong(startTime));
+
             jsonArray.add(jsonObject);
         }
 
@@ -138,8 +147,17 @@ public class FormController {
             JSONObject json = (JSONObject)JSONObject.parse(form.getFormValue());
             String pic = json.getString("cover");
             String startTime = json.getString("startTime");
+            String endTime = json.getString("endTime");
+            Long endTimeDate = Long.parseLong(endTime);
+            Long status = 0l;
+            if(System.currentTimeMillis() - endTimeDate > 0){
+                status = 1l;
+            }
+
+            jsonObject.put("status",status);
+
             jsonObject.put("pic", pic);
-            jsonObject.put("startTime",startTime);
+            jsonObject.put("startTime",Long.parseLong(startTime));
 
             jsonArray.add(jsonObject);
         }
