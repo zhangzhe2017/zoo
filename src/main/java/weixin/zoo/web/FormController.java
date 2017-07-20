@@ -146,7 +146,7 @@ public class FormController {
 
             //从详情中拿到cover
             JSONObject json = (JSONObject)JSONObject.parse(form.getFormValue());
-            String pic = json.getString("cover");
+            String pic = JSONObject.parseArray(json.getString("cover")).getString(0);
             String startTime = json.getString("startTime");
             String endTime = json.getString("endTime");
             Long endTimeDate = Long.parseLong(endTime);
