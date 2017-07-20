@@ -17,6 +17,7 @@ import weixin.zoo.utils.ActivityTypeEnum;
 import weixin.zoo.utils.ResultUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /**
@@ -84,7 +85,7 @@ public class FormController {
 
     @RequestMapping("/getMyFormList")
     @ResponseBody
-    public String getMyFormList(HttpServletRequest request){
+    public String getMyFormList(HttpServletRequest request) throws UnsupportedEncodingException {
         String wxid = (String)request.getSession().getAttribute("wxid");
         Integer currentPage = Integer.parseInt(request.getParameter("currentPage"));
         Integer pageSize = Integer.parseInt(request.getParameter("pageSize"));
@@ -107,9 +108,9 @@ public class FormController {
             String startTime = json.getString("startTime");
             String endTime = json.getString("endTime");
             Long endTimeDate = Long.parseLong(endTime);
-            String status = "进行中";
+            String status = new String("进行中".getBytes(),"UTF-8");
             if(System.currentTimeMillis() - endTimeDate > 0){
-                status = "已截止";
+                status = new String("已截止".getBytes(),"UTF-8");
             }
 
             jsonObject.put("status",status);
@@ -124,7 +125,7 @@ public class FormController {
 
     @RequestMapping("/getAttendedActivityList")
     @ResponseBody
-    public String getAttendedActivityList(HttpServletRequest request){
+    public String getAttendedActivityList(HttpServletRequest request) throws UnsupportedEncodingException {
         String wxid = (String)request.getSession().getAttribute("wxid");
         Integer currentPage = Integer.parseInt(request.getParameter("currentPage"));
         Integer pageSize = Integer.parseInt(request.getParameter("pageSize"));
@@ -149,9 +150,9 @@ public class FormController {
             String startTime = json.getString("startTime");
             String endTime = json.getString("endTime");
             Long endTimeDate = Long.parseLong(endTime);
-            String status = "进行中";
+            String status = new String("进行中".getBytes(),"UTF-8");
             if(System.currentTimeMillis() - endTimeDate > 0){
-                status = "已截止";
+                status = new String("已截止".getBytes(),"UTF-8");
             }
 
             jsonObject.put("status",status);
