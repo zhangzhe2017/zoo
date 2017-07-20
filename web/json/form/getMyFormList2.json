@@ -4,102 +4,102 @@
         {
             "id": 11,
             "title": "发起的活动11",
-            "createTime": 1493568632909,
+            "startTime": 1493568632909,
             "position": "千岛湖",
             "count": 45,
             "totalCount": 100,
             "status": 0,
-            "pic": "//gw.alicdn.com/imgextra/TB13cVORpXXXXc1XFXXSutbFXXX.jpg"
+            "pic": ["//gw.alicdn.com/imgextra/TB13cVORpXXXXc1XFXXSutbFXXX.jpg"]
         },
         {
             "id": 12,
             "title": "发起的活动12",
-            "createTime": 1493568632909,
+            "startTime": 1493568632909,
             "position": "千岛湖",
             "count": 45,
             "totalCount": 100,
             "status": 0,
-            "pic": "//gw.alicdn.com/imgextra/TB13cVORpXXXXc1XFXXSutbFXXX.jpg"
+            "pic": ["//gw.alicdn.com/imgextra/TB13cVORpXXXXc1XFXXSutbFXXX.jpg"]
         },
         {
             "id": 13,
             "title": "发起的活动13",
-            "createTime": 1493568632909,
+            "startTime": 1493568632909,
             "position": "千岛湖",
             "count": 45,
             "totalCount": 100,
             "status": 0,
-            "pic": "//gw.alicdn.com/imgextra/TB13cVORpXXXXc1XFXXSutbFXXX.jpg"
+            "pic": ["//gw.alicdn.com/imgextra/TB13cVORpXXXXc1XFXXSutbFXXX.jpg"]
         },
         {
             "id": 14,
             "title": "活发起的动14",
-            "createTime": 1493568632909,
+            "startTime": 1493568632909,
             "position": "千岛湖",
             "count": 45,
             "totalCount": 100,
             "status": 0,
-            "pic": "//gw.alicdn.com/imgextra/TB13cVORpXXXXc1XFXXSutbFXXX.jpg"
+            "pic": ["//gw.alicdn.com/imgextra/TB13cVORpXXXXc1XFXXSutbFXXX.jpg"]
         },
         {
             "id": 15,
             "title": "活动15",
-            "createTime": 1493568632909,
+            "startTime": 1493568632909,
             "position": "千岛湖",
             "count": 45,
             "totalCount": 100,
             "status": 0,
-            "pic": "//gw.alicdn.com/imgextra/TB13cVORpXXXXc1XFXXSutbFXXX.jpg"
+            "pic": ["//gw.alicdn.com/imgextra/TB13cVORpXXXXc1XFXXSutbFXXX.jpg"]
         },
         {
             "id": 16,
             "title": "活动16",
-            "createTime": 1493568632909,
+            "startTime": 1493568632909,
             "position": "千岛湖",
             "count": 45,
             "totalCount": 100,
             "status": 0,
-            "pic": "//gw.alicdn.com/imgextra/TB13cVORpXXXXc1XFXXSutbFXXX.jpg"
+            "pic": ["//gw.alicdn.com/imgextra/TB13cVORpXXXXc1XFXXSutbFXXX.jpg"]
         },
         {
             "id": 17,
             "title": "活动17",
-            "createTime": 1493568632909,
+            "startTime": 1493568632909,
             "position": "千岛湖",
             "count": 45,
             "totalCount": 100,
             "status": 0,
-            "pic": "//gw.alicdn.com/imgextra/TB13cVORpXXXXc1XFXXSutbFXXX.jpg"
+            "pic": ["//gw.alicdn.com/imgextra/TB13cVORpXXXXc1XFXXSutbFXXX.jpg"]
         },
         {
             "id": 18,
             "title": "活动18",
-            "createTime": 1493568632909,
+            "startTime": 1493568632909,
             "position": "千岛湖",
             "count": 45,
             "totalCount": 100,
             "status": 0,
-            "pic": "//gw.alicdn.com/imgextra/TB13cVORpXXXXc1XFXXSutbFXXX.jpg"
+            "pic": ["//gw.alicdn.com/imgextra/TB13cVORpXXXXc1XFXXSutbFXXX.jpg"]
         },
         {
             "id": 19,
             "title": "活动19",
-            "createTime": 1493568632909,
+            "startTime": 1493568632909,
             "position": "千岛湖",
             "count": 45,
             "totalCount": 100,
             "status": 0,
-            "pic": "//gw.alicdn.com/imgextra/TB13cVORpXXXXc1XFXXSutbFXXX.jpg"
+            "pic": ["//gw.alicdn.com/imgextra/TB13cVORpXXXXc1XFXXSutbFXXX.jpg"]
         },
         {
             "id": 20,
             "title": "发起的活动20",
-            "createTime": 1493568632909,
+            "startTime": 1493568632909,
             "position": "千岛湖",
             "count": 45,
             "totalCount": 100,
             "status": 0,
-            "pic": "//gw.alicdn.com/imgextra/TB13cVORpXXXXc1XFXXSutbFXXX.jpg"
+            "pic": ["//gw.alicdn.com/imgextra/TB13cVORpXXXXc1XFXXSutbFXXX.jpg"]
         }
     ]
 }
