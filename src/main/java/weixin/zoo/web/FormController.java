@@ -107,9 +107,9 @@ public class FormController {
             String startTime = json.getString("startTime");
             String endTime = json.getString("endTime");
             Long endTimeDate = Long.parseLong(endTime);
-            String status = "0";
+            String status = "进行中";
             if(System.currentTimeMillis() - endTimeDate > 0){
-                status = "1";
+                status = "已截止";
             }
 
             jsonObject.put("status",status);
@@ -149,9 +149,9 @@ public class FormController {
             String startTime = json.getString("startTime");
             String endTime = json.getString("endTime");
             Long endTimeDate = Long.parseLong(endTime);
-            String status = "0";
+            String status = "进行中";
             if(System.currentTimeMillis() - endTimeDate > 0){
-                status = "1";
+                status = "已截止";
             }
 
             jsonObject.put("status",status);
