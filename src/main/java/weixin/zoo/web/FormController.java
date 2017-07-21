@@ -134,7 +134,7 @@ public class FormController {
     public String getAttendedActivityList(HttpServletRequest request) throws UnsupportedEncodingException {
         String wxid = (String)request.getSession().getAttribute("wxid");
 
-        log.info("getAttendedActivityList, wxid: " + wxid);
+        log.error("getAttendedActivityList, wxid: " + wxid);
 
         Integer currentPage = Integer.parseInt(request.getParameter("currentPage"));
         Integer pageSize = Integer.parseInt(request.getParameter("pageSize"));
