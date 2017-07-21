@@ -279,7 +279,7 @@ public class FormServiceImpl implements FormService {
             }
         }
 
-        return formRepository.updateForm(id,formValues,name,ids.toJSONString());
+        return formRepository.updateForm(id,jsonObject.toJSONString(),name,ids.toJSONString());
     }
 
     /*
