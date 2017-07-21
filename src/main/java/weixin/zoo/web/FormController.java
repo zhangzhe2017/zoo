@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +17,6 @@ import weixin.zoo.service.CommonService;
 import weixin.zoo.service.FormService;
 import weixin.zoo.utils.ActivityTypeEnum;
 import weixin.zoo.utils.ResultUtils;
-
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -26,6 +27,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/form")
 public class FormController {
+
+    private static final Logger log = LoggerFactory.getLogger(FormController.class);
 
     @Autowired
     private FormService formService;
@@ -44,7 +47,7 @@ public class FormController {
         String formName = jsonObject.getString("title");
         String formFields = request.getParameter("formFields");
 
-        //从session里取到wxid
+        //
         String wxid = (String)request.getSession().getAttribute("wxid");
 
         JSONObject result = new JSONObject();
@@ -63,7 +66,7 @@ public class FormController {
     @ResponseBody
     public String getForm(HttpServletRequest request){
         String id = request.getParameter("id");
-        //从session里取到wxid
+        //
         String wxid = (String)request.getSession().getAttribute("wxid");
         Object form = formService.getForm(Long.valueOf(id),wxid);
 
@@ -87,6 +90,9 @@ public class FormController {
     @ResponseBody
     public String getMyFormList(HttpServletRequest request) throws UnsupportedEncodingException {
         String wxid = (String)request.getSession().getAttribute("wxid");
+
+        log.info("getMyFormList, wxid: " + wxid);
+
         Integer currentPage = Integer.parseInt(request.getParameter("currentPage"));
         Integer pageSize = Integer.parseInt(request.getParameter("pageSize"));
 
@@ -102,7 +108,7 @@ public class FormController {
             jsonObject.put("type", ActivityTypeEnum.ACTIVITY.getName());
             jsonObject.put("formOwner", form.getFormOwner());
 
-            //从详情中拿到cover
+            //
             JSONObject json = (JSONObject)JSONObject.parse(form.getFormValue());
             String pic = JSONObject.parseArray(json.getString("cover")).getString(0);
             String startTime = json.getString("startTime");
@@ -127,6 +133,9 @@ public class FormController {
     @ResponseBody
     public String getAttendedActivityList(HttpServletRequest request) throws UnsupportedEncodingException {
         String wxid = (String)request.getSession().getAttribute("wxid");
+
+        log.info("getAttendedActivityList, wxid: " + wxid);
+
         Integer currentPage = Integer.parseInt(request.getParameter("currentPage"));
         Integer pageSize = Integer.parseInt(request.getParameter("pageSize"));
 
@@ -144,7 +153,7 @@ public class FormController {
             jsonObject.put("formOwner",form.getFormOwner());
             jsonObject.put("title",form.getFormName());
 
-            //从详情中拿到cover
+            //
             JSONObject json = (JSONObject)JSONObject.parse(form.getFormValue());
             String pic = JSONObject.parseArray(json.getString("cover")).getString(0);
             String startTime = json.getString("startTime");
