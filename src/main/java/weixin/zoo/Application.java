@@ -22,7 +22,7 @@ import org.springframework.context.annotation.ImportResource;
 public class Application {
     static {
         //初始化log4j
-        PropertyConfigurator.configure(Application.class.getResource("/log4j.properties"));
+        PropertyConfigurator.configure(Application.class.getResource("").getPath().concat("/log4j.properties"));
     }
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
