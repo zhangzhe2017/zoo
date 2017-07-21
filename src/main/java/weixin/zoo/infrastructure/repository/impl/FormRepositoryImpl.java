@@ -8,6 +8,9 @@ import weixin.zoo.infrastructure.model.Form;
 import weixin.zoo.infrastructure.model.FormExample;
 import weixin.zoo.infrastructure.model.PageDto;
 import weixin.zoo.infrastructure.repository.FormRepository;
+
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -33,7 +36,16 @@ public class FormRepositoryImpl implements FormRepository{
                     .andFieldIdsEqualTo(fieldIds);
             List<Form> forms = formMapper.selectByExample(formExample);
 
-            Form formAdd = forms.get(forms.size()-1);
+            Collections.sort(forms, new Comparator<Form>() {
+                public int compare(Form arg0, Form arg1) {
+                    if(arg0.getGmtCreate().getTime() < arg1.getGmtCreate().getTime()){
+                        return 1;
+                    }
+                    return -1;
+                }
+            });
+
+            Form formAdd = forms.get(0);
 
             return formAdd.getId();
         }
