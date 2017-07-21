@@ -4,7 +4,7 @@ const {_, Toast, $} = window._external;
 
 export default {
 
-    logoUrl: 'http://zujuguan.oss-cn-shanghai.aliyuncs.com/1637566405.jpg',
+    logoUrl: 'http://zujuguan.oss-cn-shanghai.aliyuncs.com/logo.png',
     qrCodeUrl: 'http://zujuguan.oss-cn-shanghai.aliyuncs.com/gzh.jpg',
 
     appId: 'wx88ba27baed50d054',
