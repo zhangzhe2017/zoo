@@ -52,9 +52,11 @@ public class FormController {
 
         JSONObject result = new JSONObject();
         if(StringUtils.isNotEmpty(templateId)){
+            log.info("save form. wxid: " + wxid);
             long id = formService.saveForm(templateId, fieldValues, wxid, formName,formFields);
             result.put("id",id);
         }else{
+            log.info("update form. wxid: " + wxid +" formId: "+formId);
             long id = formService.updateForm(Long.valueOf(formId), fieldValues, formName, formFields);
             result.put("id",id);
         }
@@ -81,6 +83,8 @@ public class FormController {
         String wxid = (String)request.getSession().getAttribute("wxid");
         String fieldValues = request.getParameter("fieldValues");
 
+        log.info("user register or cancel. wxid: "+ wxid + " formId: "+ id +" isRegister: "+ rOc);
+
         Object form = formService.doRegister(Long.valueOf(id), rOc.equals("true"), wxid, fieldValues);
 
         return ResultUtils.assembleResult(true, "true", form);
@@ -91,7 +95,7 @@ public class FormController {
     public String getMyFormList(HttpServletRequest request) throws UnsupportedEncodingException {
         String wxid = (String)request.getSession().getAttribute("wxid");
 
-        log.info("getMyFormList, wxid: " + wxid);
+        log.info("getMyFormList. wxid: " + wxid);
 
         Integer currentPage = Integer.parseInt(request.getParameter("currentPage"));
         Integer pageSize = Integer.parseInt(request.getParameter("pageSize"));
@@ -134,7 +138,7 @@ public class FormController {
     public String getAttendedActivityList(HttpServletRequest request) throws UnsupportedEncodingException {
         String wxid = (String)request.getSession().getAttribute("wxid");
 
-        log.error("getAttendedActivityList, wxid: " + wxid);
+        log.info("getAttendedActivityList. wxid: " + wxid);
 
         Integer currentPage = Integer.parseInt(request.getParameter("currentPage"));
         Integer pageSize = Integer.parseInt(request.getParameter("pageSize"));

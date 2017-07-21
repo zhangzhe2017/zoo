@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,8 @@ import java.util.List;
 @Service
 @EnableAutoConfiguration
 public class FormServiceImpl implements FormService {
+
+    private static final Logger log = LoggerFactory.getLogger(FormServiceImpl.class);
 
     @Autowired
     private FormRepository formRepository;
@@ -79,6 +83,7 @@ public class FormServiceImpl implements FormService {
                                 file.delete();
                             }
                         }catch (Exception e){
+                            log.error("file delete error. filepath: " + mediaLocalPath);
                             e.printStackTrace();
                         }
                     }
