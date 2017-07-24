@@ -117,6 +117,8 @@ public class FormController {
                 String pic = "";
                 if(!JSONObject.parseArray(json.getString("cover")).isEmpty()){
                     pic = JSONObject.parseArray(json.getString("cover")).getString(0);
+                }else{
+                    pic = "http://zujuguan.oss-cn-shanghai.aliyuncs.com/logo.png";
                 }
 
                 String startTime = json.getString("startTime");
@@ -171,6 +173,8 @@ public class FormController {
                 String pic = "";
                 if(!JSONObject.parseArray(json.getString("cover")).isEmpty()){
                     pic = JSONObject.parseArray(json.getString("cover")).getString(0);
+                }else{
+                    pic = "http://zujuguan.oss-cn-shanghai.aliyuncs.com/logo.png";
                 }
 
                 String startTime = json.getString("startTime");
