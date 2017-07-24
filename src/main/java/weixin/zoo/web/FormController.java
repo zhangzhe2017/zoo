@@ -114,7 +114,11 @@ public class FormController {
 
             try{
                 JSONObject json = (JSONObject)JSONObject.parse(form.getFormValue());
-                String pic = JSONObject.parseArray(json.getString("cover")).getString(0);
+                String pic = "";
+                if(!JSONObject.parseArray(json.getString("cover")).isEmpty()){
+                    pic = JSONObject.parseArray(json.getString("cover")).getString(0);
+                }
+
                 String startTime = json.getString("startTime");
                 String endTime = json.getString("endTime");
                 Long endTimeDate = Long.parseLong(endTime);
@@ -164,7 +168,11 @@ public class FormController {
             //
             try{
                 JSONObject json = (JSONObject)JSONObject.parse(form.getFormValue());
-                String pic = JSONObject.parseArray(json.getString("cover")).getString(0);
+                String pic = "";
+                if(!JSONObject.parseArray(json.getString("cover")).isEmpty()){
+                    pic = JSONObject.parseArray(json.getString("cover")).getString(0);
+                }
+
                 String startTime = json.getString("startTime");
                 String endTime = json.getString("endTime");
                 Long endTimeDate = Long.parseLong(endTime);
@@ -175,7 +183,7 @@ public class FormController {
 
                 jsonObject.put("status",status);
                 jsonObject.put("pic", pic);
-                jsonObject.put("startTime",Long.parseLong(startTime));
+                jsonObject.put("startTime", Long.parseLong(startTime));
             }catch (Exception e){
                 e.printStackTrace();
                 log.error("getMyFormList error. "+ e.getMessage());
