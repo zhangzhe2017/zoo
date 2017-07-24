@@ -95,7 +95,10 @@ class FormDetail extends Component {
                     coverItem = (
                         <div
                             className="x-cover"
-                            style={{padding: '10% 25%', backgroundColor: '#fff'}}
+                            style={
+                                coverImageUrl === Util.logoUrl ?
+                                {padding: '10% 25%', backgroundColor: '#fff'} : {}
+                            }
                         >
                             <img
                                 className="x-cover-image"
