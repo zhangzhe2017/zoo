@@ -112,20 +112,24 @@ public class FormController {
             jsonObject.put("type", ActivityTypeEnum.ACTIVITY.getName());
             jsonObject.put("formOwner", form.getFormOwner());
 
-            //
-            JSONObject json = (JSONObject)JSONObject.parse(form.getFormValue());
-            String pic = JSONObject.parseArray(json.getString("cover")).getString(0);
-            String startTime = json.getString("startTime");
-            String endTime = json.getString("endTime");
-            Long endTimeDate = Long.parseLong(endTime);
-            String status = new String("进行中".getBytes("utf-8"),"utf-8");
-            if(System.currentTimeMillis() - endTimeDate > 0){
-                status = new String("已截止".getBytes("utf-8"),"UTF-8");
-            }
+            try{
+                JSONObject json = (JSONObject)JSONObject.parse(form.getFormValue());
+                String pic = JSONObject.parseArray(json.getString("cover")).getString(0);
+                String startTime = json.getString("startTime");
+                String endTime = json.getString("endTime");
+                Long endTimeDate = Long.parseLong(endTime);
+                String status = new String("进行中".getBytes("utf-8"),"utf-8");
+                if(System.currentTimeMillis() - endTimeDate > 0){
+                    status = new String("已截止".getBytes("utf-8"),"UTF-8");
+                }
 
-            jsonObject.put("status",status);
-            jsonObject.put("pic", pic);
-            jsonObject.put("startTime",Long.parseLong(startTime));
+                jsonObject.put("status",status);
+                jsonObject.put("pic", pic);
+                jsonObject.put("startTime",Long.parseLong(startTime));
+            }catch (Exception e){
+                e.printStackTrace();
+                log.error("getMyFormList error. "+ e.getMessage());
+            }
 
             jsonArray.add(jsonObject);
         }
@@ -158,20 +162,24 @@ public class FormController {
             jsonObject.put("title",form.getFormName());
 
             //
-            JSONObject json = (JSONObject)JSONObject.parse(form.getFormValue());
-            String pic = JSONObject.parseArray(json.getString("cover")).getString(0);
-            String startTime = json.getString("startTime");
-            String endTime = json.getString("endTime");
-            Long endTimeDate = Long.parseLong(endTime);
-            String status = new String("进行中".getBytes("utf-8"),"UTF-8");
-            if(System.currentTimeMillis() - endTimeDate > 0){
-                status = new String("已截止".getBytes("utf-8"),"UTF-8");
+            try{
+                JSONObject json = (JSONObject)JSONObject.parse(form.getFormValue());
+                String pic = JSONObject.parseArray(json.getString("cover")).getString(0);
+                String startTime = json.getString("startTime");
+                String endTime = json.getString("endTime");
+                Long endTimeDate = Long.parseLong(endTime);
+                String status = new String("进行中".getBytes("utf-8"),"utf-8");
+                if(System.currentTimeMillis() - endTimeDate > 0){
+                    status = new String("已截止".getBytes("utf-8"),"UTF-8");
+                }
+
+                jsonObject.put("status",status);
+                jsonObject.put("pic", pic);
+                jsonObject.put("startTime",Long.parseLong(startTime));
+            }catch (Exception e){
+                e.printStackTrace();
+                log.error("getMyFormList error. "+ e.getMessage());
             }
-
-            jsonObject.put("status",status);
-
-            jsonObject.put("pic", pic);
-            jsonObject.put("startTime",Long.parseLong(startTime));
 
             jsonArray.add(jsonObject);
         }
