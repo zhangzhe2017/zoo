@@ -5,6 +5,7 @@ var config = require('./webpackConfig.json');
 var devServerPort = config.devServerPort;
 var host = `http://localhost:${devServerPort}`;
 
+var fs = require('fs');
 var path = require('path');
 var _ = require('lodash');
 
@@ -30,7 +31,25 @@ var entry = {
 var keys = _.keys(entry);
 
 var proxy = {};
-var eachFile = require('./utils/eachFile');
+var eachFile = function (config) {
+    config = config || {};
+    var dirPath = config.dirPath;
+    var handler = config.handler;
+    var files = fs.readdirSync(dirPath);
+    for (var index = 0, len = files.length; index < len; index++) {
+        var fileName = files[index];
+        var filePath = dirPath + '/' + fileName;
+        var stat = fs.lstatSync(filePath);
+        if (stat.isDirectory() == true) {
+            eachFile({
+                dirPath: filePath,
+                handler: handler
+            });
+        } else {
+            handler(fileName, filePath, dirPath);
+        }
+    }
+};
 eachFile({
     dirPath: 'json',
     handler: function (fileName, filePath, dirPath) {

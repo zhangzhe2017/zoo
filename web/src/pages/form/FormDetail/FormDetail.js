@@ -138,8 +138,8 @@ class FormDetail extends Component {
                 />
             );
         });
-        const {endTime, totalCount} = fieldValues;
-        const isEnd = endTime && timestamp > endTime;
+        const {registerEndTime, totalCount} = fieldValues;
+        const isEnd = registerEndTime && timestamp > registerEndTime;
         const isComplete = totalCount && attenderList.length >= totalCount;
         return (
             <div className="x-page">

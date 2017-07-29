@@ -27,7 +27,7 @@ class FormEdit extends Component {
         const {templateId, formId} = query;
         const isAdd = pathname === '/form/add';
         const isEdit = pathname === '/form/edit';
-        if (_isQQBrowser() && isAdd && templateId === '1') {
+        if (_Util.isPC() && isAdd && templateId === '1') {
             Util.later(() => {
                 Routes.goto({
                     pathname,

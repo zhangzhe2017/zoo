@@ -114,7 +114,7 @@ class EditForm extends Component {
 
     handleImageAddClick(name, e) {
         e.preventDefault();
-        if (_isQQBrowser()) {
+        if (_Util.isPC()) {
             Util.upload((result = {}) => {
                 const {data: url} = result;
                 const {dispatch, imageFilesMap} = this.props;
@@ -383,7 +383,7 @@ class EditForm extends Component {
                         </List.Item>
                     );
                 }
-            } else if (_isQQBrowser() && type === 'richtext') {
+            } else if (_Util.isPC() && type === 'richtext') {
                 items.push(
                     <List.Item
                         key={name}
