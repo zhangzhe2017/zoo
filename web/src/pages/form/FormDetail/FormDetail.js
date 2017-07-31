@@ -95,6 +95,10 @@ class FormDetail extends Component {
                     coverItem = (
                         <div
                             className="x-cover"
+                            style={
+                                coverImageUrl === Util.logoUrl ?
+                                {padding: '10% 25%', backgroundColor: '#fff'} : {}
+                            }
                         >
                             <img
                                 className="x-cover-image"
@@ -134,8 +138,8 @@ class FormDetail extends Component {
                 />
             );
         });
-        const {endTime, totalCount} = fieldValues;
-        const isEnd = endTime && timestamp > endTime;
+        const {registerEndTime, totalCount} = fieldValues;
+        const isEnd = registerEndTime && timestamp > registerEndTime;
         const isComplete = totalCount && attenderList.length >= totalCount;
         return (
             <div className="x-page">

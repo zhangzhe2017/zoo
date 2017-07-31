@@ -127,7 +127,7 @@ class FormList extends Component {
                     {items}
                     <div id="loadingDiv" className="x-padding-bottom-20">
                         {
-                            finished ? <div className="x-noMore">没有更多了</div> :
+                            finished ? <div className="x-noMore">----我是有底线的----</div> :
                                 <ActivityIndicator size="large" className="x-activity-indicator"/>
                         }
                     </div>

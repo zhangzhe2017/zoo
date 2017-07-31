@@ -11,19 +11,18 @@ const {
     routerReducer, $
 } = window._external;
 
-if (window._isQQBrowser) {
-    var KindEditor = window.KindEditor;
-    if (KindEditor) {
-        KindEditor.kindEditorUploadBtnClickEvent = () => {
-            Util.upload((result = {}) => {
-                const {data} = result;
-                $('#remoteUrl').val(data);
-            })
-        };
-    }
-} else {
-    window._isQQBrowser = () => {
+window._Util = window._Util || {};
+_Util.isPC = _Util.isPC || function () {
         return false;
+    };
+
+var KindEditor = window.KindEditor;
+if (KindEditor) {
+    KindEditor.kindEditorUploadBtnClickEvent = () => {
+        Util.upload((result = {}) => {
+            const {data} = result;
+            $('#remoteUrl').val(data);
+        })
     };
 }
 
@@ -69,7 +68,7 @@ $(() => {
         const currentTargetEl = $(e.currentTarget);
         currentTargetEl.find('.am-input-control input,.am-textarea-control textarea').focus();
     }).on('focus', '.am-input-item .am-input-control input,.am-textarea-item .am-textarea-control textarea', (e) => {
-        if (_isQQBrowser()) {
+        if (_Util.isPC()) {
             return;
         }
         const currentTargetEl = $(e.currentTarget);
