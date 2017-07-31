@@ -19,6 +19,7 @@ import weixin.zoo.utils.ActivityTypeEnum;
 import weixin.zoo.utils.ResultUtils;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -94,7 +95,8 @@ public class FormController {
     @ResponseBody
     public String getMyFormList(HttpServletRequest request) throws UnsupportedEncodingException {
         String wxid = (String)request.getSession().getAttribute("wxid");
-
+        List<String> userids = new ArrayList<String>();
+        userids.add(wxid);
         log.info("getMyFormList. wxid: " + wxid);
 
         Integer currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -102,7 +104,7 @@ public class FormController {
 
         PageDto pageDto = new PageDto(pageSize*(currentPage-1), pageSize);
 
-        List<Form> forms = formService.getFormsByUserId(wxid, ActivityTypeEnum.ACTIVITY.getName(), pageDto);
+        List<Form> forms = formService.getFormsByUserId(userids, ActivityTypeEnum.ACTIVITY.getName(), pageDto);
 
         JSONArray jsonArray = new JSONArray();
         for(Form form : forms){
@@ -114,7 +116,7 @@ public class FormController {
 
             try{
                 JSONObject json = (JSONObject)JSONObject.parse(form.getFormValue());
-                String pic = "";
+                String pic;
                 if(!JSONObject.parseArray(json.getString("cover")).isEmpty()){
                     pic = JSONObject.parseArray(json.getString("cover")).getString(0);
                 }else{
@@ -124,9 +126,9 @@ public class FormController {
                 String startTime = json.getString("startTime");
                 String endTime = json.getString("endTime");
                 Long endTimeDate = Long.parseLong(endTime);
-                String status = new String("½øÐÐÖÐ".getBytes("utf-8"),"utf-8");
+                String status = new String("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½".getBytes("utf-8"),"utf-8");
                 if(System.currentTimeMillis() - endTimeDate > 0){
-                    status = new String("ÒÑ½ØÖ¹".getBytes("utf-8"),"UTF-8");
+                    status = new String("ï¿½Ñ½ï¿½Ö¹".getBytes("utf-8"),"UTF-8");
                 }
 
                 jsonObject.put("status",status);
@@ -170,7 +172,7 @@ public class FormController {
             //
             try{
                 JSONObject json = (JSONObject)JSONObject.parse(form.getFormValue());
-                String pic = "";
+                String pic;
                 if(!JSONObject.parseArray(json.getString("cover")).isEmpty()){
                     pic = JSONObject.parseArray(json.getString("cover")).getString(0);
                 }else{
@@ -180,9 +182,9 @@ public class FormController {
                 String startTime = json.getString("startTime");
                 String endTime = json.getString("endTime");
                 Long endTimeDate = Long.parseLong(endTime);
-                String status = new String("½øÐÐÖÐ".getBytes("utf-8"),"utf-8");
+                String status = new String("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½".getBytes("utf-8"),"utf-8");
                 if(System.currentTimeMillis() - endTimeDate > 0){
-                    status = new String("ÒÑ½ØÖ¹".getBytes("utf-8"),"UTF-8");
+                    status = new String("ï¿½Ñ½ï¿½Ö¹".getBytes("utf-8"),"UTF-8");
                 }
 
                 jsonObject.put("status",status);

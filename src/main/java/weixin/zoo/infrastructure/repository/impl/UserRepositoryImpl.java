@@ -75,5 +75,15 @@ public class UserRepositoryImpl implements UserRepository {
         return userMapper.updateByExampleSelective(user,userExample);
     }
 
+    @Override
+    public List<User> getUsersByPermission(String permission) {
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andUserTagEqualTo(permission).andIsDeleteEqualTo("n");
+
+        List<User> users = userMapper.selectByExample(userExample);
+
+        return users;
+    }
+
 
 }

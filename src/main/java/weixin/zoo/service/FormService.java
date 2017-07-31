@@ -33,7 +33,7 @@ public interface FormService {
      * 通过rOc（register or cancel）来判断报名或者取消报名
      *
      * 报名功能中如果存在群二维码，需要转换成链接返回
-     *
+     * 
      */
     public Object doRegister(long id, boolean rOc, String userId, String fieldValues);
 
@@ -42,7 +42,7 @@ public interface FormService {
      * 通过type来区分表单类型，当前只有activity(活动)，后续会新增投票问卷类型
      *
      */
-    public List<Form> getFormsByUserId(String userId, String type, PageDto pageDto);
+    public List<Form> getFormsByUserId(List<String> userIds, String type, PageDto pageDto);
 
     /*
      * 获取用户已报名的活动列表，仅面向activity类型form
@@ -63,4 +63,5 @@ public interface FormService {
      * 修改form表单数据
      */
     public Long updateForm(long id, String formValues, String name, String fields);
+
 }

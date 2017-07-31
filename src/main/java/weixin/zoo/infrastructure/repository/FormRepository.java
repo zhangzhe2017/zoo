@@ -23,7 +23,7 @@ public interface FormRepository {
     /*
      * 获取用户发起的表单
      */
-    public List<Form> getFormByUserId(String userId, PageDto pageDto);
+    public List<Form> getFormByUserId(List<String> userIds, PageDto pageDto);
 
     /*
      *  修改form表单内容

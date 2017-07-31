@@ -14,7 +14,6 @@ import weixin.zoo.infrastructure.repository.*;
 import weixin.zoo.service.FormService;
 import weixin.zoo.utils.OssUtils;
 import weixin.zoo.wxapi.WxServiceCenter;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
@@ -83,7 +82,7 @@ public class FormServiceImpl implements FormService {
                                 file.delete();
                             }
                         }catch (Exception e){
-                            log.error("file delete error. filepath: " + mediaLocalPath);
+                            log.error("file delete error. filepath: " +mediaLocalPath);
                             e.printStackTrace();
                         }
                     }
@@ -189,8 +188,8 @@ public class FormServiceImpl implements FormService {
     }
 
     @Override
-    public List<Form> getFormsByUserId(String userId, String type, PageDto pageDto) {
-        List<Form> forms = formRepository.getFormByUserId(userId, pageDto);
+    public List<Form> getFormsByUserId(List<String> userIds, String type, PageDto pageDto) {
+        List<Form> forms = formRepository.getFormByUserId(userIds, pageDto);
         //判断form 集成的template类型，如果为activity 则为活动
         List<Form> result = new ArrayList<Form>();
         for(Form form: forms){
@@ -279,7 +278,7 @@ public class FormServiceImpl implements FormService {
             }
         }
 
-        return formRepository.updateForm(id,jsonObject.toJSONString(),name,ids.toJSONString());
+        return formRepository.updateForm(id,formValues,name,ids.toJSONString());
     }
 
     /*

@@ -16,6 +16,7 @@ import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Formatter;
+import java.util.List;
 
 import  weixin.zoo.service.common.aes.*;
 
@@ -87,6 +88,12 @@ public class UserServiceImpl implements UserService {
         jsonObject.put("signature", signature);
 
         return jsonObject;
+    }
+
+    @Override
+    public List<User> getUsersByPermission(String permission) throws Exception {
+        List<User> users = userRepository.getUsersByPermission(permission);
+        return users;
     }
 
 

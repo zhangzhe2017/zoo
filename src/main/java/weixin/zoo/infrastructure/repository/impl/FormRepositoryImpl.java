@@ -60,9 +60,9 @@ public class FormRepositoryImpl implements FormRepository{
     }
 
     @Override
-    public List<Form> getFormByUserId(String userId, PageDto pageDto) {
+    public List<Form> getFormByUserId(List<String> userIds, PageDto pageDto) {
         FormExample formExample = new FormExample();
-        formExample.createCriteria().andFormOwnerEqualTo(userId).andIsDeleteEqualTo("n");
+        formExample.createCriteria().andFormOwnerIn(userIds).andIsDeleteEqualTo("n");
         formExample.setLimit(pageDto.getLimit());
         formExample.setOffset(pageDto.getOffset());
         formExample.setOrderByClause("gmt_create");

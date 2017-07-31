@@ -1,7 +1,11 @@
 package weixin.zoo.service;
 
 import com.alibaba.fastjson.JSONObject;
+import weixin.zoo.infrastructure.model.User;
 import weixin.zoo.utils.*;
+
+import java.util.List;
+
 /**
  * Created by viczhang.zhangz on 2017/4/28.
  *
@@ -19,4 +23,10 @@ public interface UserService {
      * jsapi签名
      */
     public JSONObject getJsapiSignatrue(String url) throws Exception;
+
+
+    /*
+     * 获取用权限的用户id
+     */
+    public List<User> getUsersByPermission(String permission) throws Exception;
 }
